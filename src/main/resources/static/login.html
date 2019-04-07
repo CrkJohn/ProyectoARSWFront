@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V3</title>
+	<title>Evern DRIVER</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -26,6 +26,12 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<!-- LOS SCRIPTS DE APICLIENT Y APP -->
+
+<script src="js/apiclient.js"></script>
+<script src="js/app.js"></script>
+
 </head>
 <body>
 	
@@ -38,16 +44,16 @@
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
+						EVERN DRIVER
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
+					<div class="wrap-input100 validate-input" data-validate = "Ingrese un correo">
+						<input id="correoLogin" class="input100" type="correo" name="correo" placeholder="Correo">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+					<div class="wrap-input100 validate-input" data-validate="Ingrese la contraseña">
+						<input id="contrasenaLogin" class="input100" type="password" name="pass" placeholder="Contraseña">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -59,7 +65,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="app.getUsuarioByCorreo($('#correoLogin').val())">
 							Login
 						</button>
 					</div>
@@ -92,7 +98,7 @@
 <!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<!-- script src="js/main.js"></script-->
 
 </body>
 </html>

@@ -49,8 +49,8 @@ public class Main {
   }
 
   @RequestMapping("/")
-  String index() {
-    return "index";
+  public String index() {
+    return "src/main/resources/static/index.html";
   }
 
   @RequestMapping("/db")
@@ -77,6 +77,7 @@ public class Main {
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
+      //dbUrl = index.html;
       return new HikariDataSource();
     } else {
       HikariConfig config = new HikariConfig();
