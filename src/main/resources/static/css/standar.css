@@ -1,0 +1,10 @@
+.wrap-login100 {
+    background: -webkit-linear-gradient(top, #000000, #c30000);
+}
+
+.btn-outline-dark {
+    color: #ffffff;
+    background-color: #3a070700;
+    background-image: none;
+    border-color: #ffffff;
+}
