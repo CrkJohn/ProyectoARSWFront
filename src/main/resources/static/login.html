@@ -54,7 +54,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Ingrese la contraseña">
-						<input id="contrasenaLogin" class="input100" type="password" name="pass" placeholder="Contraseña">
+						<input id="claveLogin" class="input100" type="password" name="pass" placeholder="Contraseña">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -66,7 +66,9 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button type="button" class="btn btn-light btn-outline-dark btn-lg" onclick="app.getUsuarioByCorreo($('#correoLogin').val())">
+
+						<button type="button" class="btn btn-light btn-outline-dark btn-lg"
+							onclick="app.login()">
 							Iniciar sesión
 						</button>
 					</div>
