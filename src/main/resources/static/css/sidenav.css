@@ -15,20 +15,6 @@ a:focus{
 	transition: all 0.3s;
 }
 
-.navbar{
-	padding: 15px 10px;
-	background: #fff;
-	border: none;
-	border-radius: 0;
-	margin-bottom: 40px;
-	box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-}
-
-.navbar-btn{
-	box-shadow: none;
-	outline: none!important;
-	border: none;
-}
 
 .line{
 	width: 100%;
@@ -44,6 +30,7 @@ a:focus{
 #sidebar {
     min-width: 250px;
     max-width: 250px;
+    min-height: 100vh;
     background: -webkit-linear-gradient(top, #000000, #c30000);
     color: #fff;
     transition: all 0.3s;
@@ -54,7 +41,7 @@ a:focus{
 
 #sidebar .sidebar-header{
 	padding: 20px;
-	background: #320101;
+	background: #1c0101;
 }
 #sidebar ul.components{
 	padding: 20px 0px;
