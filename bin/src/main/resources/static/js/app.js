@@ -1,13 +1,4 @@
 app=(function(){
-
-    var onSuccess = function(data){
-         location.href = "/userHome.html";
-    }
-
-    var onError = function(data){
-         alert("El correo o la contraseña son incorrectas.");
-    }
-
     return{
         getUsuarioByCorreo:function(correo){
             console.log("APP",correo);
@@ -19,7 +10,9 @@ app=(function(){
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
             console.log(correo+" - "+clave);
-            return apiclient.login(correo, clave, onSuccess, onError);
+            return apiclient.login(correo,clave, function(result){
+                location.href = "/userHome.html";
+            });
         }
     }
 })();

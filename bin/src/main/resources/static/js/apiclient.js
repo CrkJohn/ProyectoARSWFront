@@ -6,13 +6,19 @@ apiclient=(function(){
 				callback(data);
 			});
 		},
-		login:function(correo,clave, succ, err){
+		login:function(correo,clave, callback){
+			/*console.log(loginData);
+			var arr = loginData.split('/');
+			var correo = arr[0];
+			var clave = arr[1];*/
 			console.log("APICLIENT -> ",correo,clave);
 			$.ajax({
 			    type: "GET",  
 			    url: "https://backarsw.herokuapp.com/v1/usuarios/"+correo+"/"+clave,
-			    success: succ,
-			    error: err
+			    success: callback,
+			    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+			        alert("Clave incorrecta");
+			    }
 			});
 		}
 	}
