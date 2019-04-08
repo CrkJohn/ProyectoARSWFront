@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<th:block th:fragment="head">
+		<title>Conductor</title>
+		<meta charset="UTF-8">
+		
+		<!-- Bootstrap core CSS -->
+		<link href="conductor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/simple-sidebar.css" rel="stylesheet">
+		<style>
+			.list-group-item {
+				background-color: #fff0;
+			}
+			
+			.list-group-item-action {
+				color: #ffffff;
+			}
+		</style>
+	</th:block>
+<head>
+
+<body  th:fragment="navbarBody">
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper" style="background: -webkit-linear-gradient(top, #000000, #c30000);">
+      <!--<div class="sidebar-heading">Start Bootstrap </div>
+      -->
+	  <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action ">Perfil</a>
+        <a href="#" class="list-group-item list-group-item-action ">Viajes Disponibles</a>
+        <a href="#" class="list-group-item list-group-item-action ">Mis Viajes</a>
+        <a href="#" class="list-group-item list-group-item-action ">Events</a>
+        <a href="#" class="list-group-item list-group-item-action ">Salir</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Ver menu</button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="conductor/jquery/jquery.min.js"></script>
+  <script src="conductor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>
