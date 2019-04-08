@@ -52,6 +52,11 @@ public class ViewController {
 		return "navbar";
 	}
 	
+	@RequestMapping("/register")
+	String register() {
+		return "register";
+	}
+	
 	
 	
 	

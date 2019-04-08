@@ -1,7 +1,7 @@
 app=(function(){
 
     var onSuccess = function(data){
-         location.href = "/userHome.html";
+         location.href = "userHome";
     }
 
     var onError = function(data){
