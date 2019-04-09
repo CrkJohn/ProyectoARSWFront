@@ -14,13 +14,15 @@ var stomp =(function () {
     		
     	}
     	console.log(viaje);
-        stompClient.send("http://localhost:8080/topic/newpoint", {}, JSON.stringify(viaje)); 
+        stompClient.send("/topic/newpoint", {}, JSON.stringify(viaje)); 
+       
     };
 
     var connectAndSubscribe = function () {
         console.info('Connecting to WS...');
         
-        var url = 'http://localhost:8080/stompendpoint2';
+        var url = 'http://localhost:8080/stompendpoint';
+        //var url = '/stompendpoint';
               
         var socket = new SockJS(url);
         stompClient = Stomp.over(socket);
