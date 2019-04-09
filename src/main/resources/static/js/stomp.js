@@ -21,8 +21,8 @@ var stomp =(function () {
     var connectAndSubscribe = function () {
         console.info('Connecting to WS...');
         
-        var url = 'http://localhost:8080/stompendpoint';
-        //var url = '/stompendpoint';
+        //var url = 'http://localhost:8080/stompendpoint';
+        var url = '/stompendpoint';
               
         var socket = new SockJS(url);
         stompClient = Stomp.over(socket);
