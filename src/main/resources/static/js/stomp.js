@@ -5,20 +5,30 @@ var stomp =(function () {
    
     
     
-    var sendTopicNewPt = function(){
-        stompClient.send("http://localhost:8080/topic/newpoint", {}, JSON.stringify(pt)); 
+    var sendTopic = function(){
+    	
+    	var viaje = {
+    		 lugarOrigen : $('#direccionInicio').val(),
+    		 lugarDestino : $('#direccionDestino').val(),
+    		 costo : $('#precio').val()
+    		
+    	}
+    	console.log(viaje);
+        stompClient.send("http://localhost:8080/topic/newpoint", {}, JSON.stringify(viaje)); 
     };
 
     var connectAndSubscribe = function () {
         console.info('Connecting to WS...');
-        var socket = new SockJS('localhost:8080/stompendpoint');
+        
+        var url = 'http://localhost:8080/stompendpoint2';
+              
+        var socket = new SockJS(url);
         stompClient = Stomp.over(socket);
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('localhost:8080/topic/newpoint', function (eventbody) {
-                var ptn=JSON.parse(eventbody.body);
-                addPointToCanvas(ptn);
+            stompClient.subscribe('/topic/newpoint', function (eventbody) {
+            	alert("Funcioan");	
             });
         });
     };
@@ -28,9 +38,13 @@ var stomp =(function () {
     return {
 
         init: function () {
+            var btnPedirViaje  = document.getElementById("pedirViaje")
+            btnPedirViaje.addEventListener('click',sendTopic);
             connectAndSubscribe();
+            
         },
 
+        
         disconnect: function () {
             if (stompClient !== null) {
                 stompClient.disconnect();

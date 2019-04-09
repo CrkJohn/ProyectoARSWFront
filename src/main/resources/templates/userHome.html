@@ -9,8 +9,17 @@
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  	<script src= "js/stomp.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  	
+  	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+        
+  	
+	
 </head>
-<body>
+<body onload="stomp.init()">
 <div class="wrapper">
    	<nav id="sidebar">
    		<div class="sidebar-header">
@@ -52,7 +61,7 @@
 						        <form>
 								  <div class="form-group">
 								    <label for="exampleInputEmail1">Dirección de Recogida</label>
-								    <input type="text" class="form-control" id="direccionRecogida" placeholder="Ingrese dirección de recogida">
+								    <input type="text" class="form-control" id="direccionInicio" placeholder="Ingrese dirección de inicio">
 								  </div>
 								  <div class="form-group">
 								    <label for="exampleInputPassword1">Dirección de Destino</label>
@@ -62,11 +71,11 @@
 								    <label for="exampleInputPassword1">Precio Esperado</label>
 								    <input type="text" class="form-control" id="precio" placeholder="Ingrese el valor de la tarifa le gustaria pagar">
 								  </div>
-								  <button type="submit" class="btn btn-primary" >Pedir</button>
+								  <button id="pedirViaje" type="button" class="btn btn-primary" >Pedir</button>
 								</form>
 					        </div>
 					        <div class="modal-footer">
-					          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					          <button  type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 					        </div>
 					      </div>
 					      
