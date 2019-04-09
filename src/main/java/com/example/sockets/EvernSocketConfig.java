@@ -11,7 +11,6 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;;;
 
 @Configuration
 @EnableWebSocketMessageBroker
-@CrossOrigin
 public class EvernSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 	  
 	@Override
