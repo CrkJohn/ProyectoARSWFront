@@ -21,21 +21,24 @@ apiclient=(function(){
 			console.log(datos);
 			$.ajax({
 				type: "POST",
-				url: 'https://backarsw.herokuapp.com/v1/pasajeros/savePasajero',
-				contentType: 'application/json', 
-				data: datos,
+				url: "https://backarsw.herokuapp.com/v1/pasajeros/savePasajero",
+				contentType: "application/json", 
+				data: JSON.stringify(datos),
+				dataType: "text",
 				success: succ,
 				error: err
 			})
 		},
 
 		registerConductor:function(datos, succ, err){
-			console.log("DATA CONDUCTOR -> "+datos);
+			console.log("DATA CONDUCTOR ->");
+			console.log(datos);
 			$.ajax({
 				type: "POST",
-				url: 'https://backarsw.herokuapp.com/v1/conductores',
-				contentType: 'application/json',
-				data: datos,
+				url: "https://backarsw.herokuapp.com/v1/conductores",
+				contentType: "application/json",
+				data: JSON.stringify(datos),
+				dataType: "text",
 				success: succ,
 				error: err
 			})

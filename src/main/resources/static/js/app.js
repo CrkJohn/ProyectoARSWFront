@@ -53,7 +53,7 @@ app=(function(){
             if(!this.validateRegister()) return; //validationRegister fails
             var user = {
                 nombres: $('#nombresRegister').val(),
-                apellidos: $('#apellidosRegister').val(),
+                //apellidos: $('#apellidosRegister').val(),
                 fechaNacimiento: $('#fechaNacimientoRegister').val(),
                 celular: $('#telefonoRegister').val(),
                 correo: $('#correoRegister').val(),
@@ -64,8 +64,7 @@ app=(function(){
             if($('#conductorCheckbox').is(':checked')){
                 console.log("registrarse como conductor");
             }else{
-                var userJSON = JSON.stringify(user);
-                return apiclient.registerPasajero(userJSON, onSuccessRegister, onErrorRegister);
+                return apiclient.registerPasajero(user, onSuccessRegister, onErrorRegister);
             }
         },
         
