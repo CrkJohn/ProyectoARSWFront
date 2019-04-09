@@ -1,11 +1,20 @@
 app=(function(){
 
-    var onSuccess = function(data){
+    var onSuccessLogin = function(data){
          location.href = "userHome";
     }
 
-    var onError = function(data){
+    var onErrorLogin = function(data){
          alert("El correo o la contraseña son incorrectas.");
+    }
+
+    var onSuccessRegister = function(data){
+        alert("Ha sido registrado satisfactoriamente");
+        location.href = "login";
+    }
+
+    var onErrorRegister = function(data){
+        alert("El correo electrónico ya se encuentra registrado");
     }
 
     return{
@@ -21,7 +30,7 @@ app=(function(){
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
             console.log("APP "+correo+" - "+clave);
-            return apiclient.login(correo, clave, onSuccess, onError);
+            return apiclient.login(correo, clave, onSuccessLogin, onErrorLogin);
         },
         
         validateLogin:function(name){
@@ -38,16 +47,31 @@ app=(function(){
         		return false;
         	}
         	return true;
-        }
+        },
         
         register:function(name){
-        	
-        }
+            if(!this.validateRegister()) return; //validationRegister fails
+            var user = {
+                nombres: $('#nombresRegister').val(),
+                apellidos: $('#apellidosRegister').val(),
+                fechaNacimiento: $('#fechaNacimientoRegister').val(),
+                celular: $('#telefonoRegister').val(),
+                correo: $('#correoRegister').val(),
+                clave: $('#claveRegister').val()
+            }
+
+            console.log(user);
+            if($('#conductorCheckbox').is(':checked')){
+                console.log("registrarse como conductor");
+            }else{
+                var userJSON = JSON.stringify(user);
+                return apiclient.registerPasajero(userJSON, onSuccessRegister, onErrorRegister);
+            }
+        },
         
-        registerLogin:function(name){
-        	
-        	var nombres=$('#nombresRegister');
-        	if(nombres.val()==""){
+        validateRegister:function(name){
+            var nombres=$('#nombresRegister');
+            if(nombres.val()==""){
         		window.alert("Por favor ingrese sus nombres");
         		nombres.focus();
         		return false;
@@ -58,31 +82,42 @@ app=(function(){
         		apellidos.focus();
         		return false;
         	}
-        	var fechaNacimientoLogin=$('#fechaNacimientoLogin');
-        	if(fechaNacimientoLogin.val()==""){
+        	var fechaNacimiento=$('#fechaNacimientoRegister');
+        	if(fechaNacimiento.val()==""){
         		window.alert("Por favor ingrese su fecha de nacimiento");
-        		fechaNacimientoLogin.focus();
+        		fechaNacimiento.focus();
         		return false;
-        	}
-        	var correoLogin = $('#correoLogin');
-        	if(correoLogin.val()==""){
+            }
+            var telefono=$('#telefonoRegister');
+            if(telefono.val()==""){
+                window.alert("Por favor ingrese su número telefónico");
+                telefono.focus();
+                return false;
+            }
+        	var correo = $('#correoRegister');
+        	if(correo.val()==""){
         		window.alert("Por favor ingrese su correo");
-        		correoLogin.focus();
+        		correo.focus();
         		return false;
         	}
-        	var claveLogin = $('#claveLogin');
-        	if(claveLogin.val()==""){
+        	var clave = $('#claveRegister');
+        	if(clave.val()==""){
         		window.alert("Por favor ingrese sus clave");
-        		claveLogin.focus();
+        		clave.focus();
         		return false;
         	}
-        	var reclaveLogin = $('#reclaveLogin');
-        	if(reclaveLogin.val()==""){
-        		window.alert("Por favor confirme su clave");
-        		reclaveLogin.focus();
+        	var reclave = $('#reclaveRegister');
+        	if(reclave.val()==""){
+        		window.alert("Por favor confirme su clave.");
+        		reclave.focus();
         		return false;
-        	}
-        	return true;
+            }
+            if(clave.val()!=reclave.val()){
+                window.alert("Las contraseñas no coinciden.");
+                reclave.focus();
+                return false;
+            }
+            return true;
         }
     }
 })();
