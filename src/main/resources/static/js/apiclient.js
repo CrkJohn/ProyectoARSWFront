@@ -14,6 +14,30 @@ apiclient=(function(){
 			    success: succ,
 			    error: err
 			});
+		},
+
+		registerPasajero:function(datos, succ, err){
+			console.log("DATA PASAJERO -> "+datos);
+			$.ajax({
+				type: "POST",
+				url: 'https://backarsw.herokuapp.com/v1/pasajeros',
+				contentType: 'application/json', 
+				data: datos,
+				success: succ,
+				error: err
+			})
+		},
+
+		registerConductor:function(datos, succ, err){
+			console.log("DATA CONDUCTOR -> "+datos);
+			$.ajax({
+				type: "POST",
+				url: 'https://backarsw.herokuapp.com/v1/conductores',
+				contentType: 'application/json',
+				data: datos,
+				success: succ,
+				error: err
+			})
 		}
 	}
 })();
