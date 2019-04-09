@@ -38,11 +38,9 @@ app=(function(){
         		return false;
         	}
         	return true;
-        }
+        },
         
-        register:function(name){
-        	
-        }
+      
         
         registerLogin:function(name){
         	
