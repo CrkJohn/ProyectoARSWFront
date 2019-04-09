@@ -17,10 +17,11 @@ apiclient=(function(){
 		},
 
 		registerPasajero:function(datos, succ, err){
-			console.log("DATA PASAJERO -> "+datos);
+			console.log("DATA PASAJERO -> ");
+			console.log(datos);
 			$.ajax({
 				type: "POST",
-				url: 'https://backarsw.herokuapp.com/v1/pasajeros',
+				url: 'https://backarsw.herokuapp.com/v1/pasajeros/savePasajero',
 				contentType: 'application/json', 
 				data: datos,
 				success: succ,
