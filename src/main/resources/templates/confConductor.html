@@ -1,67 +1,74 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<th:block th:replace="navbar ::head"></th:block>
+    <th:block th:replace="navbar ::head"></th:block>
 
-	<style>
+    <style>
 	
 		body {
 	    background-color: #f5f5f5;
 	}
 	
 	#main-content {
-	    max-width: 940px;
-	    padding: 2em 3em;
-	    margin: 0 auto 20px;
-	    background-color: #fff;
-	    border: 1px solid #e5e5e5;
-	    -webkit-border-radius: 5px;
-	    -moz-border-radius: 5px;
-	    border-radius: 5px;
-	}
-	</style>
-	
-	
+        max-width: 940px;
+        padding: 2em 3em;
+        margin: 0 auto 20px;
+        background-color: #f5f5f517;
+        border: 1px solid #e5e5e50d;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    </style>
+    <script src="js/stompConductor.js"></script>
+
 </head>
 <body>
-	<div th:replace="navbar :: navbarBody"></div>
 
-	<div id="main-content" class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<form class="form-inline">
-					<div class="form-group">
-						<label for="connect">WebSocket connection:</label>
-						<button id="connect" class="btn btn-default" type="submit">Connect</button>
-						<button id="disconnect" class="btn btn-default" type="submit"
-							disabled="disabled">Disconnect</button>
-					</div>
-				</form>
-			</div>
-			<div class="col-md-6">
-				<form class="form-inline">
-					<div class="form-group">
-						<label for="name">What is your name?</label> <input type="text"
-							id="name" class="form-control" placeholder="Your name here...">
-					</div>
-					<button id="send" class="btn btn-default" type="submit">Send</button>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<table id="conversation" class="table table-striped">
-					<thead>
-						<tr>
-							<th>Greetings</th>
-						</tr>
-					</thead>
-					<tbody id="greetings">
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+<div class="d-flex" id="wrapper">
+
+    <div th:replace="navbar :: navbarBody"></div>
+
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Ver menu</button>
+        </nav>
+
+        <nav class="navbar  navbar-light">
+            <div id="main-content" class="container">
+                    <div class="col-md-8">
+                        <label for="connect">Viajes actulamente pedidos</label>
+                        <p/>
+                        <table id="conversation" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>lugarOrigen</th>
+
+                                <th>lugarDestino</th>
+                                <th>costo</th>
+                            </tr>
+                            </thead>
+                            <tbody id="greetings">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                            <button id="connect" class="btn btn-default" type="button">Buscar</button>
+                            <button id="disconnect" class="btn btn-default" type="button" disabled="disabled">Disconnect
+                            </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+ </script>
+
 
 </body>
 </html>
