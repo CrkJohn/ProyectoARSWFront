@@ -26,11 +26,18 @@
 </head>
 <body>
 
+<div class="d-flex" id="wrapper">
 
     <div th:replace="navbar :: navbarBody"></div>
-</p>
-    <div id="main-content" class="container">
-            <div class="col-md-8">
+
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <button class="btn btn-primary" id="menu-toggle">Ver menu</button>
+        </nav>
+
+        <nav class="navbar  navbar-light">
+            <div id="main-content" class="container">
+                    <div class="col-md-8">
                         <label for="connect">Viajes actulamente pedidos</label>
                         <p/>
                         <table id="conversation" class="table table-striped">
@@ -45,14 +52,16 @@
                             <tbody id="greetings">
                             </tbody>
                         </table>
-            </div>
-                <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
                             <button id="connect" class="btn btn-default" type="button">Buscar</button>
                             <button id="disconnect" class="btn btn-default" type="button" disabled="disabled">Disconnect
                             </button>
+                </div>
             </div>
+        </nav>
     </div>
-      
+</div>
 <script>
     $("#menu-toggle").click(function(e) {
       e.preventDefault();

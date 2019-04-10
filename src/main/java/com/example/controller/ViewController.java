@@ -57,10 +57,10 @@ public class ViewController {
 		return "register";
 	}
 	
-	@RequestMapping("conductorRegister")
-	String conductorRegister(){
-		return "conductorRegister";
-	}
+	@RequestMapping("/perfil")
+	String perfil() {
+		return "perfil";
+  }
 	
 	
 	

@@ -31,17 +31,22 @@
     <head>
     <body th:fragment="navbarBody"   style="background-image: url('images/bg-01.jpg');">
         <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper"
-             style="background: -webkit-linear-gradient(top, #000000, #c30000);">
-            <div class="sidebar-heading" style="color:white">John David Ibañez</div>
-
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action ">Perfil</a>
-                <a href="#" class="list-group-item list-group-item-action ">Viajes Disponibles</a>
-                <a href="#" class="list-group-item list-group-item-action ">Mis Viajes</a>
-                <a href="#" class="list-group-item list-group-item-action ">Events</a>
-                <a href="#" class="list-group-item list-group-item-action ">Salir</a>
-            </div>
-        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" 
+					style="    background: -webkit-linear-gradient(left,#a2a1c7, #002986);					">
+					>
+					<a class="navbar-brand">Conductor</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					  <div class="navbar-nav">
+						  <!-- <span class="sr-only">(current)</span>-->
+						<a class="nav-item nav-link" href="perfil">Mi Perfil</a>
+						<a class="nav-item nav-link" href="confConductor">Viajes Disponibles</a>
+						<a class="nav-item nav-link" href="#">Mis Viajes</a>
+						<a class="nav-item nav-link" href="login">Salir</a>
+					  </div>
+					</div>
+			</nav>
     </body>
 </html>
