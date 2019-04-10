@@ -57,7 +57,10 @@ public class ViewController {
 		return "register";
 	}
 	
-	
+	@RequestMapping("conductorRegister")
+	String conductorRegister(){
+		return "conductorRegister";
+	}
 	
 	
 	

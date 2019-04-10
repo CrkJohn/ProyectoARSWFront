@@ -58,9 +58,12 @@ app=(function(){
                 correo: $('#correoRegister').val(),
                 clave: $('#claveRegister').val()
             }
-            console.log(user);
+            //console.log(user);
+            user = JSON.stringify(user);
+            localStorage.setItem('user', user); //guarda el dato
             if($('#conductorCheckbox').is(':checked')){
                 console.log("registrarse como conductor");
+                location.href = "conductorRegister"
             }else{
             	console.log("registarse como pasajero");
                 apiclient.registerPasajero(user, onSuccessRegister, onErrorRegister);
@@ -116,6 +119,41 @@ app=(function(){
                 return false;
             }
             return true;
+        },
+
+        conductorRegister:function(name){
+            if(!this.validateConductorRegister()) return;
+            var user = JSON.parse(localStorage.getItem('user'));
+            var automovil = {
+                placa: $('#placaCarroRegister').val(),
+                modelo: $('#modeloCarroRegister').val(),
+                tipo: $('#marcaCarroRegister').val()
+            }
+            user.Automovil = automovil;
+            console.log(user);
+            console.log(Automovil);
+        },
+
+        validateConductorRegister:function(name){
+            var placa=$('#placaCarroRegister');
+            if(placa.val()==""){
+        		window.alert("Por favor ingrese la placa del carro");
+        		placa.focus();
+        		return false;
+            }
+            var modelo=$('#modeloCarroRegister');
+            if(modelo.val()==""){
+                window.alert("Por favor ingrese el modelo del carro");
+                modelo.focus();
+                return false;
+            }
+            var marca=$('#marcaCarroRegister');
+            if(marca.val()==""){
+                window.alert("Por favor ingrese la marca del carro");
+                marca.focus();
+                return false;
+            }
+            return false;
         }
     }
 })();
