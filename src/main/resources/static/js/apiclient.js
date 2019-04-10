@@ -23,7 +23,6 @@ apiclient=(function(){
 				method: "POST",
 				contentType: "application/json",
 				url: "https://backarsw.herokuapp.com/v1/pasajeros/savePasajero",
-				//url: "http://localhost:8080/v1/pasajeros/savePasajero",
 				data: datos,
 				dataType : 'json',
 				success: succ,
@@ -37,8 +36,9 @@ apiclient=(function(){
 			$.ajax({
 				method: "POST",
 				contentType: "application/json",
-				url: "https://backarsw.herokuapp.com/v1/pasajeros/saveConductor",
-				data: JSON.stringify(datos),
+				url: "https://backarsw.herokuapp.com/v1/conductores/saveConductor",
+				//url: "http://localhost:8080/v1/conductores/saveConductor",
+				data: datos,
 				dataType : 'json',
 				success: succ,
 				error: err

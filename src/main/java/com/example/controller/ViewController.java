@@ -61,11 +61,10 @@ public class ViewController {
 	String perfil() {
 		return "perfil";
   }
-	
-	
-	
-	
-	
-	
+
+	@RequestMapping("/conductorRegister")
+	String conductorRegister(){
+		return "conductorRegister";
+	}
 	
 }

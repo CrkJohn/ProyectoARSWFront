@@ -1,7 +1,12 @@
 app=(function(){
 
     var onSuccessLogin = function(data){
-         location.href = "userHome";
+        console.log(data);
+        if(data=="pasajero"){
+            location.href = "userHome";
+        }else{
+            location.href = "perfil";
+        }
     }
 
     var onErrorLogin = function(data){
@@ -15,6 +20,10 @@ app=(function(){
 
     var onErrorRegister = function(data){
         alert("El correo electrónico o el celular ingresado ya está asociado con una cuenta.");
+    }
+
+    var onErrorConductorRegister = function(data){
+        alert("El automóvil ya está asociado a otra cuenta");
     }
 
     return{
@@ -59,11 +68,11 @@ app=(function(){
                 clave: $('#claveRegister').val()
             }
             //console.log(user);
-            user = JSON.stringify(user);
+            user = JSON.stringify(user); //pasa por cadena para que pueda ser guardado en localStorage
             localStorage.setItem('user', user); //guarda el dato
             if($('#conductorCheckbox').is(':checked')){
                 console.log("registrarse como conductor");
-                location.href = "conductorRegister"
+                location.href = "conductorRegister";
             }else{
             	console.log("registarse como pasajero");
                 apiclient.registerPasajero(user, onSuccessRegister, onErrorRegister);
@@ -83,12 +92,12 @@ app=(function(){
         		apellidos.focus();
         		return false;
             }
-        	var fechaNacimiento=$('#fechaNacimientoRegister');
+        	/*var fechaNacimiento=$('#fechaNacimientoRegister');
         	if(fechaNacimiento.val()==""){
         		window.alert("Por favor ingrese su fecha de nacimiento");
         		fechaNacimiento.focus();
         		return false;
-            }
+            }*/
             var celular=$('#telefonoRegister');
             if(celular.val()==""){
                 window.alert("Por favor ingrese su número telefónico");
@@ -122,6 +131,7 @@ app=(function(){
         },
 
         conductorRegister:function(name){
+            console.log("A REGISTRAR OME");
             if(!this.validateConductorRegister()) return;
             var user = JSON.parse(localStorage.getItem('user'));
             var automovil = {
@@ -129,9 +139,11 @@ app=(function(){
                 modelo: $('#modeloCarroRegister').val(),
                 tipo: $('#marcaCarroRegister').val()
             }
-            user.Automovil = automovil;
+            //user.automovil = automovil;
             console.log(user);
-            console.log(Automovil);
+            user = JSON.stringify(user);
+            console.log(user);
+            apiclient.registerConductor(user, onSuccessRegister, onErrorConductorRegister);
         },
 
         validateConductorRegister:function(name){
@@ -153,7 +165,7 @@ app=(function(){
                 marca.focus();
                 return false;
             }
-            return false;
+            return true;
         }
     }
 })();
