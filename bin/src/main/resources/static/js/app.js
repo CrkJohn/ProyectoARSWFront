@@ -80,15 +80,15 @@ app=(function(){
         		window.alert("Por favor ingrese sus apellidos");
         		apellidos.focus();
         		return false;
-        	}
+            }
         	var fechaNacimiento=$('#fechaNacimientoRegister');
         	if(fechaNacimiento.val()==""){
         		window.alert("Por favor ingrese su fecha de nacimiento");
         		fechaNacimiento.focus();
         		return false;
             }
-            var telefono=$('#telefonoRegister');
-            if(telefono.val()==""){
+            var celular=$('#telefonoRegister');
+            if(celular.val()==""){
                 window.alert("Por favor ingrese su número telefónico");
                 telefono.focus();
                 return false;

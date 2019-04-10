@@ -14,7 +14,7 @@ app=(function(){
     }
 
     var onErrorRegister = function(data){
-        alert("El correo electrónico ya se encuentra registrado");
+        alert("El correo electrónico o el celular ingresado ya está asociado con una cuenta.");
     }
 
     return{
@@ -53,18 +53,17 @@ app=(function(){
             if(!this.validateRegister()) return; //validationRegister fails
             var user = {
                 nombres: $('#nombresRegister').val(),
-                //apellidos: $('#apellidosRegister').val(),
                 fechaNacimiento: $('#fechaNacimientoRegister').val(),
                 celular: $('#telefonoRegister').val(),
                 correo: $('#correoRegister').val(),
                 clave: $('#claveRegister').val()
             }
-
             console.log(user);
             if($('#conductorCheckbox').is(':checked')){
                 console.log("registrarse como conductor");
             }else{
-                return apiclient.registerPasajero(user, onSuccessRegister, onErrorRegister);
+            	console.log("registarse como pasajero");
+                apiclient.registerPasajero(user, onSuccessRegister, onErrorRegister);
             }
         },
         
