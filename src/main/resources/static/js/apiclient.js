@@ -10,7 +10,7 @@ apiclient=(function(){
 			console.log("APICLIENT -> ",correo,clave);
 			$.ajax({
 			    type: "GET",  
-			    url: "http://localhost:8080/v1/usuarios/"+correo+"/"+clave,
+			    url: "https://backarsw.herokuapp.com/v1/usuarios/"+correo+"/"+clave,
 			    success: succ,
 			    error: err
 			});
@@ -22,8 +22,8 @@ apiclient=(function(){
 			$.ajax({
 				method: "POST",
 				contentType: "application/json",
-				//url: "https://backarsw.herokuapp.com/v1/pasajeros/savePasajero",
-				url: "http://localhost:8080/v1/pasajeros/savePasajero",
+				url: "https://backarsw.herokuapp.com/v1/pasajeros/savePasajero",
+				//url: "http://localhost:8080/v1/pasajeros/savePasajero",
 				data: JSON.stringify(datos),
 				dataType : 'json',
 				success: succ,
