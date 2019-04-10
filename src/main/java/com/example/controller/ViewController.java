@@ -57,6 +57,10 @@ public class ViewController {
 		return "register";
 	}
 	
+	@RequestMapping("/perfil")
+	String perfil() {
+		return "perfil";
+	}
 	
 	
 	
