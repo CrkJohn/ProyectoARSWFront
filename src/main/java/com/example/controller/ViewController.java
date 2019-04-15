@@ -26,6 +26,13 @@ public class ViewController {
 	String configuracion() {
 		return "configuracion";
 	}
+
+
+	@RequestMapping("/maps")
+	String mapsp() {
+		return "mapsP";
+	}
+
 	
 	@RequestMapping("/pagos")
 	String pagos() {
