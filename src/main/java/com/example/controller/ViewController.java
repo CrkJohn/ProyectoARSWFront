@@ -75,7 +75,7 @@ public class ViewController {
 
 	@RequestMapping("/subasta")
 	String  subasta(){
-		return "subasta";
+		return "subastav2";
 	}
 	
 }

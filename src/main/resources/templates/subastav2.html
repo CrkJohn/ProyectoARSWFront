@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Read Only by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="css/mainSubasta.css" />
+		<link rel="stylesheet" href="css/styleChat.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body class="is-preload" onload='sb.init()'>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar">
+						<img src="images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="#">Evern Viajes</a></h1>
+					<p>I got reprogrammed by a rogue AI<br />
+					and now I'm totally cray</p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">Información del viaje</a></li>
+						<li><a href="#two">Chat de la subasta</a></li>
+						<li><a href="perfil">Volver</a></li>				
+					</ul>
+				</nav>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Main -->
+					<div id="main">
+						<!-- One -->
+							<section id="one">
+								<div class="mapa main" data-position="center">
+									<div class ="mp" id="map"></div>
+								</div>
+								<div class="container">
+									<header class="major">
+										<h2>Información del viaje</h2>
+									</header>
+									<p id ="infViajes"></p>
+								</div>
+							</section>
+							<!-- Two -->
+							<section id="two">
+								<div class="container">
+									<h3>Things I Can Do</h3>
+									<div class="btn-group btn-block" >
+											<label class="btn btn-secondary">
+												<i class="fa fa-minus"></i>
+											</label>	
+											<label class="btn btn-secondary btn-block">
+											  <input type="radio" name="options" id="option2" autocomplete="off" > 1000
+											</label>
+											<label class="btn btn-secondary">
+													<i class="fa fa-plus"></i>
+											</label>
+									</div>
+									
+									<div class="card" style="height: 500px;">
+											<div class="card-header"> Viaje </div>
+											<div class="card-body" style="overflow-y: auto">
+												
+												<div class="received-chats">
+														<div class="received-msg">
+															<div class="received-msg-inbox">
+																<p>Intentando hacer el chat</p>
+																<span class="time">11:30 pm</span>
+															</div>
+														</div>
+													</div>
+													<div class="outgoing-chats">
+														<div class="outgoing-chats-msg">
+															<p> agregando cositas
+															</p>
+															<span class="time">11:30 pm</span>
+														</div>
+													</div>
+		
+											</div>
+											<div class="card-footer text-muted">
+													<div class="input-group">
+														<input type ="text" class ="form-control" placeholder="Envia tu mensaje">
+														<div class = "input-group-append">
+															<span class = "input-group-text">
+																	<i class="faa fa-paper-plane"></i>
+															</span>
+														</div>
+												 </div>  
+											</div>
+									</div>
+								</div>
+							</section>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved.</li>
+								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.scrollex.min.js"></script>
+			<script src="js/browser.min.js"></script>
+			<script src="js/breakpoints.min.js"></script>
+			<script src="js/mainSubasta.js"></script>
+			<script src = "js/subasta.js"></script>
+			      
+			<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
+			</script>
+	</body>
+</html>
