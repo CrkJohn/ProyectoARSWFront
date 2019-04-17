@@ -1,16 +1,15 @@
 app=(function(){
 
-    var onSuccessLogin = function(data){
-        console.log(data);
-        if(data=="pasajero"){
-            location.href = "userHome";
-        }else{
-            location.href = "perfil";
-        }
+    var onSuccessLoginPasajero = function(data){
+        location.href = "userHome";
     }
-
+    
+    var onSuccessLoginConductor = function(data){
+    	location.href = "perfilConductor";
+    }
+    
     var onErrorLogin = function(data){
-         alert("El correo o la contraseña son incorrectas.");
+        alert("El correo o la contraseña no son correctas.");
     }
 
     var onSuccessRegister = function(data){
@@ -34,12 +33,19 @@ app=(function(){
             });
         },
         
-        login:function(name){
+        loginPasajero:function(name){
         	if(!this.validateLogin()) return; //validateLogin fails
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
             console.log("APP "+correo+" - "+clave);
-            return apiclient.login(correo, clave, onSuccessLogin, onErrorLogin);
+            return apiclient.loginPasajero(correo, clave, onSuccessLoginPasajero, onErrorLogin);
+        },
+        
+        loginConductor:function(name){
+        	if(!this.validateLogin()) return; //validateLogin fails
+            var correo = $('#correoLogin').val();
+            var clave = $('#claveLogin').val();
+            return apiclient.loginConductor(correo, clave, onSuccessLoginConductor, onErrorLogin);
         },
         
         validateLogin:function(name){

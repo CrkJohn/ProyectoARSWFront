@@ -6,16 +6,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewController {
 
-	@RequestMapping("/index")
-	  String index() {
+	@RequestMapping(value = { "/" , "index" })
+	String index() {
 	    return "index";
-	 }
-	
-	@RequestMapping(value = { "/" , "login" })
-	String login() {
-	    return "login";
 	}
 	
+	@RequestMapping("/loginPasajero")
+	String loginPasajero(){
+		return "loginPasajero";
+	}
+
+	@RequestMapping("/loginConductor")
+	String loginConductor(){
+		return "loginConductor";
+	}
+
 	@RequestMapping("/userHome")
 	String userHome() {
 	    return "userHome";
@@ -53,19 +58,34 @@ public class ViewController {
 		return "confConductor";
 	}
 	
-	@RequestMapping("/navbar")
-	String navbar() {
-		return "navbar";
+	@RequestMapping("/navbarConductor")
+	String navbarConductor() {
+		return "navbarConductor";
 	}
 	
 	@RequestMapping("/register")
 	String register() {
 		return "register";
 	}
+
+	@RequestMapping("/registroConductor")
+	String registroConductor(){
+		return "registroConductor";
+	}
 	
+	@RequestMapping("/registroPasajero")
+	String registroPasajero(){
+		return "registroPasajero";
+	}
+
 	@RequestMapping("/perfil")
 	String perfil() {
 		return "perfil";
+  }
+
+	@RequestMapping("/perfilConductor")
+	String perfilConductor() {
+		return "perfilConductor";
   }
 
 	@RequestMapping("/conductorRegister")

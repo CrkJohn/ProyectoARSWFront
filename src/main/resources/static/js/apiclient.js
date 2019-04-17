@@ -6,11 +6,21 @@ apiclient=(function(){
 				callback(data);
 			});
 		},
-		login:function(correo,clave, succ, err){
+		
+		loginPasajero:function(correo,clave, succ, err){
 			console.log("APICLIENT -> ",correo,clave);
 			$.ajax({
 			    type: "GET",  
-			    url: "https://backarsw.herokuapp.com/v1/usuarios/"+correo+"/"+clave,
+			    url: "https://backarsw.herokuapp.com/v1/pasajeros/"+correo+"/"+clave,
+			    success: succ,
+			    error: err
+			});
+		},
+		
+		loginConductor:function(correo, clave, succ, err){
+			$.ajax({
+			    type: "GET",  
+			    url: "https://backarsw.herokuapp.com/v1/conductores/"+correo+"/"+clave,
 			    success: succ,
 			    error: err
 			});
