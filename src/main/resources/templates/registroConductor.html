@@ -4,7 +4,7 @@
 
 
 <!--===============================================================================================-->
-<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+<!-- link rel="icon" type="image/png" href="images/icons/favicon.ico" /-->
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="conductor/bootstrap/css/bootstrap.min.css">
@@ -70,8 +70,7 @@
 
 
 	<div class="limiter">
-		<div class="container-login100"
-			style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" id="reForm">
 
@@ -79,7 +78,7 @@
 						Pasajero </span>
 
 					<!-- One "tab" for each step in the form: -->
-
+					<!--		
 					<div class="tab">
 						<div class="wrap-input100 validate-input"
 							data-validate="Ingrese sus nombres">
@@ -114,7 +113,7 @@
 								class="focus-input100" data-placeholder="&#xf207;"></span>
 						</div>
 					</div>
-
+					-->
 					<div class="tab">
 
 						<div class="wrap-input100 validate-input"
@@ -139,8 +138,6 @@
 						</div>
 
 					</div>
-
-
 
 					<div style="overflow: auto;">
 						<div style="float: left;">
@@ -175,9 +172,11 @@
 		showTab(currentTab); // Display the current tab
 
 		function showTab(n) {
+			console.log("SHOW TAB -> "+ n);
 			// This function will display the specified tab of the form...
 			var x = document.getElementsByClassName("tab");
 			x[n].style.display = "block";
+			console.log("SHOW TAB -> "+x);
 			//... and fix the Previous/Next buttons:
 			if (n == 0) {
 				document.getElementById("prevBtn").style.display = "none";

@@ -78,15 +78,10 @@ public class ViewController {
 		return "registroPasajero";
 	}
 
-	@RequestMapping("/perfil")
-	String perfil() {
-		return "perfil";
-  }
-
 	@RequestMapping("/perfilConductor")
 	String perfilConductor() {
 		return "perfilConductor";
-  }
+	}
 
 	@RequestMapping("/conductorRegister")
 	String conductorRegister(){
