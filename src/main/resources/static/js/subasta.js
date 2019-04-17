@@ -38,13 +38,8 @@ sb=(function(){
             var duration =  route.legs[0].duration.text
             console.log()
             var distance = route.legs[0].distance.text;
-            
-            
+     
             console.log(duration +  " " + distance);
-            /*route.legs.forEach( function(leg){
-                    duration += leg.duration.value;
-            });*/
-            //document.getElementById('duration').innerHTML = duration/60 + " minutos";              
           } else {
             window.alert('Directions request failed due to ' + status);
           }
@@ -59,8 +54,8 @@ sb=(function(){
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
-        
-        console.log('Men');
+        sbStomp.init();
+
     } 
 
     

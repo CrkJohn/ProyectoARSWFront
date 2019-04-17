@@ -3,6 +3,7 @@
 	<head>
 		<title>Read Only by HTML5 UP</title>
 		<meta charset="utf-8" />
+		<th:block th:replace="navbar ::head"></th:block>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="css/mainSubasta.css" />
 		<link rel="stylesheet" href="css/styleChat.css">
@@ -49,21 +50,22 @@
 							<section id="two">
 								<div class="container">
 									<h3>Things I Can Do</h3>
+									<!-- Cambio de precios -->
 									<div class="btn-group btn-block" >
 											<label class="btn btn-secondary">
 												<i class="fa fa-minus"></i>
 											</label>	
 											<label class="btn btn-secondary btn-block">
-											  <input type="radio" name="options" id="option2" autocomplete="off" > 1000
+											  <input  type="radio" name="options"  autocomplete="off" > 1000
 											</label>
 											<label class="btn btn-secondary">
 													<i class="fa fa-plus"></i>
 											</label>
 									</div>
-									
+									<!-- chats -->
 									<div class="card" style="height: 500px;">
 											<div class="card-header"> Viaje </div>
-											<div class="card-body" style="overflow-y: auto">
+											<div id="chat" class="card-body" style="overflow-y: auto">
 												
 												<div class="received-chats">
 														<div class="received-msg">
@@ -73,6 +75,7 @@
 															</div>
 														</div>
 													</div>
+
 													<div class="outgoing-chats">
 														<div class="outgoing-chats-msg">
 															<p> agregando cositas
@@ -80,20 +83,30 @@
 															<span class="time">11:30 pm</span>
 														</div>
 													</div>
+
+
+													<div class="outgoing-chats">
+															<div class="outgoing-chats-msg">
+																<p> agregando cositas
+																</p>
+																<span class="time">11:30 pm</span>
+															</div>
+														</div>
 		
 											</div>
 											<div class="card-footer text-muted">
 													<div class="input-group">
-														<input type ="text" class ="form-control" placeholder="Envia tu mensaje">
+														<input id='msg' type ="text" class ="form-control" placeholder="Envia tu mensaje">
 														<div class = "input-group-append">
 															<span class = "input-group-text">
-																	<i class="faa fa-paper-plane"></i>
+																	<button id='sendMsg' class="fa fa-paper-plane"></button>
 															</span>
 														</div>
 												 </div>  
 											</div>
 									</div>
 								</div>
+
 							</section>
 
 				<!-- Footer -->
@@ -115,7 +128,7 @@
 			<script src="js/breakpoints.min.js"></script>
 			<script src="js/mainSubasta.js"></script>
 			<script src = "js/subasta.js"></script>
-			      
+			<script src = "js/subastaSTOMP.js"></script>
 			<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
 			</script>
