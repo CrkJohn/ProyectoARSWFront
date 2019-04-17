@@ -33,7 +33,6 @@ public class ViewController {
 		return "mapsP";
 	}
 
-	
 	@RequestMapping("/pagos")
 	String pagos() {
 		return "pagos";
@@ -72,6 +71,11 @@ public class ViewController {
 	@RequestMapping("/conductorRegister")
 	String conductorRegister(){
 		return "conductorRegister";
+	}
+
+	@RequestMapping("/subasta")
+	String  subasta(){
+		return "subasta";
 	}
 	
 }

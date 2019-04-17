@@ -1,6 +1,4 @@
-
-
-app=(function(){
+sb=(function(){
     
     var map;
     function autocompleteFunction(val){
@@ -61,19 +59,8 @@ app=(function(){
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-    
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        directionsDisplay.setMap(map);
-    
-        document.getElementById('Karen').addEventListener('click', function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        });;
-        autocompleteFunction('start');
-        autocompleteFunction('end');
+        
+        console.log('Men');
     } 
 
     
