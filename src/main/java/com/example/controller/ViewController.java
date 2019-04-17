@@ -93,4 +93,9 @@ public class ViewController {
 		return "subasta";
 	}
 	
+	@RequestMapping("/prueba")
+	String prueba() {
+		return "prueba";
+	}
+	
 }
