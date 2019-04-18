@@ -7,18 +7,18 @@
 	
 		body {
 	    background-color: #f5f5f5;
-	}
+	    }
 	
-	#main-content {
-        max-width: 940px;
-        padding: 2em 3em;
-        margin: 0 auto 20px;
-        background-color: #f5f5f517;
-        border: 1px solid #e5e5e50d;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-    }
+        #main-content {
+            max-width: 940px;
+            padding: 2em 3em;
+            margin: 0 auto 20px;
+            background-color: #f5f5f517;
+            border: 1px solid #e5e5e50d;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
 
     </style>
     <script src="js/stompConductor.js"></script>
@@ -28,7 +28,9 @@
 
 
     <div th:replace="navbarConductor :: navbarConductorBody"></div>
-</p>
+
+    </p>
+    
     <div id="main-content" class="container">
             <div class="col-md-8">
                         <label for="connect">Viajes actulamente pedidos</label>
@@ -52,14 +54,5 @@
                             </button>
             </div>
     </div>
-      
-<script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
- </script>
-
-
 </body>
 </html>

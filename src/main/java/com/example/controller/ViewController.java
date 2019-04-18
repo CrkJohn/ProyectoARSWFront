@@ -53,9 +53,9 @@ public class ViewController {
 		return "cupones";
 	}
 	
-	@RequestMapping("/confConductor")
-	String confConductor() {
-		return "confConductor";
+	@RequestMapping("/viajesDisponiblesConductor")
+	String viajesDisponiblesConductor() {
+		return "viajesDisponiblesConductor";
 	}
 	
 	@RequestMapping("/navbarConductor")
