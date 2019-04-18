@@ -34,7 +34,7 @@ apiclient=(function(){
 				contentType: "application/json",
 				url: "https://backarsw.herokuapp.com/v1/pasajeros/savePasajero",
 				data: datos,
-				dataType : 'json',
+				//dataType : 'json',
 				success: succ,
 				error: err
 			})

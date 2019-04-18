@@ -32,8 +32,15 @@ app=(function(){
     }
 
     var onSucessRegistroPasajero = function(data){
+        console.log(data);
         alert("Ha sido registrado exitosamente como pasajero de Evern Driver");
         location.href = "loginPasajero";
+    }
+
+    var onErrorRegistroPasajero = function(data){
+        console.log(data);
+        alert("No se pudo realizar el registro correctamente");
+        location.href = "registroPasajero";
     }
 
     return{
@@ -195,7 +202,8 @@ app=(function(){
             };
             pasajero = JSON.stringify(pasajero);
             console.log("APP REGISTRO PASAJERO -> "+pasajero);
-            return apiclient.registroPasajero(pasajero, onSucessRegistroPasajero, onErrorRegister);
+            return apiclient.registroPasajero(pasajero, onSucessRegistroPasajero,
+                onErrorRegistroPasajero);
         }
     }
 })();
