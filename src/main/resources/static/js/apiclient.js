@@ -6,7 +6,7 @@ apiclient=(function(){
 				callback(data);
 			});
 		},
-		
+
 		loginPasajero:function(correo,clave, succ, err){
 			console.log("APICLIENT -> ",correo,clave);
 			$.ajax({
@@ -26,7 +26,7 @@ apiclient=(function(){
 			});
 		},
 
-		registerPasajero:function(datos, succ, err){
+		registroPasajero:function(datos, succ, err){
 			console.log("DATA PASAJERO -> ");
 			console.log(datos);
 			$.ajax({
@@ -40,7 +40,7 @@ apiclient=(function(){
 			})
 		},
 
-		registerConductor:function(datos, succ, err){
+		registroConductor:function(datos, succ, err){
 			console.log("DATA CONDUCTOR ->");
 			console.log(datos);
 			$.ajax({
