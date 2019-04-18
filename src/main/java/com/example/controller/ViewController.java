@@ -78,15 +78,10 @@ public class ViewController {
 		return "registroPasajero";
 	}
 
-	@RequestMapping("/perfil")
-	String perfil() {
-		return "perfil";
-  }
-
 	@RequestMapping("/perfilConductor")
 	String perfilConductor() {
 		return "perfilConductor";
-  }
+	}
 
 	@RequestMapping("/conductorRegister")
 	String conductorRegister(){
@@ -96,6 +91,11 @@ public class ViewController {
 	@RequestMapping("/subasta")
 	String  subasta(){
 		return "subasta";
+	}
+	
+	@RequestMapping("/prueba")
+	String prueba() {
+		return "prueba";
 	}
 	
 }
