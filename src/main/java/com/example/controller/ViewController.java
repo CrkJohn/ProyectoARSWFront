@@ -53,9 +53,9 @@ public class ViewController {
 		return "cupones";
 	}
 	
-	@RequestMapping("/confConductor")
-	String confConductor() {
-		return "confConductor";
+	@RequestMapping("/viajesDisponiblesConductor")
+	String viajesDisponiblesConductor() {
+		return "viajesDisponiblesConductor";
 	}
 	
 	@RequestMapping("/navbarConductor")
@@ -91,6 +91,11 @@ public class ViewController {
 	@RequestMapping("/subasta")
 	String  subasta(){
 		return "subasta";
+	}
+	
+	@RequestMapping("/prueba")
+	String prueba() {
+		return "prueba";
 	}
 	
 }

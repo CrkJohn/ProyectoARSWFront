@@ -1,0 +1,22 @@
+.navbar{
+	border-top: solid 2px #5ccfb1;
+	background-color:   #5ccfb1;
+	border-bottom: solid 2px #5ccfb1;
+	
+}
+
+.navbar-brand{
+	font-family: "Snell Roundhand, cursive";
+	font-style: italic	;
+	color : white;
+}
+
+
+.nav-item{
+	color : white;
+}
+
+a:hover {
+    color : black;
+    text-decoration: underline
+}

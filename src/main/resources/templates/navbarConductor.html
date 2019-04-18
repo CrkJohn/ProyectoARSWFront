@@ -8,45 +8,37 @@
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
         <script src="js/stomp.js"></script>
-        <script src="conductor/jquery/jquery.min.js"></script>
-        <script src="conductor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Bootstrap core CSS -->
-        <link href="conductor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="css/simple-sidebar.css" rel="stylesheet">
-        <style>
-			.list-group-item {
-				background-color: #fff0;
-			}
-			
-			.list-group-item-action {
-				color: #ffffff;
-			}
-
-			.bg-light {
-                background-color: #ffffff00!important;
-            }
-        </style>
+        <link href="css/navbarConductor.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     </th:block>
     <head>
-    <body th:fragment="navbarConductorBody"   style="background-image: url('images/bg-01.jpg');">
-        <!-- Sidebar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" 
-					style="    background: -webkit-linear-gradient(left,#a2a1c7, #002986);					">
-					>
-					<a class="navbar-brand">Conductor</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-					  <span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					  <div class="navbar-nav">
-						  <!-- <span class="sr-only">(current)</span>-->
-						<a class="nav-item nav-link" href="perfil">Mi Perfil</a>
-						<a class="nav-item nav-link" href="confConductor">Viajes Disponibles</a>
-						<a class="nav-item nav-link" href="#">Mis Viajes</a>
-						<a class="nav-item nav-link" href="login">Salir</a>
-					  </div>
-					</div>
-			</nav>
+    <body th:fragment="navbarConductorBody" >
+      
+      <nav class="navbar navbar-expand-lg justify-content-between">
+        <a class="navbar-brand" >Conductor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        
+        <div class="collapse navbar-collapse">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link active " href="perfilConductor">Mi Perfil</a> 
+            <a class="nav-item nav-link" href="viajesDisponiblesConductor">Viajes disponibles</a>
+            <a class="nav-item nav-link" href="viajesRealizados">Viajes realizados</a> 
+            <a class="nav-item nav-link" href="loginConductor">Salir</a> 
+          </div>
+          
+        </div>
+      </nav>
     </body>
 </html>
+
+
+
