@@ -19,10 +19,28 @@ app=(function(){
 
     var onErrorRegister = function(data){
         alert("El correo electrónico o el celular ingresado ya está asociado con una cuenta.");
+        location.href = "index"
     }
 
     var onErrorConductorRegister = function(data){
         alert("El automóvil ya está asociado a otra cuenta");
+    }
+
+    var onSucessRegistroConductor = function (data){
+        alert("Ha sido registrado exitosamente como conductor de Evern Driver");
+        location.href = "loginConductor";
+    }
+
+    var onSucessRegistroPasajero = function(data){
+        console.log(data);
+        alert("Ha sido registrado exitosamente como pasajero de Evern Driver");
+        location.href = "loginPasajero";
+    }
+
+    var onErrorRegistroPasajero = function(data){
+        console.log(data);
+        alert("No se pudo realizar el registro correctamente");
+        location.href = "registroPasajero";
     }
 
     return{
@@ -47,7 +65,7 @@ app=(function(){
             var clave = $('#claveLogin').val();
             return apiclient.loginConductor(correo, clave, onSuccessLoginConductor, onErrorLogin);
         },
-        
+
         validateLogin:function(name){
         	var correo=$('#correoLogin');
         	if(correo.val()==""){
@@ -172,6 +190,20 @@ app=(function(){
                 return false;
             }
             return true;
+        },
+
+        registroPasajero:function(name){
+            var pasajero = {
+                "nombres": $('[name=nombres]').val(),
+                "apellidos": $('[name=apellidos]').val(),
+                "correo": $('[name=correo]').val(), 
+                "clave": $('[name=clave]').val(),
+                "celular": $('[name=telefono]').val()					
+            };
+            pasajero = JSON.stringify(pasajero);
+            console.log("APP REGISTRO PASAJERO -> "+pasajero);
+            return apiclient.registroPasajero(pasajero, onSucessRegistroPasajero,
+                onErrorRegistroPasajero);
         }
     }
 })();
