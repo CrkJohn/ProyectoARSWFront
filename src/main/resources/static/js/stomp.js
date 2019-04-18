@@ -13,7 +13,7 @@ var stomp =(function () {
     		
     	}
     	console.log(viaje);
-        stompClient.send("/topic/newpoint", {}, JSON.stringify(viaje)); 
+        stompClient.send("/topic/pedirViaje", {}, JSON.stringify(viaje)); 
 
     };
 
@@ -27,7 +27,7 @@ var stomp =(function () {
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/newpoint', function (eventbody) {
+            stompClient.subscribe('/topic/pedirViaje', function (eventbody) {
             	alert("Se ha enviado su viajes correctamente, espera que un coductor lo acepte");
             });
         });

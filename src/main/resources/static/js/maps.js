@@ -61,7 +61,7 @@ app=(function(){
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
-        var infowindow = new google.maps.InfoWindow();
+        /*var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
         infowindow.setContent(infowindowContent);
     
@@ -73,7 +73,7 @@ app=(function(){
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         });;
         autocompleteFunction('start');
-        autocompleteFunction('end');
+        autocompleteFunction('end');*/
     } 
 
     

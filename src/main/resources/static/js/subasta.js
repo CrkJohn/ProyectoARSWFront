@@ -49,13 +49,14 @@ sb=(function(){
       
     
     
-      function initMap() {
+      function initMap(iniciarSBinit) {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
-        sbStomp.init();
-
+        if(iniciarSBinit == "true"){
+          sbStomp.init();
+        }
     } 
 
     
