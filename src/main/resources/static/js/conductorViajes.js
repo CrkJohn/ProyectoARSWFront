@@ -14,6 +14,13 @@ var conductorViajes =(function () {
         });
     }
 
+    function initMap(){
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 4.782715, lng: -74.042611},
+            zoom: 15
+        });
+    }
+
     function showRoute(message) {
         var  newRoute = '<div class="card text-center" ><div class="card-body">' +
             '<h5 class="card-title">Viaje pedido por el usario : CrkJohn</h5>' +
@@ -32,6 +39,7 @@ var conductorViajes =(function () {
 
         init: function () {
             connect();
+            initMap();
             
         },
         

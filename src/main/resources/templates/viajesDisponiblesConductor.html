@@ -10,8 +10,7 @@
     <!-- main css -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <script src="js/stompConductor.js"></script>
-    <script src="js/maps.js"> </script>
+    <script src="js/conductorViajes.js"></script>
 
     <style>
         #map {
@@ -32,7 +31,7 @@
     </style>
 </head>
 
-<body onload='conductorViajes.init();app.init() '>
+<body onload='conductorViajes.init(); '>
 
     <div th:replace="navbarConductor :: navbarConductorBody"></div>
 
@@ -41,7 +40,7 @@
     <section class="home_banner_area">
         <div class="container box_1620">
             <div class="mapa main" data-position="center">
-                <div class="mp" id="map"></div>
+                <div  id="map"></div>
             </div>
 
         </p>
