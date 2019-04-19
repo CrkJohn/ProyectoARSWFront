@@ -1,7 +1,3 @@
-
-
-
-
 app=(function(){
     
     var map;

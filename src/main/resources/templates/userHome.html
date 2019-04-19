@@ -93,7 +93,7 @@
 		</style>
 		
 </head>
-<body >
+<body onload= 'pedirViaje.init()'>
 	<div th:replace="navbarPasajero :: navbarPasajeroB"></div>
 	
 	<div class="pac-card" id="pac-card">
@@ -118,7 +118,7 @@
 	<script src ="js/perdirViaje.js"></script> 
 	<script src="js/stomp.js"></script>
 	<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places&callback=initMap">
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
 	</script>   
 	
 </body>
