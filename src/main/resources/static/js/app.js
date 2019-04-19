@@ -12,7 +12,7 @@ app=(function(){
         alert("El correo o la contraseña no son correctas.");
     }
 
-    var onSuccessRegister = function(data){
+    /*var onSuccessRegister = function(data){
         alert("Ha sido registrado satisfactoriamente");
         location.href = "login";
     }
@@ -20,7 +20,7 @@ app=(function(){
     var onErrorRegister = function(data){
         alert("El correo electrónico o el celular ingresado ya está asociado con una cuenta.");
         location.href = "index"
-    }
+    }*/
 
     var onErrorConductorRegister = function(data){
         alert("El automóvil ya está asociado a otra cuenta");
@@ -39,8 +39,13 @@ app=(function(){
 
     var onErrorRegistroPasajero = function(data){
         console.log(data);
-        alert("No se pudo realizar el registro correctamente");
+        alert("No se pudo realizar el registro del pasajero correctamente");
         location.href = "registroPasajero";
+    }
+
+    var onErrorRegistroConductor = function(data){
+        alert("No se pudo realizar el registro del conductor correctamente");
+        location.href = "registroConductor";
     }
 
     return{
@@ -81,7 +86,7 @@ app=(function(){
         	}
         	return true;
         },
-        
+        /*
         register:function(name){
             if(!this.validateRegister()) return; //validationRegister fails
             var user = {
@@ -101,8 +106,8 @@ app=(function(){
             	console.log("registarse como pasajero");
                 apiclient.registerPasajero(user, onSuccessRegister, onErrorRegister);
             }
-        },
-        
+        },*/
+        /*
         validateRegister:function(name){
             var nombres=$('#nombresRegister');
             if(nombres.val()==""){
@@ -116,12 +121,12 @@ app=(function(){
         		apellidos.focus();
         		return false;
             }
-        	/*var fechaNacimiento=$('#fechaNacimientoRegister');
+        	var fechaNacimiento=$('#fechaNacimientoRegister');
         	if(fechaNacimiento.val()==""){
         		window.alert("Por favor ingrese su fecha de nacimiento");
         		fechaNacimiento.focus();
         		return false;
-            }*/
+            }
             var celular=$('#telefonoRegister');
             if(celular.val()==""){
                 window.alert("Por favor ingrese su número telefónico");
@@ -190,7 +195,7 @@ app=(function(){
                 return false;
             }
             return true;
-        },
+        },*/
 
         registroPasajero:function(name){
             var pasajero = {
@@ -204,6 +209,28 @@ app=(function(){
             console.log("APP REGISTRO PASAJERO -> "+pasajero);
             return apiclient.registroPasajero(pasajero, onSucessRegistroPasajero,
                 onErrorRegistroPasajero);
+        },
+
+        registroConductor:function(name){
+            var conductor = {
+                "nombres": $('[name=nombres]').val(),
+                "apellidos": $('[name=apellidos]').val(),
+                "correo": $('[name=correo]').val(), 
+                "clave": $('[name=clave]').val(),
+                "celular": $('[name=telefono]').val()					
+            };
+            var automovil = {
+                "placa": $('[name=placaAutomovil]').val(),
+                "modelo": $('[name=modeloAutomovil]').val(),
+                "color": $('[name=colorAutomovil]').val(),
+                "tipo": $('[name=tipoAutomovil]').val()
+            }
+            conductor.automovil = automovil;
+            console.log("APP REGISTRO AUTOMOVIL -> "+automovil);
+            conductor = JSON.stringify(conductor);
+            console.log("APP REGISTRO CONDUCTOR -> "+conductor);
+            return apiclient.registroConductor(conductor, onSucessRegistroConductor,
+                onErrorRegistroConductor);
         }
     }
 })();

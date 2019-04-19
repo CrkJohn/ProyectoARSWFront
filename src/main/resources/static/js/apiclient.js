@@ -41,15 +41,13 @@ apiclient=(function(){
 		},
 
 		registroConductor:function(datos, succ, err){
-			console.log("DATA CONDUCTOR ->");
+			console.log("DATA CONDUCTOR -> ");
 			console.log(datos);
 			$.ajax({
 				method: "POST",
 				contentType: "application/json",
 				url: "https://backarsw.herokuapp.com/v1/conductores/saveConductor",
-				//url: "http://localhost:8080/v1/conductores/saveConductor",
 				data: datos,
-				dataType : 'json',
 				success: succ,
 				error: err
 			})
