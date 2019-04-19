@@ -1,164 +1,59 @@
 <!DOCTYPE html>
 <html lang="en"> 
-<head>
-<title>Login V3</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/sidenav.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div class="wrapper">
-   	<nav id="sidebar">
-   		<div class="sidebar-header">
-   			<h2>ENERV</h2>
-   		</div>
-   		<ul class="list-unstyled components">
-   			<li ><a href="pagos" style="color:#fff;"><i class="fa fa-usd"></i> <span class="d-none d-md-inline">Pagos</span></a></li>
-   			<li><a href="viajes" style="color:#fff;"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline">Tus Viajes</span></a></li>
-   			<li><a href="cupones" style="color:#fff;"><i class="fa fa-tags"></i> <span class="d-none d-md-inline">Viajes Gratis</span></a></li>
-   			<li ><a href="userHome" style="color:#fff;"><i class="fa fa-send"></i> <span class="d-none d-md-inline">Mapa</span></a></li >
-   			<li class="active"><a href="#config" style="color:#fff;"><i class="fa fa-gear"></i> <span class="d-none d-md-inline">Configuración</span></a></li>
-   			<li><a href="index" style="color:#fff;"><i class="fa fa-bullhorn"></i> <span class="d-none d-md-inline">Ayuda</span></a></li>
-   		</ul>
-   	</nav>
-   	
-   	<div class="content">
-   		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-   			<a href="#" data-target="#sidebar" data-toggle="collapse" aria-expanded="false"><i class="fa fa-align-justify"></i></a>
-        </nav>
-  	
-  	
-  	<div class="container" id="config">
-  	
-   <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="title">Editar Perfil</h3>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="row">
-              <div class="col-md-5 pr-1">
-                <div class="form-group">
-                  <label>Empresa (disabled)</label>
-                  <input type="text" class="form-control" disabled="" placeholder="Company" value="No company">
-                </div>
-              </div>
-              <div class="col-md-3 px-1">
-                <div class="form-group">
-                  <label>Nombre de Usuario</label>
-                  <input type="text" class="form-control" placeholder="Username" value="michael23">
-                </div>
-              </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label for="email">Correo Electrónico</label>
-                  <input name="email" id="email" type="email" class="form-control" placeholder="Email">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6 pr-1">
-                <div class="form-group">
-                  <label>Nombres</label>
-                  <input type="text" class="form-control" placeholder="Company" value="Mike">
-                </div>
-              </div>
-              <div class="col-md-6 pl-1">
-                <div class="form-group">
-                  <label>Apellidos</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Dirección de Residencia</label>
-                  <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label>Ciudad</label>
-                  <input type="text" class="form-control" placeholder="City" value="Mike">
-                </div>
-              </div>
-              <div class="col-md-4 px-1">
-                <div class="form-group">
-                  <label>País</label>
-                  <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                </div>
-              </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label>Código postal</label>
-                  <input type="number" class="form-control" placeholder="ZIP Code">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Acerca de Mi</label>
-                  <textarea rows="4" cols="80" class="form-control" placeholder="En este espacio puede poner una pequeña descripción sobre usted" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card card-user">
-        <div class="card-body">
-          <div class="author">
-            <a href="#">
-              <img class="avatar border-gray" src="../images/userDefault.png" alt="...">
-              <h5 class="title">Mike Andrew</h5>
-            </a>
-            <p class="description">
-              michael24
-            </p>
-          </div>
-          <p class="description text-center">
-            "Lamborghini Mercy
-            <br> Your chick she so thirsty
-            <br> I'm in that two seat Lambo"
-          </p>
-        </div>
-        <hr>
-        <div class="button-container">
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fa fa-facebook-square"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fa fa-github"></i>
-          </button>
-          <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fa fa-google-plus"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-   	</div>
-   	</div>
-   	
-   	
-   	
-   	
-   </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" ></script>
+<head>
+<title>Perfil</title>
+
+<th:block th:replace="navbarPasajero ::head"></th:block>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="perfil/linericon/style.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!-- main css -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <div th:replace="navbarPasajero :: navbarPasajeroB"></div>
+	</p>
+
+	<!--================Home Banner Area =================-->
+	<section class="home_banner_area">
+		<div class="container box_1620">
+			<div class="banner_inner d-flex align-items-center">
+				<div class="banner_content">
+					<div class="media">
+						<div class="d-flex">
+							<img src="img/personal.jpg" alt="">
+						</div>
+						<div class="media-body">
+							<div class="personal_text">
+								<h6>Ingeniero de sistemas</h6>
+								<h3>David Saavedra</h3>
+								<h4>Master arquitectura de software</h4>
+								<p> </p>
+								<ul class="list basic_info">
+									<li><a href="#"><i class="lnr lnr-calendar-full"></i> 31st December, 1992</a></li>
+									<li><a href="#"><i class="lnr lnr-phone-handset"></i> 44 (012) 6954 783</a></li>
+									<li><a href="#"><i class="lnr lnr-envelope"></i> david.saavedra@donald</a></li>
+									<li><a href="#"><i class="lnr lnr-home"></i> Bogota Colombia</a></li>
+								</ul>
+								<ul class="list personal_social">
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 </html>

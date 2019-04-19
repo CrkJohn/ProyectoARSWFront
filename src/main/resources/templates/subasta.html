@@ -9,17 +9,34 @@
 		<link rel="stylesheet" href="css/styleChat.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/chat.css">
+		<style>
+				ul::-webkit-scrollbar{
+					width: 8px;
+				}
+				ul::-webkit-scrollbar-thumb{
+					background:#068FA6;
+					border-radius: 5px;
+		
+				}
+				body::-webkit-scrollbar{
+					width: 11px;
+				}
+				body::-webkit-scrollbar-thumb{
+					background:#033A25;
+					border-radius: 5px;
+				}
+				</style>
+				
 	</head>
 	<body class="is-preload" onload='sb.init("true")'>
 
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar">
-						<img src="images/avatar.jpg" alt="" /></span>
-					<h1 id="logo"><a href="#">Evern Viajes</a></h1>
-					<p>I got reprogrammed by a rogue AI<br />
-					and now I'm totally cray</p>
+					
+					<h3 id="logo"><a>Evern Viajes</a></h3>
+					<p>Encuentre el precio ideal para su viaje</p>
 				</header>
 				<nav id="nav">
 					<ul>
@@ -49,7 +66,7 @@
 							<!-- Two -->
 							<section id="two">
 								<div class="container">
-									<h3>Things I Can Do</h3>
+									<h3>Chat</h3>
 									<!-- Cambio de precios -->
 									<div class="btn-group btn-block" >
 											<label class="btn btn-secondary">
@@ -63,48 +80,22 @@
 											</label>
 									</div>
 									<!-- chats -->
-									<div class="card" style="height: 500px;">
-											<div class="card-header"> Viaje </div>
-											<div id="chat" class="card-body" style="overflow-y: auto">
-												
-												<div class="received-chats">
-														<div class="received-msg">
-															<div class="received-msg-inbox">
-																<p>Intentando hacer el chat</p>
-																<span class="time">11:30 pm</span>
-															</div>
-														</div>
-													</div>
-
-													<div class="outgoing-chats">
-														<div class="outgoing-chats-msg">
-															<p> agregando cositas
-															</p>
-															<span class="time">11:30 pm</span>
-														</div>
-													</div>
-
-
-													<div class="outgoing-chats">
-															<div class="outgoing-chats-msg">
-																<p> agregando cositas
-																</p>
-																<span class="time">11:30 pm</span>
-															</div>
-														</div>
-		
-											</div>
-											<div class="card-footer text-muted">
-													<div class="input-group">
-														<input id='msg' type ="text" class ="form-control" placeholder="Envia tu mensaje">
-														<div class = "input-group-append">
-															<span class = "input-group-text">
-																	<button id='sendMsg' class="fa fa-paper-plane"></button>
-															</span>
-														</div>
-												 </div>  
-											</div>
+								<div class="card" style="height: 500px; background-image: url('../img/chat.png'); width: 100%; height: 100vh; ">
+									<div id="chat" class="card-body" style="overflow-y: auto">
+										<ul id="scroll"></ul>
 									</div>
+									<div >
+											<div class="msj-rta macro">                        
+													<div class="text text-r" style="background:#F2FAFB !important">
+														<input class="mytext" placeholder="Escribe un mensaje"/>
+													</div> 
+												</div>
+												<div style="padding:10px;">
+													<span class="glyphicon glyphicon-share-alt"></span>
+												</div>
+										
+									</div>
+								
 								</div>
 
 							</section>
@@ -129,6 +120,7 @@
 			<script src="js/mainSubasta.js"></script>
 			<script src = "js/subasta.js"></script>
 			<script src = "js/subastaSTOMP.js"></script>
+			<script src="js/chat.js"></script>  
 			<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
 			</script>

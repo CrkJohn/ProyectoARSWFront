@@ -3,6 +3,24 @@
 app=(function(){
     
     var map;
+    var icons = {
+      start: {
+        icon:'../img/car.png',
+      },
+      end: {
+        icon:'../img/flag.png',
+      }
+    };
+    function makeMarker(position, icon, title){
+      new google.maps.Marker({
+        position: position,
+        map: map,
+        icon: icon,
+        title: title,
+        //animation: google.maps.Animation.DROP
+      });
+    }
+
     function autocompleteFunction(val){
         var input = document.getElementById(val);
         //map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
@@ -18,14 +36,14 @@ app=(function(){
         // Set the data fields to return when the user selects a place.
         autocomplete.setFields(
             ['address_components', 'geometry', 'icon', 'name']);
-      }
+      };
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var waypts = [];
     
         directionsService.route({
-          origin: document.getElementById('start').value,
-          destination: document.getElementById('end').value,
+          origin: document.getElementById('direccionInicio').value,
+          destination: document.getElementById('direccionDestino').value,
           waypoints: waypts,
           optimizeWaypoints: true,
           travelMode: 'DRIVING' ,
@@ -35,6 +53,12 @@ app=(function(){
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
+            var leg = response.routes[0].legs[0];
+            //mark = new google.maps.Marker({position:{lat:window.lat, lng:window.lng}, map:map,icon:icons.start.icon});
+            //makeMarker({position:{lat:window.lat, lng:window.lng}},icons.start.icon,"init");
+            makeMarker(leg.start_location, icons.start.icon,'start');
+            makeMarker(leg.end_location, icons.end.icon,'end');
+            
             routeConsole = route;
             console.log(route);
             var duration =  route.legs[0].duration.text
@@ -61,27 +85,22 @@ app=(function(){
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
-        /*var infowindow = new google.maps.InfoWindow();
+        var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
         infowindow.setContent(infowindowContent);
     
         var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
         directionsDisplay.setMap(map);
-    
-        document.getElementById('Karen').addEventListener('click', function() {
+        autocompleteFunction('direccionInicio');
+        autocompleteFunction('direccionDestino');
+        document.getElementById('pedirViaje').addEventListener('click', function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         });;
-        autocompleteFunction('start');
-        autocompleteFunction('end');*/
+        
     } 
 
-    
-
-
-	return{
-
-        
+	return{        
         init: function () {
            initMap();
         },
