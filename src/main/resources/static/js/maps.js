@@ -1,5 +1,7 @@
 
 
+
+
 app=(function(){
     
     var map;
@@ -85,7 +87,7 @@ app=(function(){
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
-        var infowindow = new google.maps.InfoWindow();
+        /*var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
         infowindow.setContent(infowindowContent);
     
@@ -96,7 +98,7 @@ app=(function(){
         autocompleteFunction('direccionDestino');
         document.getElementById('pedirViaje').addEventListener('click', function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
-        });;
+        });;*/
         
     } 
 

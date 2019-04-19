@@ -9,113 +9,117 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="perfil/linericon/style.css">
-		<link rel="stylesheet" href="css/font-awesome.min.css">
-		<!-- main css -->
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/chat.css">
-		<link rel="stylesheet" href="css/responsive.css">
 		<style>
 		#map {
-			height: 100%;
-			float: left;
-			width: 100%;
-			height: 100%;
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
 
-		}
-		ul::-webkit-scrollbar{
-			width: 8px;
-		}
-		ul::-webkit-scrollbar-thumb{
-			background:#068FA6;
-			border-radius: 5px;
+      #infowindow-content .title {
+        font-weight: bold;
+      }
 
-		}
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+				font-weight: 300;
+				text-align: center;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+				width: 400px;
+				text-align: center;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+			}
+		
 		</style>
 		
 </head>
-<body onload='stomp.init();app.init()' >
+<body >
 	<div th:replace="navbarPasajero :: navbarPasajeroB"></div>
-	</p>
-				
-	<div class="container">
-	<div class="row">
-			<!--mapa-->
-			<div class="col-xs-12 col-sm-6 col-md-8">
-					<div id="map"></div>
+	
+	<div class="pac-card" id="pac-card">
+		<div>
+			<div id="title">
+				Pedir viaje.
 			</div>
-			<!--chat-->
-			<div class="col-xs-6 col-md-4 frame" style="background-image: url('../img/chat.png'); width: 100%; height:450px ">
-			<ul id="scroll"></ul>
-			<div>
-				<div class="msj-rta macro" >                        
-					<div class="text text-r" style="background:#F2FAFB !important">
-						<input class="mytext" placeholder="Escribe un mensaje"/>
-					</div> 
-				</div>
-				<div style="padding:10px;">
-					<span class="glyphicon glyphicon-share-alt"></span>
-				</div>                
-			</div>
-		</div>
-
 			
 		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-8">
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#registrarViaje">Pedir un viaje</button>
-					
-					  <!-- Modal -->
-					  <div class="modal fade" id="registrarViaje" role="dialog">
-					    <div class="modal-dialog">
-					    
-					      <!-- Modal content-->
-					      <div class="modal-content">
-					        <div class="modal-header">
-					          <button type="button" class="close" data-dismiss="modal">&times;</button>
-					          <h4 class="modal-title"></h4>
-					        </div>
-					        <div class="modal-body">
-						        <form>
-								  <div class="form-group">
-								    <label for="exampleInputEmail1">Dirección de Recogida</label>
-								    <input type="text" class="form-control" id="direccionInicio" placeholder="Ingrese dirección de inicio">
-								  </div>
-								  <div class="form-group">
-								    <label for="exampleInputPassword1">Dirección de Destino</label>
-								    <input type="text" class="form-control" id="direccionDestino" placeholder="Ingrese dirección de destino">
-								  </div>
-								  <div class="form-group">
-								    <label for="exampleInputPassword1">Precio Esperado</label>
-								    <input type="text" class="form-control" id="precio" placeholder="Ingrese el valor de la tarifa le gustaria pagar">
-								  </div>
-								  <button id="pedirViaje" type="button" class="btn btn-primary" >Pedir</button>
-								</form>
-					        </div>
-					        <div class="modal-footer">
-					          <button  type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					        </div>
-					      </div>
-					      
-					    </div>
-					  </div>
-					  
-             </div>
-			
-			<div  class="col-xs-6 col-md-4">
-
-			</div>
+		</p>
+		<div id="pac-container">
+			<label for="pac-input"> Llevar a: </label>
+			<input id="pac-input" type="text" placeholder="Enter a location">
 		</div>
 	</div>
-
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src ="js/maps.js"></script> 
+	<div id="map"></div>
+	<div id="infowindow-content">
+		<img src="" width="16" height="16" id="place-icon">
+		<span id="place-name"  class="title"></span><br>
+		<span id="place-address"></span>
+	</div>
+	<script src ="js/perdirViaje.js"></script> 
 	<script src="js/stomp.js"></script>
-	<script src="js/chat.js"></script>  
 	<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
-			</script>   
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places&callback=initMap">
+	</script>   
 	
 </body>
 </html>
