@@ -75,11 +75,11 @@ pedirViaje = (function () {
           }
         });
       }, function () {
-        handleLocationError(true, infoWindow, map.getCenter());
+        handleLocationError(true, infowindow, map.getCenter());
       });
     } else {
       // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
+      handleLocationError(false, infowindow, map.getCenter());
     }
   }
 
