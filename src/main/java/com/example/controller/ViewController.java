@@ -23,15 +23,13 @@ public class ViewController {
 
 	@RequestMapping("/userHome")
 	String userHome() {
-	    return "userHome";
+		return "userHome";
 	}
-	
 	
 	@RequestMapping("/configuracion")
 	String configuracion() {
 		return "configuracion";
 	}
-
 
 	@RequestMapping("/maps")
 	String mapsp() {
@@ -97,6 +95,5 @@ public class ViewController {
 	String prueba() {
 		return "prueba";
 	}
-	
-	
+		
 }
