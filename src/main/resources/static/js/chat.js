@@ -1,83 +1,121 @@
-var me = {};
-me.avatar = "https://lh6.googleusercontent.com/-lr2nyjhhjXw/AAAAAAAAAAI/AAAAAAAARmE/MdtfUmC0M4s/photo.jpg?sz=48";
+'use strict';
 
-var you = {};
-you.avatar = "https://a11.t26.net/taringa/avatares/9/1/2/F/7/8/Demon_King1/48x48_5C5.jpg";
+var usernamePage = document.querySelector('#username-page');
+var chatPage = document.querySelector('#chat-page');
+var usernameForm = document.querySelector('#usernameForm');
+var messageForm = document.querySelector('#messageForm');
+var messageInput = document.querySelector('#message');
+var messageArea = document.querySelector('#messageArea');
+var connectingElement = document.querySelector('.connecting');
 
-function formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-}            
+var stompClient = null;
+var username = null;
 
-//-- No use time. It is a javaScript effect.
-function insertChat(who, text, time){
-    if (time === undefined){
-        time = 0;
+var colors = [
+    '#61ECB7','#FFE807','#FF6666','#99FFE3','#2196F3', '#40EFA4', '#1DE0F8', '#ff5652',
+    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+];
+
+function connect(event) {
+    username = document.cookie;
+
+    if(username) {
+        usernamePage.classList.add('hidden');
+        chatPage.classList.remove('hidden');
+
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, onConnected, onError);
     }
-    var control = "";
-    var date = formatAMPM(new Date());
-    
-    if (who == "me"){
-        control = '<li style="width:100%">' +
-                        '<div class="msj macro">' +
-                        '<div class="avatar"><img class="img-circle" style="width:100%;" src="'+ me.avatar +'" /></div>' +
-                            '<div class="text text-l">' +
-                                '<p>'+ text +'</p>' +
-                                '<p><small>'+date+'</small></p>' +
-                            '</div>' +
-                        '</div>' +
-                    '</li>';                    
-    }else{
-        control = '<li style="width:100%;">' +
-                        '<div class="msj-rta macro">' +
-                            '<div class="text text-r">' +
-                                '<p>'+text+'</p>' +
-                                '<p><small>'+date+'</small></p>' +
-                            '</div>' +
-                        '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="'+you.avatar+'" /></div>' +                                
-                  '</li>';
-    }
-    setTimeout(
-        function(){                        
-            $("#scroll").append(control).scrollTop($("#scroll").prop('scrollHeight'));
-        }, time);
-    
+    event.preventDefault();
 }
 
-function resetChat(){
-    $("#scroll").empty();
+
+function onConnected() {
+    // Subscribe to the Public Topic
+    stompClient.subscribe('/topic/public', onMessageReceived);
+
+    // Tell your username to the server
+    stompClient.send("/app/chat.addUser",
+        {},
+        JSON.stringify({sender: username, type: 'JOIN'})
+    )
+
+    connectingElement.classList.add('hidden');
 }
 
-$(".mytext").on("keydown", function(e){
-    if (e.which == 13){
-        var text = $(this).val();
-        if (text !== ""){
-            insertChat("me", text);              
-            $(this).val('');
-        }
+
+function onError(error) {
+    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+    connectingElement.style.color = 'red';
+}
+
+
+function sendMessage(event) {
+    var messageContent = messageInput.value.trim();
+
+    if(messageContent && stompClient) {
+        var chatMessage = {
+            sender: username,
+            content: messageInput.value,
+            type: 'CHAT'
+        };
+
+        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        messageInput.value = '';
     }
-});
-
-$('body > div > div > div:nth-child(2) > span').click(function(){
-    $(".mytext").trigger({type: 'keydown', which: 13, keyCode: 13});
-})
-
-//-- Clear Chat
-resetChat();
-
-//-- Print Messages
-insertChat("me", "Hola...", 0);  
-insertChat("you", "No me parece el precio", 1500);
-insertChat("me", "Cuál es su oferta?", 3500);
-insertChat("you", "Ofrezco 10000",7000);
-insertChat("me", "no lo se rick", 9500);
-insertChat("you", "creo que es lo adecuado", 12000);
+    event.preventDefault();
+}
 
 
-//-- NOTE: No use time on insertChat.
+function onMessageReceived(payload) {
+    var message = JSON.parse(payload.body);
+
+    var messageElement = document.createElement('li');
+
+    if(message.type === 'JOIN') {
+        messageElement.classList.add('event-message');
+        message.content = message.sender + ' joined!';
+    } else if (message.type === 'LEAVE') {
+        messageElement.classList.add('event-message');
+        message.content = message.sender + ' left!';
+    } else {
+        messageElement.classList.add('chat-message');
+
+        var avatarElement = document.createElement('i');
+        var avatarText = document.createTextNode(message.sender[0]);
+        avatarElement.appendChild(avatarText);
+        avatarElement.style['background-color'] = getAvatarColor(message.sender);
+
+        messageElement.appendChild(avatarElement);
+
+        var usernameElement = document.createElement('span');
+        var usernameText = document.createTextNode(message.sender);
+        usernameElement.appendChild(usernameText);
+        messageElement.appendChild(usernameElement);
+    }
+
+    var textElement = document.createElement('p');
+    var messageText = document.createTextNode(message.content);
+    textElement.appendChild(messageText);
+
+    messageElement.appendChild(textElement);
+
+    messageArea.appendChild(messageElement);
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+
+function getAvatarColor(messageSender) {
+    var hash = 0;
+    for (var i = 0; i < messageSender.length; i++) {
+        hash = 31 * hash + messageSender.charCodeAt(i);
+    }
+
+    var index = Math.abs(hash % colors.length);
+    return colors[index];
+}
+
+usernameForm.addEventListener('submit', connect, true)
+messageForm.addEventListener('submit', sendMessage, true)

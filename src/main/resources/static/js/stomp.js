@@ -2,9 +2,7 @@ var stomp =(function () {
 
    
     var stompClient = null;
-   
-    
-    
+
     var sendTopic = function(){
     	var viaje = {
     		 lugarOrigen : $('#direccionInicio').val(),
