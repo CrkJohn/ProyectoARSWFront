@@ -3,16 +3,47 @@ pedirViaje = (function () {
   var pos = null;
   var icons = {
     start: {
-      icon:'../img/car.png',
+      icon: '../img/car.png',
     },
     end: {
-      icon:'../img/flag.png',
+      icon: '../img/flag.png',
     }
   };
   var map = null;
-  
+  var stompClient = null;
+
+  var sendTopic = function () {
+    var viaje = {
+      origin: $('#place-address').text(),
+      destination: document.getElementById('pac-input').value,
+      costo: $('#precio').val(),
+      usr : document.cookie
+    }
+    console.log(viaje);
+    stompClient.send("/topic/pedirViaje", {}, JSON.stringify(viaje));
+
+  };
+
+  var connectAndSubscribe = function () {
+    console.info('Connecting to WS...');
+
+    //var url = 'http://localhost:8080/stompendpoint';
+    var url = 'stompendpoint';
+    var socket = new SockJS(url);
+    stompClient = Stomp.over(socket);
+    //subscribe to /topic/TOPICXX when connections succeed
+    stompClient.connect({}, function (frame) {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe('/topic/pedirViaje', function (eventbody) {
+        alert("Se ha enviado su viajes correctamente, espera que un coductor lo acepte");
+      });
+    });
+  };
+
+
+
   function initMap() {
-    
+
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
     var strictBounds = document.getElementById('strict-bounds-selector');
@@ -36,8 +67,8 @@ pedirViaje = (function () {
         geocoder.geocode({ 'location': pos }, function (results, status) {
           if (status === 'OK') {
             if (results[0]) {
-              tmp =  jQuery.parseJSON(JSON.stringify(results[0]));
-              console.log('Geocode  '+ tmp);
+              tmp = jQuery.parseJSON(JSON.stringify(results[0]));
+              console.log('Geocode  ' + tmp);
               infowindow.setContent(infowindowContent);
               var marker = new google.maps.Marker({
                 map: map,
@@ -62,12 +93,12 @@ pedirViaje = (function () {
                   (place2.address_components[2] && place2.address_components[2].short_name || '')
                 ].join(' ');
               }
-      
+
               infowindowContent.children['place-icon'].src = place2.icon;
               infowindowContent.children['place-name'].textContent = place2.name;
               infowindowContent.children['place-address'].textContent = address;
-              infowindow.open(map, marker);      
-            }else {
+              infowindow.open(map, marker);
+            } else {
               window.alert('No results found');
             }
           } else {
@@ -83,15 +114,15 @@ pedirViaje = (function () {
     }
   }
 
-  function geolocation(){
+  function geolocation() {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'location': pos }, function (results, status) {
       if (status === 'OK') {
         if (results[0]) {
-            return jQuery.parseJSON(JSON.stringify(results[0]));  
+          return jQuery.parseJSON(JSON.stringify(results[0]));
         }
       }
-    }); 
+    });
   }
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -103,10 +134,10 @@ pedirViaje = (function () {
       destination: document.getElementById('pac-input').value,
       waypoints: waypts,
       optimizeWaypoints: true,
-      travelMode: 'DRIVING' ,
+      travelMode: 'DRIVING',
       provideRouteAlternatives: true
-      
-    }, function(response, status) {
+
+    }, function (response, status) {
       if (status === 'OK') {
         directionsDisplay.setMap(map);
         directionsDisplay.setDirections(response);
@@ -114,17 +145,17 @@ pedirViaje = (function () {
         var leg = response.routes[0].legs[0];
         //mark = new google.maps.Marker({position:{lat:window.lat, lng:window.lng}, map:map,icon:icons.start.icon});
         //makeMarker({position:{lat:window.lat, lng:window.lng}},icons.start.icon,"init");
-        makeMarker(leg.start_location, icons.start.icon,'start');
-        makeMarker(leg.end_location, icons.end.icon,'end');
-        
+        makeMarker(leg.start_location, icons.start.icon, 'start');
+        makeMarker(leg.end_location, icons.end.icon, 'end');
+
         routeConsole = route;
         console.log(route);
-        var duration =  route.legs[0].duration.text
+        var duration = route.legs[0].duration.text
         console.log()
         var distance = route.legs[0].distance.text;
-        
-        
-        console.log(duration +  " " + distance);
+
+
+        console.log(duration + " " + distance);
         /*route.legs.forEach( function(leg){
                 duration += leg.duration.value;
         });*/
@@ -135,7 +166,7 @@ pedirViaje = (function () {
     });
   }
 
-  function makeMarker(position, icon, title){
+  function makeMarker(position, icon, title) {
     new google.maps.Marker({
       position: position,
       map: map,
@@ -145,41 +176,41 @@ pedirViaje = (function () {
     });
   }
 
-  function infoWindowsF(){
+  function infoWindowsF() {
     var infowindowContent = document.getElementById('infowindow-content');
-    var infowindow = new google.maps.InfoWindow(); 
+    var infowindow = new google.maps.InfoWindow();
     console.log(tmp);
     infowindow.setContent(infowindowContent);
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
-        console.log('Hola mundo')
-        var place2 = tmp;
-        console.log(place2.geometry)
-        infowindow.setPosition(pos);
-        if (place2.geometry.viewport) {
-          map.fitBounds(place2.geometry.viewport);
-        } else {
-          map.setCenter(place2.geometry.location);
-          map.setZoom(17);  // Why 17? Because it looks good.
-        }
-        marker.setPosition(place2.geometry.location);
-        marker.setVisible(true);
+    var marker = new google.maps.Marker({
+      map: map,
+      anchorPoint: new google.maps.Point(0, -29)
+    });
+    console.log('Hola mundo')
+    var place2 = tmp;
+    console.log(place2.geometry)
+    infowindow.setPosition(pos);
+    if (place2.geometry.viewport) {
+      map.fitBounds(place2.geometry.viewport);
+    } else {
+      map.setCenter(place2.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setPosition(place2.geometry.location);
+    marker.setVisible(true);
 
-        var address = '';
-        if (place2.address_components) {
-          address = [
-            (place2.address_components[0] && place2.address_components[0].short_name || ''),
-            (place2.address_components[1] && place2.address_components[1].short_name || ''),
-            (place2.address_components[2] && place2.address_components[2].short_name || '')
-          ].join(' ');
-        }
+    var address = '';
+    if (place2.address_components) {
+      address = [
+        (place2.address_components[0] && place2.address_components[0].short_name || ''),
+        (place2.address_components[1] && place2.address_components[1].short_name || ''),
+        (place2.address_components[2] && place2.address_components[2].short_name || '')
+      ].join(' ');
+    }
 
-        infowindowContent.children['place-icon'].src = place2.icon;
-        infowindowContent.children['place-name'].textContent = place2.name;
-        infowindowContent.children['place-address'].textContent = address;
-        infowindow.open(map, marker);
+    infowindowContent.children['place-icon'].src = place2.icon;
+    infowindowContent.children['place-name'].textContent = place2.name;
+    infowindowContent.children['place-address'].textContent = address;
+    infowindow.open(map, marker);
   }
 
 
@@ -199,13 +230,15 @@ pedirViaje = (function () {
         zoom: 18
       });
       initMap();
+      
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+      var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
       var btn = document.getElementById('pedir');
-      btn.addEventListener('click',function(){
+      btn.addEventListener('click', function () {
+        sendTopic();
         calculateAndDisplayRoute(directionsService, directionsDisplay);
       });
-      //initStomp();
+      connectAndSubscribe();
     }
   }
 })();
