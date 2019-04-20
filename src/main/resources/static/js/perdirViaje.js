@@ -24,15 +24,15 @@ pedirViaje = (function () {
     autocomplete.bindTo('bounds', map);
     // Set the data fields to return when the user selects a place.
     autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+    var geocoder = new google.maps.Geocoder();
+    var infowindowContent = document.getElementById('infowindow-content');
+    var infowindow = new google.maps.InfoWindow();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        var geocoder = new google.maps.Geocoder();
-        var infowindowContent = document.getElementById('infowindow-content');
-        var infowindow = new google.maps.InfoWindow();
         geocoder.geocode({ 'location': pos }, function (results, status) {
           if (status === 'OK') {
             if (results[0]) {
