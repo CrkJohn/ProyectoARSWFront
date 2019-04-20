@@ -31,13 +31,13 @@ pedirViaje = (function () {
           lng: position.coords.longitude
         };
         var geocoder = new google.maps.Geocoder();
+        var infowindowContent = document.getElementById('infowindow-content');
+        var infowindow = new google.maps.InfoWindow();
         geocoder.geocode({ 'location': pos }, function (results, status) {
           if (status === 'OK') {
             if (results[0]) {
               tmp =  jQuery.parseJSON(JSON.stringify(results[0]));
               console.log('Geocode  '+ tmp);
-              var infowindowContent = document.getElementById('infowindow-content');
-              var infowindow = new google.maps.InfoWindow(); 
               infowindow.setContent(infowindowContent);
               var marker = new google.maps.Marker({
                 map: map,
