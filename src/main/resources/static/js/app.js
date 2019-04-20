@@ -61,6 +61,8 @@ app=(function(){
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
             console.log("APP "+correo+" - "+clave);
+            document.cookie=correo;
+            alert(document.cookie);
             return apiclient.loginPasajero(correo, clave, onSuccessLoginPasajero, onErrorLogin);
         },
         
@@ -68,6 +70,8 @@ app=(function(){
         	if(!this.validateLogin()) return; //validateLogin fails
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
+            document.cookie=correo;
+            alert(document.cookie);
             return apiclient.loginConductor(correo, clave, onSuccessLoginConductor, onErrorLogin);
         },
 
