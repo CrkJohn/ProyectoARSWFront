@@ -1,7 +1,7 @@
 app=(function(){
 
     var onSuccessLoginPasajero = function(data){
-        location.href = "userHome";
+        location.href = "perdirViajeUser";
     }
     
     var onSuccessLoginConductor = function(data){
