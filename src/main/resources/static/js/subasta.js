@@ -54,6 +54,7 @@ sb=(function(){
           center: {lat: 4.782715, lng: -74.042611},
           zoom: 15
         });
+        alert(Cookies.get('subasta'));
         if(iniciarSBinit == "true"){
           sbStomp.init();
         }

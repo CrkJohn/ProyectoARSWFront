@@ -21,9 +21,9 @@ public class ViewController {
 		return "loginConductor";
 	}
 
-	@RequestMapping("/userHome")
-	String userHome() {
-		return "userHome";
+	@RequestMapping("/perdirViajeUser")
+	String perdirViajeUser() {
+		return "perdirViajeUser";
 	}
 	
 	@RequestMapping("/configuracion")

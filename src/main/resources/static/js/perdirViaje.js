@@ -17,7 +17,7 @@ pedirViaje = (function () {
       origin: $('#place-address').text(),
       destination: document.getElementById('pac-input').value,
       costo: $('#precio').val(),
-      usr : document.cookie
+      //usr : document.cookie
     }
     console.log(viaje);
     stompClient.send("/topic/pedirViaje", {}, JSON.stringify(viaje));
