@@ -6,39 +6,48 @@ apiclient=(function(){
 				callback(data);
 			});
 		},
-		login:function(correo,clave, succ, err){
+
+		loginPasajero:function(correo,clave, succ, err){
 			console.log("APICLIENT -> ",correo,clave);
 			$.ajax({
 			    type: "GET",  
-			    url: "https://backarsw.herokuapp.com/v1/usuarios/"+correo+"/"+clave,
+			    url: "https://backarsw.herokuapp.com/v1/pasajeros/"+correo+"/"+clave,
+			    success: succ,
+			    error: err
+			});
+		},
+		
+		loginConductor:function(correo, clave, succ, err){
+			$.ajax({
+			    type: "GET",  
+			    url: "https://backarsw.herokuapp.com/v1/conductores/"+correo+"/"+clave,
 			    success: succ,
 			    error: err
 			});
 		},
 
-		registerPasajero:function(datos, succ, err){
+		registroPasajero:function(datos, succ, err){
 			console.log("DATA PASAJERO -> ");
 			console.log(datos);
 			$.ajax({
 				method: "POST",
 				contentType: "application/json",
-				url: "http://localhost:8080/v1/pasajeros/savePasajero",
-				data: JSON.stringify(datos),
-				dataType : 'json',
+				url: "https://backarsw.herokuapp.com/v1/pasajeros/savePasajero",
+				data: datos,
+				//dataType : 'json',
 				success: succ,
 				error: err
 			})
 		},
 
-		registerConductor:function(datos, succ, err){
-			console.log("DATA CONDUCTOR ->");
+		registroConductor:function(datos, succ, err){
+			console.log("DATA CONDUCTOR -> ");
 			console.log(datos);
 			$.ajax({
-				type: "POST",
-				url: "https://backarsw.herokuapp.com/v1/conductores",
+				method: "POST",
 				contentType: "application/json",
-				data: JSON.stringify(datos),
-				dataType: 'json',
+				url: "https://backarsw.herokuapp.com/v1/conductores/saveConductor",
+				data: datos,
 				success: succ,
 				error: err
 			})

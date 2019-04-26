@@ -18,3 +18,4 @@ docs/deploying-spring-boot-apps/
 /mvnw.cmd
 /pom.xml
 /src/
+/system.properties
