@@ -8,14 +8,3 @@ target/
 docs/tmp/
 docs/java-getting-started/
 docs/deploying-spring-boot-apps/
-/.gitignore
-/.mvn/
-/LICENSE
-/Procfile
-/app.json
-/docs/
-/mvnw
-/mvnw.cmd
-/pom.xml
-/src/
-/system.properties

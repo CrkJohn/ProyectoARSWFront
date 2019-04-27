@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Google Maps Example</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>PubNub Google Maps Tutorial - Live Device Location</h1>
+      <div id="map-canvas" style="width:600px;height:400px"></div>
+    </div>
+
+    <script>
+    window.lat = 4.782715;
+    window.lng = -74.042611;
+
+    function circlePoint(time) {
+        var radius = 0.01;
+        var x = Math.cos(time) * radius;
+        var y = Math.sin(time) * radius;
+        return {lat:window.lat + y, lng:window.lng + x};
+        };
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(updatePosition);
+        }
+      
+        return null;
+    };
+
+    function updatePosition(position) {
+      if (position) {
+        window.lat = position.coords.latitude;
+        window.lng = position.coords.longitude;
+      }
+    }
+    
+    setInterval(function(){updatePosition(getLocation());}, 10000);
+      
+    function currentLocation() {
+      return {lat:window.lat, lng:window.lng};
+    };
+
+    var map;
+    var mark;
+    var infoWindow;
+    var lineCoords=[];
+    var pos;
+    var gLatLon;
+    var initialize = function() {
+      map  = new google.maps.Map(document.getElementById('map-canvas'), {center:{lat:lat,lng:lng},zoom:12});
+      infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            gLatLon= new google.maps.LatLng(pos.lat, pos.lng);
+            mark = new google.maps.Marker({position:{lat:pos.lat, lng:pos.lng}, map:map});
+            setInterval(function() {
+                pubnub.publish({channel:pnChannel, message:{lat:pos.lat, lng:pos.lng}});
+            }, 500);
+            
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+        
+        
+    
+    };
+
+    window.initialize = initialize;
+
+    var redraw = function(payload) {
+      lat = payload.message.lat;
+      lng = payload.message.lng;
+
+      map.setCenter({lat:lat, lng:lng, alt:0});
+      mark.setPosition({lat:lat, lng:lng, alt:0});
+
+      lineCoords.push(new google.maps.LatLng(lat, lng));
+        var lineCoordinatesPath = new google.maps.Polyline({
+            path: lineCoords,
+            geodesic: true,
+            strokeColor: '#2E10FF'
+        });
+        lineCoordinatesPath.setMap(map);
+    };
+    
+    var pnChannel = "map2-channel";
+
+    var pubnub = new PubNub({
+      publishKey:   'pub-c-e00fa6b2-8ef6-47ec-82ae-baa4e4b042cc',
+      subscribeKey: 'sub-c-84790ac2-6125-11e9-87e8-f2af15a79e05'
+    });
+
+    pubnub.subscribe({channels: [pnChannel]});
+    pubnub.addListener({message:redraw});
+
+    
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&callback=initialize"></script>
+  </body>
+</html>

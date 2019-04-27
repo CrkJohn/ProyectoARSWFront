@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <th:block th:replace="navbarConductor ::head"></th:block>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="perfil/linericon/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/conductorViajes.js"></script>
+
+    <style>
+        #map {
+            height: 100%;
+            float: left;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .mapa.main {
+            display: block;
+            height: 20em;
+            widows: 100%;
+            border-radius: 10px;
+            border-bottom-color: brown;
+        }
+    </style>
+</head>
+
+<body onload='conductorViajes.init(); '>
+
+    <div th:replace="navbarConductor :: navbarConductorBody"></div>
+
+    </p>
+
+    <section class="home_banner_area">
+        <div class="container box_1620">
+            <div class="mapa main" data-position="center">
+                <div  id="map"></div>
+            </div>
+
+        </p>
+
+            <div class="card-deck" id ="listaDeViajes">
+                <div class="card text-center" id = 'prueba' >
+                    <div class="card-body">
+                        <h5 class="card-title">Viaje pedido por el usario : CrkJohn</h5>
+                        <p class="card-text" id = "Inicio">
+                            El usuario se debe recoger en : Escuela colombiana.
+                        </p>
+                        <p class="card-text" id = "fin">
+                            El usuario tiene como destino : Centro Mayor
+                        </p>
+                        <p>
+                            El usuario tiene una calificaion 3 estrellas.
+                        </p>
+                        <p class="card-text"><small class="text-muted"></small></p>
+                    </div>
+                    <div class="card-footer text-center">
+                            <button type="button" class="btn  btn-lg btn-block" style = "background-color: #5ccfb1; color : white">Ver ruta</button>
+                            <button type="button" class="btn btn-warning btn-lg btn-block">Subastar</button>
+                            <button type="button" class="btn btn-danger btn-lg btn-block">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+</body>
+
+</html>
