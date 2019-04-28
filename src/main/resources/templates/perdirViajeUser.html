@@ -11,7 +11,7 @@
 		<!-- Bootstrap CSS -->
 		<style>
 		#map {
-        height: 50%;
+        height: 90%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -31,7 +31,7 @@
   <div class="card">
       <div class="card-body">
         <!--Header-->
-        <div id="tooglePedirViaje" class="form-header blue accent-1" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <div id="tooglePedirViaje" class="form-header blue accent-1" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
           <h3><i class="fa fa-car"></i> Peticion del viaje:</h3>
         </div>
         <br>
@@ -63,6 +63,23 @@
 	<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
 	</script>   
-	
+	<script>
+    $("#tooglePedirViaje").click(function() {
+      var $mapCanvas = $('#map');
+      if ($('#tooglePedirViaje').attr('aria-expanded') == "false"){
+        $mapCanvas.css({'height':'50%'});
+        google.maps.event.trigger(map, 'resize');  
+      }else{
+        $mapCanvas.css({'height':'90%'});
+        google.maps.event.trigger(map, 'resize');  
+      }
+      
+    });
+    
+    
+
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
