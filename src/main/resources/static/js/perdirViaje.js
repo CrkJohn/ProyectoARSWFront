@@ -14,8 +14,8 @@ pedirViaje = (function () {
 
   var sendTopic = function () {
     var viaje = {
-      origin: $('#place-address').text(),
-      destination: document.getElementById('pac-input').value,
+      origin: document.getElementById('pac-input').value,
+      destination: document.getElementById('pac-output').value,
       costo: $('#precio').val(),
       //usr : document.cookie
     }
@@ -26,12 +26,9 @@ pedirViaje = (function () {
 
   var connectAndSubscribe = function () {
     console.info('Connecting to WS...');
-
-    //var url = 'http://localhost:8080/stompendpoint';
     var url = 'stompendpoint';
     var socket = new SockJS(url);
     stompClient = Stomp.over(socket);
-    //subscribe to /topic/TOPICXX when connections succeed
     stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
       stompClient.subscribe('/topic/pedirViaje', function (eventbody) {
@@ -43,22 +40,20 @@ pedirViaje = (function () {
 
 
   function initMap() {
-
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
+    var tgt = document.getElementById('pac-output');
     var strictBounds = document.getElementById('strict-bounds-selector');
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
     var autocomplete = new google.maps.places.Autocomplete(input);
-    // Bind the map's bounds (viewport) property to the autocomplete object,
-    // so that the autocomplete requests use the current map bounds for the
-    // bounds option in the request.
+    var autocomplete2 = new google.maps.places.Autocomplete(tgt);
     autocomplete.bindTo('bounds', map);
-    // Set the data fields to return when the user selects a place.
+    autocomplete2.bindTo('bounds', map);
     autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+    autocomplete2.setFields(['address_components', 'geometry', 'icon', 'name']);
     var geocoder = new google.maps.Geocoder();
     var infowindowContent = document.getElementById('infowindow-content');
     var infowindow = new google.maps.InfoWindow();
-    if (navigator.geolocation) {
+    if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         pos = {
           lat: position.coords.latitude,
@@ -72,11 +67,13 @@ pedirViaje = (function () {
               infowindow.setContent(infowindowContent);
               var marker = new google.maps.Marker({
                 map: map,
-                anchorPoint: new google.maps.Point(0, -29)
+                anchorPoint: new google.maps.Point(0, -29),
+                animation: google.maps.Animation.DROP
+    
               });
               var place2 = tmp;
               console.log(place2.geometry)
-              infowindow.setPosition(pos);
+              //infowindow.setPosition(pos);
               if (place2.geometry.viewport) {
                 map.fitBounds(place2.geometry.viewport);
               } else {
@@ -85,6 +82,7 @@ pedirViaje = (function () {
               }
               marker.setPosition(place2.geometry.location);
               marker.setVisible(true);
+              marker.addListener('click', toggleBounce);
               var address = '';
               if (place2.address_components) {
                 address = [
@@ -93,11 +91,12 @@ pedirViaje = (function () {
                   (place2.address_components[2] && place2.address_components[2].short_name || '')
                 ].join(' ');
               }
-
+              /*
               infowindowContent.children['place-icon'].src = place2.icon;
               infowindowContent.children['place-name'].textContent = place2.name;
               infowindowContent.children['place-address'].textContent = address;
               infowindow.open(map, marker);
+              */
             } else {
               window.alert('No results found');
             }
@@ -130,8 +129,9 @@ pedirViaje = (function () {
 
     console.log($('#place-address').text());
     directionsService.route({
-      origin: $('#place-address').text(),
-      destination: document.getElementById('pac-input').value,
+      origin: document.getElementById('pac-input').value,
+      destination: document.getElementById('pac-output').value,
+     
       waypoints: waypts,
       optimizeWaypoints: true,
       travelMode: 'DRIVING',
@@ -153,8 +153,6 @@ pedirViaje = (function () {
         var duration = route.legs[0].duration.text
         console.log()
         var distance = route.legs[0].distance.text;
-
-
         console.log(duration + " " + distance);
         /*route.legs.forEach( function(leg){
                 duration += leg.duration.value;
@@ -167,13 +165,22 @@ pedirViaje = (function () {
   }
 
   function makeMarker(position, icon, title) {
-    new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: position,
       map: map,
       icon: icon,
       title: title,
-      //animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP
     });
+    marker.addListener('click', toggleBounce);
+  }
+
+  function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
   }
 
   function infoWindowsF() {
@@ -183,8 +190,11 @@ pedirViaje = (function () {
     infowindow.setContent(infowindowContent);
     var marker = new google.maps.Marker({
       map: map,
+      animation: google.maps.Animation.DROP,
       anchorPoint: new google.maps.Point(0, -29)
     });
+    marker.addListener('click', toggleBounce);
+
     console.log('Hola mundo')
     var place2 = tmp;
     console.log(place2.geometry)
@@ -235,8 +245,10 @@ pedirViaje = (function () {
       var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
       var btn = document.getElementById('pedir');
       btn.addEventListener('click', function () {
-        sendTopic();
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        if($("#costo").val()>0){
+          sendTopic();
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }   
       });
       connectAndSubscribe();
     }

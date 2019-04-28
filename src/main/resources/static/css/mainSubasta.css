@@ -2216,7 +2216,7 @@ input, select, textarea {
 .mapa.main {
 	display: block;
 	height: 20em;
-	widows: 100%;
+	width: 100%;
 	border-radius: 0;
 }
 
