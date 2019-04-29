@@ -1,4 +1,6 @@
-'use strict';
+chat=(function(){
+
+    'use strict';
 
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
@@ -20,7 +22,7 @@ function connect(event) {
     username = document.cookie;
 
     if(username) {
-        usernamePage.classList.add('hidden');
+       // usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
         var socket = new SockJS('/ws');
@@ -28,7 +30,7 @@ function connect(event) {
 
         stompClient.connect({}, onConnected, onError);
     }
-    event.preventDefault();
+    //event.preventDefault();
 }
 
 
@@ -117,5 +119,13 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-usernameForm.addEventListener('submit', connect, true)
-messageForm.addEventListener('submit', sendMessage, true)
+
+return{
+
+        
+    init: function () {
+       connect();
+       messageForm.addEventListener('submit', sendMessage, true);
+    },
+}
+})();

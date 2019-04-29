@@ -29,13 +29,12 @@
 				</style>
 				
 	</head>
-	<body class="is-preload" onload='sb.init("true")'>
+	<body class="is-preload" onload='sb.init("true"); chat.init("true")'>
 			<noscript>
 				<h2>Sorry! Your browser doesn't support Javascript</h2>
 			</noscript>
-			
-
 		<!-- Header -->
+		<!--
 			<section id="header">
 				<header>
 					
@@ -50,7 +49,7 @@
 					</ul>
 				</nav>
 			</section>
-
+			-->
 		<!-- Wrapper -->
 			<div id="wrapper">
 				<!-- Main -->
@@ -60,18 +59,13 @@
 								<div class="mapa main" data-position="center">
 									<div class ="mp" id="map"></div>
 								</div>
-								<div class="container">
-									<header class="major">
-										<h2>Información del viaje</h2>
-									</header>
-									<p id ="infViajes"></p>
-								</div>
 							</section>
 							<!-- Two -->
 							<section id="two">
 								<div class="container">
 									<h3>CHAT</h3>
 									<!-- Cambio de precios -->
+									<!--
 									<div class="btn-group btn-block" >
 											<label class="btn btn-secondary">
 												<i class="fa fa-minus"></i>
@@ -83,7 +77,6 @@
 													<i class="fa fa-plus"></i>
 											</label>
 									</div>
-									<!-- chats -->
 									
 									<div id="username-page" >
 										<div class="username-page-container">
@@ -94,6 +87,7 @@
 											</form>
 										</div>
 									</div>
+									-->
 									<div id="chat-page" class="card" style="height: 500px; background-image: url('../img/chat.png'); width: 100%; height: 100vh; ">
 											<div class="chat-container">
 												<div class="chat-header">
@@ -144,7 +138,7 @@
 			<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
 			</script>
-			x<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
 	</body>
 </html>

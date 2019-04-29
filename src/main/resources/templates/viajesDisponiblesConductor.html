@@ -3,6 +3,11 @@
 
 <head>
     <th:block th:replace="navbarConductor ::head"></th:block>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="perfil/linericon/style.css">
@@ -62,7 +67,7 @@
                     </div>
                     <div class="card-footer text-center">
                             <button type="button" class="btn  btn-lg btn-block" style = "background-color: #5ccfb1; color : white">Ver ruta</button>
-                            <button type="button" class="btn btn-warning btn-lg btn-block">Subastar</button>
+                            <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Subastar</button>
                             <button type="button" class="btn btn-danger btn-lg btn-block">Eliminar</button>
                     </div>
                 </div>
@@ -70,6 +75,27 @@
 
         </div>
     </section>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Realizar oferta</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <button type="button" id="boton1" class="btn  btn-lg btn-block" style = "background-color: #4ACFD7; color : white">20000</button>
+                    <button type="button" id="boton2" class="btn  btn-lg btn-block" style = "background-color: #4ACFD7; color : white">25000</button>
+                    <button type="button" id="boton3" class="btn  btn-lg btn-block" style = "background-color: #4ACFD7; color : white">30000</button>
+                </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
     </script>
