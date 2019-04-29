@@ -54,15 +54,26 @@ var conductorViajes =(function () {
                                 '<h5 id="usr'+uuid+'" class="card-title">Viaje pedido por el usario : '+ message.usr + '</h5>' +
                                     '<p class="card-text" id = "Inicio'+uuid+'"> El usuario se debe recoger en : '+ message.origin +'.</p>' +
                                     '<p class="card-text" id = "fin'+uuid+'"> El usuario tiene como destino :'+  message.destination +'</p>' +
-                                        '<p>El usuario tiene una calificaion 3 estrellas.</p>'+  
+                                        '<p>El usuario tiene una calificación 3 estrellas.</p>'+  
                                         '<p id="costo'+uuid+'">Precio ofrecido : '+message.costo+'</p>'+  
                                         
                                         '<p class="card-text"><small class="text-muted"></small></p>' +
                             '</div>'+   
                             '<div class="card-footer text-center">' +
                                 '<button  onclick="conductorViajes.verRuta('+"'"+uuid+"'"+')" type="button"  class="btn  btn-lg btn-block" style = "background-color: #5ccfb1; color : white">Ver ruta</button>' +
-                                '<button  onclick="conductorViajes.subastar('+"'"+uuid+"'"+')" type="button"  class="btn btn-warning btn-lg btn-block">Subastar</button>'+
-                                '<button  onclick="conductorViajes.eliminar('+"'"+uuid+"'"+')" type="button"  class="btn btn-danger btn-lg btn-block">Eliminar</button>'+
+                                '<button  onclick="conductorViajes.eliminar('+"'"+uuid+"'"+')" type="button"  class="btn btn-danger btn-lg btn-block" >Eliminar</button>'+
+                                '<button  type="button"  class="btn btn-warning btn-lg btn-block" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Subastar</button>'+
+                                '</p>'+
+                                '<div class="collapse" id="collapseExample">'+
+                                '<div class="card card-body">'+
+                                        '<div class="opciones">'+
+                                            '<button type="button" id="boton1" class="btn btn-outline-primary" >'+message.costo+'</button>'+
+                                            '<button type="button" id="boton2" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(5000))+'</button>'+
+                                            '<button type="button" id="boton3" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(7000))+'</button>'+
+                                        '</div>'+
+                                '</div>'+
+                            '</div>'+
+
                             '</div>'+
                         '</div>'
         $("#listaDeViajes").append(newRoute);
