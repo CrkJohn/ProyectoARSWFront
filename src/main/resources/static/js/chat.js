@@ -12,15 +12,13 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
-
 var colors = [
     '#61ECB7','#FFE807','#FF6666','#99FFE3','#2196F3', '#40EFA4', '#1DE0F8', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
 function connect(event) {
-    username = document.cookie;
-
+    username = document.cookie.split(';')[0].split(';')[0];
     if(username) {
        // usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
