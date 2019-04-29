@@ -1,7 +1,7 @@
 var conductorViajes =(function () {
 
     var stompClient = null;
-
+    var contador=0;
     function connect() {
         var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
@@ -62,21 +62,25 @@ var conductorViajes =(function () {
                             '<div class="card-footer text-center">' +
                                 '<button  onclick="conductorViajes.verRuta('+"'"+uuid+"'"+')" type="button"  class="btn  btn-lg btn-block" style = "background-color: #5ccfb1; color : white">Ver ruta</button>' +
                                 '<button  onclick="conductorViajes.eliminar('+"'"+uuid+"'"+')" type="button"  class="btn btn-danger btn-lg btn-block" >Eliminar</button>'+
-                                '<button  type="button"  class="btn btn-warning btn-lg btn-block" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Subastar</button>'+
+                                '<button  type="button"  class="btn btn-warning btn-lg btn-block" data-toggle="collapse" data-target="#collapseExample'+contador+'" aria-expanded="false" aria-controls="collapseExample">Subastar</button>'+
                                 '</p>'+
-                                '<div class="collapse" id="collapseExample">'+
+                                '<div class="collapse" id="collapseExample'+contador+'">'+
                                 '<div class="card card-body">'+
                                         '<div class="opciones">'+
+                                            '<div class="btn-group">'+
                                             '<button type="button" id="boton1" class="btn btn-outline-primary" >'+message.costo+'</button>'+
+                                            '</div><div class="btn-group">'+
                                             '<button type="button" id="boton2" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(5000))+'</button>'+
+                                            '</div><div class="btn-group">'+
                                             '<button type="button" id="boton3" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(7000))+'</button>'+
-                                        '</div>'+
+                                        '</div></div>'+
                                 '</div>'+
                             '</div>'+
 
                             '</div>'+
                         '</div>'
         $("#listaDeViajes").append(newRoute);
+        contador++;
     }
 
     return {
