@@ -1,10 +1,19 @@
 app=(function(){
 
     var onSuccessLoginPasajero = function(data){
+        var info = {
+            correo : $('#correoLogin').val()
+        }
+        Cookies.set('usuario' , JSON.stringify(info));
         location.href = "perdirViajeUser";
+
     }
     
     var onSuccessLoginConductor = function(data){
+        var info = {
+            correo : $('#correoLogin').val()
+        }
+        Cookies.set('usuario' , JSON.stringify(info));
     	location.href = "perfilConductor";
     }
     
@@ -50,9 +59,6 @@ app=(function(){
         	if(!this.validateLogin()) return; //validateLogin fails
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
-            console.log("APP "+correo+" - "+clave);
-            document.cookie=correo;
-            //alert(document.cookie);
             return apiclient.loginPasajero(correo, clave, onSuccessLoginPasajero, onErrorLogin);
         },
         
@@ -60,9 +66,7 @@ app=(function(){
         	if(!this.validateLogin()) return; //validateLogin fails
             var correo = $('#correoLogin').val();
             var clave = $('#claveLogin').val();
-            document.cookie=correo;
-            //alert(document.cookie);
-            return apiclient.loginConductor(correo, clave, onSuccessLoginConductor, onErrorLogin);
+              return apiclient.loginConductor(correo, clave, onSuccessLoginConductor, onErrorLogin);
         },
 
         validateLogin:function(name){

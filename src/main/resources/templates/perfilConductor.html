@@ -24,10 +24,36 @@
 			right: -5px;
 			font-size: 18px;
 		}
+
+		.stars-outer {
+			display: inline-block;
+			position: relative;
+			font-family: FontAwesome;
+		}
+
+		.stars-outer::before {
+			font-size: 25px;
+			content: "\f006 \f006 \f006 \f006 \f006";
+		}
+
+		.stars-inner {
+			position: absolute;
+			top: 0;
+			left: 0;
+			white-space: nowrap;
+			overflow: hidden;
+			width: 0;
+		}
+
+		.stars-inner::before {
+			font-size: 25px;
+			content: "\f005 \f005 \f005 \f005 \f005";
+			color: #f8ce0b;
+		}
 	</style>
 </head>
 
-<body>
+<body onload="perfil.init()">
 
 	<div th:replace="navbarConductor :: navbarConductorBody"></div>
 	</p>
@@ -35,12 +61,18 @@
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
 		<div class="container box_1620">
-			
+
 			<div class="banner_inner d-flex align-items-center">
 				<div class="banner_content">
-					<div id = "configure" class ="topright">
-						<a class="btn-floating accent-1" style="background-color: #4267b2"><i class="fa fa-cogs"></i></a>
-					</div >
+					<div id="configure" class="topright">
+						<a class="btn-floating accent-1" 
+						data-toggle="modal" data-target="#exampleModalCenter"
+							style="background-color: #4267b2"><i class="fa fa-cogs"></i></a>		
+						</div>
+
+
+
+
 					<div class="media">
 						<div class="d-flex">
 							<img src="img/personal.jpg" alt="">
@@ -48,16 +80,30 @@
 						<div class="media-body">
 
 							<div class="personal_text">
-								<h6>Ingeniero de sistemas</h6>
-								<h3>David Saavedra</h3>
-								<h4>Master arquitectura de software</h4>
+								<h6>Condcutor</h6>
+								<h3 id="nombre">David Saavedra</h3>
 								<p> </p>
 								<ul class="list basic_info">
-									<li><a href="#"><i class="lnr lnr-calendar-full"></i> 31st December, 1992</a></li>
-									<li><a href="#"><i class="lnr lnr-phone-handset"></i> 44 (012) 6954 783</a></li>
-									<li><a href="#"><i class="lnr lnr-envelope"></i> david.saavedra@donald</a></li>
-									<li><a href="#"><i class="lnr lnr-home"></i> Bogota Colombia</a></li>
+									<li><a href="#" id="fecha"><i class="lnr lnr-calendar-full"></i> 31st December,
+											1992</a></li>
+									<li><a href="#" id="tel"><i class="lnr lnr-phone-handset"></i> 44 (012) 6954 783</a>
+									</li>
+									<li><a href="#" id="correo"><i class="lnr lnr-envelope"></i>
+											david.saavedra@donald</a></li>
+									<li><a href="#" id="lugar"><i class="lnr lnr-home"></i> Bogota Colombia</a></li>
+									<li style="line-height: 26px;
+												font-size: 16px;
+												font-family: 'Roboto', sans-serif;
+												font-weight: normal;
+												color: #777777;">
+										<div class="stars-outer">
+											<div class="stars-inner">
+											</div>
+										</div>
+										Su calificacion
+									</li>
 								</ul>
+
 								<ul class="list personal_social">
 									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -70,8 +116,33 @@
 			</div>
 		</div>
 	</section>
+
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="background-color: #4267b2">
+				<h5 class="modal-title" id="exampleModalLongTitle" style="color : white"><i class="fa fa-cogs"></i> Cambia tu informacion personal</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				...
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script src="js/cargarPerfil.js"></script>
 
 </body>
 
