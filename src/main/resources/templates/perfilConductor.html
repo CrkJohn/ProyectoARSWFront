@@ -50,6 +50,25 @@
 			content: "\f005 \f005 \f005 \f005 \f005";
 			color: #f8ce0b;
 		}
+		.modal-header {
+			display: -ms-flexbox;
+			-ms-flex-align: start;
+			-ms-flex-pack: justify;
+			justify-content: normal;
+			padding: 1rem;
+			border-bottom: solid #e9ecef;
+			border-top-left-radius: 0;
+		    border-top-right-radius: 0;
+		}
+
+
+		.pac-input {
+			text-align: center;
+		}
+
+  		.pac-input:focus {
+			border-color: #4d90fe;
+		}
 	</style>
 </head>
 
@@ -80,7 +99,7 @@
 						<div class="media-body">
 
 							<div class="personal_text">
-								<h6>Condcutor</h6>
+								<h6 id="tipoUsuario">Anonymo</h6>
 								<h3 id="nombre">David Saavedra</h3>
 								<p> </p>
 								<ul class="list basic_info">
@@ -123,16 +142,21 @@
 		<div class="modal-content">
 			<div class="modal-header" style="background-color: #4267b2">
 				<h5 class="modal-title" id="exampleModalLongTitle" style="color : white"><i class="fa fa-cogs"></i> Cambia tu informacion personal</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				...
+					<input type="radio" name="raza" id="raza_2" value="elfo" />
+					<label for="raza_2">Nombre</label>
+					<input type="radio" name="raza" id="raza_2" value="elfo" />
+					<label for="raza_2">Apellido</label>
+					<input type="radio" name="raza" id="raza_2" value="elfo" />
+     			 	<label for="raza_2">Telefono</label>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" style= "color:white">Cerrar</button>
+				<button type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar cambios</button>
 			</div>
 		</div>
 	</div>

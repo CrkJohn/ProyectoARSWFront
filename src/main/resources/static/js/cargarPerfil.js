@@ -9,7 +9,10 @@ perfil  = (function(){
             var json = data;
             var cache = $('#tel').children();
             $("#tel").text(json.celular).append(cache);
-            $("#nombre").text(json.nombres)
+            $("#nombre").text(json.nombres);
+
+            $("#tipoUsuario").text(json.tipoUsuario);
+            
             var cache = $('#correo').children();
             
             $("#correo").text(json.correo).append(cache);
