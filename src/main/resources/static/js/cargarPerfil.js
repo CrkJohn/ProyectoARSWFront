@@ -19,7 +19,7 @@ perfil  = (function(){
             //$('.stars-inner').circleType({radius: 800});
 
             const ratings = {
-                hotel_a : json.calificacion
+                hotel_a : 3.5
               };
 
             const starTotal = 5;
