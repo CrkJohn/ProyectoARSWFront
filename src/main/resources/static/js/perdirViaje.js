@@ -11,7 +11,6 @@ pedirViaje = (function () {
   };
   var map = null;
   var stompClient = null;
-
   var sendTopic = function () {
     var viaje = {
       origin: document.getElementById('pac-input').value,
@@ -32,7 +31,7 @@ pedirViaje = (function () {
     stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
       stompClient.subscribe('/topic/pedirViaje', function (eventbody) {
-        alert("Se ha enviado su viajes correctamente, espera que un coductor lo acepte");
+        alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
       });
     });
   };
