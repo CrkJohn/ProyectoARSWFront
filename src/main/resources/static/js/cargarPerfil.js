@@ -1,7 +1,7 @@
 perfil  = (function(){
 
     var cargarInformacion = function(){
-        var usuario = JSON.parse(Cookies.get("usuario"));
+        var usuario = JSON.parse(Cookies.get("conductor"));
         var correo = usuario.correo;
         console.log(correo)
         $.get("https://backarsw.herokuapp.com/v1/conductores/" + correo, function(data) {

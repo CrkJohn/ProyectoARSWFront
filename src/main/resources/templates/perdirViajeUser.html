@@ -24,7 +24,7 @@
 		<link rel="stylesheet" type="text/css" href="css/cardStyle.css">
 
 </head>
-<body onload= 'pedirViaje.init()'>
+<body onload= 'pedirViaje.init(); aceptarOferta.init()'>
 	<div th:replace="navbarPasajero :: navbarPasajeroB"></div>
 
 	<div id="map"></div>
@@ -59,6 +59,7 @@
 		<span id="place-address"></span>
 	</div>
 	<script src ="js/perdirViaje.js"></script> 
+	<script src ="js/aceptarOferta.js"></script> 
 	<script src="js/stomp.js"></script>
 	<script async defer
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
@@ -80,6 +81,7 @@
 
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
 </body>
 </html>

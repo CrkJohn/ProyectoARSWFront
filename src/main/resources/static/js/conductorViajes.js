@@ -68,11 +68,11 @@ var conductorViajes =(function () {
                                 '<div class="card card-body">'+
                                         '<div class="opciones">'+
                                             '<div class="btn-group">'+
-                                            '<button type="button" id="boton1" class="btn btn-outline-primary" >'+message.costo+'</button>'+
+                                            '<button onclick="contraofertar.ofertar('+"'boton1"+uuid+"'"+')" type="button" id="boton1'+uuid+'" class="btn btn-outline-primary" >'+message.costo+'</button>'+
                                             '</div><div class="btn-group">'+
-                                            '<button type="button" id="boton2" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(5000))+'</button>'+
+                                            '<button onclick="contraofertar.ofertar('+"'boton2"+uuid+"'"+')" type="button" id="boton2'+uuid+'" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(5000))+'</button>'+
                                             '</div><div class="btn-group">'+
-                                            '<button type="button" id="boton3" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(7000))+'</button>'+
+                                            '<button onclick="contraofertar.ofertar('+"'boton3"+uuid+"'"+')" type="button" id="boton3'+uuid+'" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(7000))+'</button>'+
                                         '</div></div>'+
                                 '</div>'+
                             '</div>'+

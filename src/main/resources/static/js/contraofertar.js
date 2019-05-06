@@ -1,15 +1,27 @@
 contraofertar = (function () {
     var stompClient = null;
   
-    var sendTopic = function () {
+    var sendTopic = function (uuid) {
+    	
       var oferta = {
-        costo: document.getElementById('boton').value,
-        usr : document.cookie.split(';')[0]
+        costo: $("#"+uuid).text(),
+        usr : JSON.parse( Cookies.get('conductor')).correo
       }
       console.log(oferta);
       stompClient.send("/topic/contraoferta", {}, JSON.stringify(oferta));
   
     };
+    
+    function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4()+s4()+'-'+s4()+'-'+s4()+'-'+s4()+'-'+s4()+s4()+s4();
+    }
+    
+   
   
     var connectAndSubscribe = function () {
       console.info('Connecting to WS...');
@@ -26,14 +38,13 @@ contraofertar = (function () {
   
     return {
       init: function () {
-        var btn = document.getElementById('boton');
-        btn.addEventListener('click', function () {
-          if($("#costo").val()>0){
-            sendTopic();
-          }   
-        });
-        connectAndSubscribe();
-      }
+    	  connectAndSubscribe(); 
+      },
+    
+    ofertar:function(uuid){
+    	sendTopic(uuid);
+    
+    }
     }
   })();
   
