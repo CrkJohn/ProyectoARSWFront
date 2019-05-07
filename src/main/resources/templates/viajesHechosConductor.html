@@ -43,34 +43,18 @@
 
 </head>
 
-<body>
+<body onload ="viajesHechos.init()">
 	<div th:replace="navbarConductor :: navbarConductorBody"></div>
 	</p>
 	<!--================Home Banner Area =================-->
 
 
 	<section class="home_banner_area">
-		<div class="container box_1620">
-			<div class="card">
-
-				<b class="top"><b class="b1t"></b><b class="b2"></b></b>
-				<div class="card-body">
-				
-					<!--Header-->
-					<div id="tooglePedirViaje" class="form-header blue accent-1">
-						<h3><i class="fa fa-flag"></i></i> Viaje fecha : </h3>
-					</div>
-					<br>
-					<div class="md-form">
-						<input type="text" id="pac-output" class="form-control">
-					</div>
-
-				</div>
-
-				<b class="bottom"><b class="b2"></b><b class="b1b"></b></b>
-			</div>
+		<div id="viaje" class="container box_1620" style = "overflow-y: scroll; height: 500px;">
+			
 		</div>
 	</section>
+	<script src = "js/viajesHechos.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </body>
 </html>
