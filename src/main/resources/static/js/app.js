@@ -4,7 +4,7 @@ app=(function(){
         var info = {
             correo : $('#correoLogin').val()
         }
-        Cookies.set('usuario' , JSON.stringify(info));
+        Cookies.set('pasajero' , JSON.stringify(info));
         location.href = "perdirViajeUser";
 
     }
@@ -13,7 +13,7 @@ app=(function(){
         var info = {
             correo : $('#correoLogin').val()
         }
-        Cookies.set('usuario' , JSON.stringify(info));
+        Cookies.set('conductor' , JSON.stringify(info));
     	location.href = "perfilConductor";
     }
     

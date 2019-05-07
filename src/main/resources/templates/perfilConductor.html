@@ -17,59 +17,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/cardStyle.css">
 	<link rel="stylesheet" href="css/responsive.css">
-	<style>
-		.topright {
-			position: absolute;
-			top: -10px;
-			right: -5px;
-			font-size: 18px;
-		}
-
-		.stars-outer {
-			display: inline-block;
-			position: relative;
-			font-family: FontAwesome;
-		}
-
-		.stars-outer::before {
-			font-size: 25px;
-			content: "\f006 \f006 \f006 \f006 \f006";
-		}
-
-		.stars-inner {
-			position: absolute;
-			top: 0;
-			left: 0;
-			white-space: nowrap;
-			overflow: hidden;
-			width: 0;
-		}
-
-		.stars-inner::before {
-			font-size: 25px;
-			content: "\f005 \f005 \f005 \f005 \f005";
-			color: #f8ce0b;
-		}
-		.modal-header {
-			display: -ms-flexbox;
-			-ms-flex-align: start;
-			-ms-flex-pack: justify;
-			justify-content: normal;
-			padding: 1rem;
-			border-bottom: solid #e9ecef;
-			border-top-left-radius: 0;
-		    border-top-right-radius: 0;
-		}
-
-
-		.pac-input {
-			text-align: center;
-		}
-
-  		.pac-input:focus {
-			border-color: #4d90fe;
-		}
-	</style>
+	<link rel="stylesheet" href="css/perfilConductor.css">
 </head>
 
 <body onload="perfil.init()">
@@ -84,10 +32,9 @@
 			<div class="banner_inner d-flex align-items-center">
 				<div class="banner_content">
 					<div id="configure" class="topright">
-						<a class="btn-floating accent-1" 
-						data-toggle="modal" data-target="#exampleModalCenter"
-							style="background-color: #4267b2"><i class="fa fa-cogs"></i></a>		
-						</div>
+						<a class="btn-floating accent-1" data-toggle="modal" data-target="#exampleModalCenter"
+							style="background-color: #4267b2"><i class="fa fa-cogs"></i></a>
+					</div>
 
 
 
@@ -137,32 +84,66 @@
 	</section>
 
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-	aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header" style="background-color: #4267b2">
-				<h5 class="modal-title" id="exampleModalLongTitle" style="color : white"><i class="fa fa-cogs"></i> Cambia tu informacion personal</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">    
-					<input type="radio" name="raza" id="raza_2" value="elfo" />
-					<label for="raza_2">Nombre</label>
-					<input type="radio" name="raza" id="raza_2" value="elfo" />
-					<label for="raza_2">Apellido</label>
-					<input type="radio" name="raza" id="raza_2" value="elfo" />
-     			 	<label for="raza_2">Telefono</label>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal" style= "color:white">Cerrar</button>
-				<button type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar cambios</button>
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #4267b2">
+					<h5 class="modal-title" id="exampleModalLongTitle" style="color : white"><i class="fa fa-cogs"></i>
+						Cambia tu informacion personal</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<form>
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">Nuevo número</label>
+								<div class="col-sm-10">
+									<div class="md-form">
+										<input type="text" id="cambiarNumero" class="form-control" >
+									</div>
+								</div>
+						</div>	
+
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">Nuevo apellido</label>
+							<div class="col-sm-10">
+								<div class="md-form">
+									<input type="text" id="cambiarApellido" class="form-control" >
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label">Nuevo nombre</label>
+							<div class="col-sm-10">
+								<div class="md-form">
+									<input type="text" id="cambiarNombre" class="form-control" >
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPassword" class="col-sm-2 col-form-label">Nueva clave</label>
+							<div class="col-sm-10">
+								<div class="md-form">
+									<input type="password" class="form-control" id="inputPassword">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"
+						style="color:white">Cerrar</button>
+					<button type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
+						cambios</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-	
+
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>

@@ -40,6 +40,11 @@ public class ViewController {
 	String pagos() {
 		return "pagos";
 	}
+
+	@RequestMapping("/viajesRealizados")
+	String viajesHechosConductor(){
+		return "viajesHechosConductor";
+	}
 	
 	@RequestMapping("/viajes")
 	String viajes() {
