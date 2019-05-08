@@ -18,14 +18,16 @@ var colors = [
 ];
 
 function connect(event) {
-    username = document.cookie.split(';')[0].split(';')[0];
-    if(username) {
-       // usernamePage.classList.add('hidden');
-        chatPage.classList.remove('hidden');
 
+    if(Cookies.get('pasajero')){
+        username = JSON.parse( Cookies.get('pasajero')).correo
+    }else{
+        username = JSON.parse( Cookies.get('conductor')).correo
+    }
+    if(username) {
+        chatPage.classList.remove('hidden');
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
-
         stompClient.connect({}, onConnected, onError);
     }
     //event.preventDefault();
@@ -35,7 +37,6 @@ function connect(event) {
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
-
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
