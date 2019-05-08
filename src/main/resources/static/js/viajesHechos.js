@@ -6,25 +6,38 @@ viajesHechos = (function(){
 
         $.get("https://backarsw.herokuapp.com/v1/conductores/" + correo + "/viajes",function(data){
             var json = data;
-            console.log(data)
+            console.log(json[0])
+            var directionsService = new google.maps.DirectionsService;
             for(var i = 0 ; i < Object.keys(json).length ; i++){
+                console.log(json[i].lugarOrigen + "  " + json[i].lugarDestino)
+                var duration = null
+                var distance = null
+                directionsService.route({
+                    origin:  json[i].lugarOrigen,
+                    destination: json[i].lugarDestino,
+                    travelMode: 'DRIVING' , 
+                },function(response, status) {
+                    if (status === 'OK') {
+                      var route = response.routes[0];
+                      var leg = response.routes[0].legs[0];
+                      duration =  route.legs[0].duration.text
+                      distance = route.legs[0].distance.text;
+                      console.log(duration +  " " + distance); 
+                      
+                }});
+                
+                console.log(duration +  " " + distance);  
                 $("#viaje").append(
-                    '<div class="card">'+
-				'<b class="top"><b class="b1t"></b><b class="b2"></b></b>'+ 
-				'<div class="card-body"> ' + 
-			    '	<div id="tooglePedirViaje" class="form-header blue accent-1">'  + 
-				'		<h3><i class="fa fa-flag"></i></i> Viaje fecha : </h3>'+ 
-				'	</div>' + 
-				'	<br>' + 
-				'	<div class="md-form">' + 
-				'		<input type="text" id="pac-output" class="form-control">' + 
-				'	</div>' + 
-				'</div>' + 
-				'    <b class="bottom"><b class="b2"></b><b class="b1b"></b></b>' + 
-			    '</div>' + 
-                '</br>'
-                );
-            }
+                    '<li><a href="#">'+
+                    '<h2> aqui </h2>'+
+                    '<p>  El viaje inicio en ' + json[i].lugarOrigen + 'donde tuvo un desplazamiento de '+ distance +' hacia el'+
+                        'destino' + json[i].lugarDestino + ' tardando ' + duration+'</p>'+
+                    '</a>'+
+                    '</li>'
+                    );
+                }
+
+            
         });
 
     }

@@ -14,30 +14,14 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="css/cardStyle.css">
+	<link rel="stylesheet" href="css/notas.css">
+	<link href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
 
-	
-	<style type="text/css">
-		.card .top, .square .bottom {display:block; background:transparent; font-size:1px;}
-		.card .b1t {margin:0 6px; display:block; overflow:hidden; height:5px; background:white; border-left:1px solid  black; border-right:1px solid  black; border-top:1px solid  black;}
-		.card .b1t {margin:0 6px; display:block; overflow:hidden; height:5px; background:white; border-left:1px solid  black; border-right:1px solid  black; border-top:1px solid  black;}
-		.card .b2 {display:block; height:1px; margin:0; background:white; border-left:7px solid  black; border-right:7px solid  black; overflow:hidden;}
-		.card .b1b {margin:0 6px; display:block; overflow:hidden; height:5px; background: white; border-left:1px solid  black; border-right:1px solid  black; border-bottom:1px solid  black;}
-		.blue.accent-1 {
-   			background-color: #ffffff!important;
-		}	
-		.form-header{
-			margin-left: 9rem;
-			-webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-			box-shadow: 0 5px 11px 0 rgba(67, 103, 177, 0.36), 0 4px 15px 0 rgba(67, 104, 178, 0.55);
-
-			color: #4367b1;
-		}
-		h3 { 
-			margin-top: .3rem;
-			margin-bottom: .3rem;
-		}
+	<style>
+	a:focus{
+		color : white;
+	}
 	</style>
-	
 	
 	
 
@@ -47,13 +31,16 @@
 	<div th:replace="navbarConductor :: navbarConductorBody"></div>
 	</p>
 	<!--================Home Banner Area =================-->
-
-
 	<section class="home_banner_area">
-		<div id="viaje" class="container box_1620" style = "overflow-y: scroll; height: 500px;">
+		<div  class="container box_1620" style = "overflow-y: scroll; height: 500px;">
+			<ul id="viaje">
 			
+			</ul>
 		</div>
 	</section>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
+	</script>
 	<script src = "js/viajesHechos.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </body>
