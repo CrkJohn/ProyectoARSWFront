@@ -7,12 +7,40 @@ var conductorViajes =(function () {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/pedirViaje', function (viaje) {
+            stompClient.subscribe('/topic/canales.1', function (viaje) {
                 console.log('Hollaaaa');
-                showRoute(JSON.parse(viaje.body));
+                var json = JSON.parse(viaje.body);
+                connectAndSubscribe(json.topic);
+                showRoute(json);
             });
         });
     }
+
+
+  var connectAndSubscribe = function (channel) {
+    console.info('Connecting to WS...');
+    var url = 'stompendpoint';
+    var socket = new SockJS(url);
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+      console.log('Connected: ' + frame);
+      stompClient.subscribe('/topic/canales.'+channel, function (eventbody) {
+        //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
+      });
+    });
+  };
+
+
+  var sendOferta = function (uuid) {
+    var oferta = {
+      costo: $("#"+uuid).text(),
+      usr : JSON.parse( Cookies.get('conductor')).correo
+    }
+    console.log(oferta);
+    stompClient.send("/topic/canales."+uuid, {}, JSON.stringify(oferta));
+  };
+
+
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay,uuid) { 
         directionsService.route({
@@ -31,14 +59,6 @@ var conductorViajes =(function () {
         });
       }
 
-    function guid() {
-        function s4() {
-          return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-        }
-        return s4()+s4()+'-'+s4()+'-'+s4()+'-'+s4()+'-'+s4()+s4()+s4();
-    }
 
     function initMap(){
         map = new google.maps.Map(document.getElementById('map'), {
@@ -48,7 +68,7 @@ var conductorViajes =(function () {
     }
 
     function showRoute(message) {
-        var uuid = guid();
+        var uuid = message.topic;
         var  newRoute = '<div id="'+uuid+'" class="card text-center">'+
                             '<div class="card-body">' +
                                 '<h5 id="usr'+uuid+'" class="card-title">Viaje pedido por el usario : '+ message.usr + '</h5>' +
@@ -98,6 +118,11 @@ var conductorViajes =(function () {
             }
             setConnected(false);
             console.log("Disconnected");
+        },
+
+        ofertar:function(uuid){
+            sendOferta(uuid);
+        
         },
 
         verRuta : function(uuid){

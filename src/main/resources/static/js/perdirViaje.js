@@ -10,28 +10,42 @@ pedirViaje = (function () {
     }
   };
   var map = null;
-  var stompClient = null;
+  var stompClient = null; 
+
+  function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4()+s4()+'-'+s4()+'-'+s4()+'-'+s4()+'-'+s4()+s4()+s4();
+  } 
+  
   var sendTopic = function () {
+    var newTopicID  = guid();
     var viaje = {
       origin: document.getElementById('pac-input').value,
       destination: document.getElementById('pac-output').value,
       costo: document.getElementById('costo').value,
-      usr : JSON.parse( Cookies.get('pasajero')).correo
+      usr : JSON.parse( Cookies.get('pasajero')).correo,
+      topic  : newTopicID
     }
     console.log(viaje);
-    stompClient.send("/topic/pedirViaje", {}, JSON.stringify(viaje));
-
+    connectAndSubscribe(newTopicID);
+    stompClient.send("/topic/canales.1", {}, JSON.stringify(viaje));
   };
 
-  var connectAndSubscribe = function () {
+  
+
+  var connectAndSubscribe = function (channel) {
     console.info('Connecting to WS...');
     var url = 'stompendpoint';
     var socket = new SockJS(url);
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
-      stompClient.subscribe('/topic/pedirViaje', function (eventbody) {
-        alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
+      stompClient.subscribe('/topic/canales.'+channel, function (eventbody) {
+        //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
       });
     });
   };
@@ -249,7 +263,7 @@ pedirViaje = (function () {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         }   
       });
-      connectAndSubscribe();
+      connectAndSubscribe(1);
     }
   }
 })();
