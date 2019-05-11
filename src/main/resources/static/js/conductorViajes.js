@@ -35,9 +35,10 @@ var conductorViajes =(function () {
     var oferta = {
       costo: $("#"+uuid).text(),
       usr : JSON.parse( Cookies.get('conductor')).correo ,
+      uuid  :  uuid.substring(6,uuid.length ) ,
       channelUno : false
     }
-    console.log(uuid.substring(6,uuid.length ));
+    //console.log(uuid.substring(6,uuid.length ));
     stompClient.send("/topic/canales."+uuid.substring(6,uuid.length ), {}, JSON.stringify(oferta));
   };
 

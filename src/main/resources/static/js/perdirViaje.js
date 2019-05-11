@@ -10,7 +10,7 @@ pedirViaje = (function () {
     }
   };
   var map = null;
-  var stompClient = null; 
+  var stompClient = null;
 
   function guid() {
     function s4() {
@@ -18,25 +18,50 @@ pedirViaje = (function () {
         .toString(16)
         .substring(1);
     }
-    return s4()+s4()+'-'+s4()+'-'+s4()+'-'+s4()+'-'+s4()+s4()+s4();
-  } 
-  
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  }
+
   var sendTopic = function () {
-    var newTopicID  = guid();
+    var newTopicID = guid();
     var viaje = {
       origin: document.getElementById('pac-input').value,
       destination: document.getElementById('pac-output').value,
       costo: document.getElementById('costo').value,
-      usr : JSON.parse( Cookies.get('pasajero')).correo,
-      topic  : newTopicID
+      usr: JSON.parse(Cookies.get('pasajero')).correo,
+      topic: newTopicID
     }
     console.log(viaje);
     stompClient.send("/topic/canales.1", {}, JSON.stringify(viaje));
     connectAndSubscribe(newTopicID);
-    
+
   };
 
-  
+  function showOffers(message) {
+   
+    var message = message;
+    var uuid = message.uuid + ':' + message.usr;
+    console.log(message.costo);
+    console.log(uuid);
+    var thereIsAnOffer = document.getElementById(uuid);
+    if (thereIsAnOffer) {
+        document.getElementById("costo"+uuid).textContent=message.costo;
+    } else {
+    
+        var newOffer = '<div id="' + uuid + '" class="card text-center"  style = "max-width =50px" >' +
+        '<div class="card-body">' +
+        '<h5 id="usr' + uuid + '" class="card-title">Usuario ofertante : ' + message.usr + '</h5>' +
+        '<p id="costo' + uuid + '">Precio ofrecido : ' + message.costo + '</p>' +
+        '<p class="card-text"><small class="text-muted"></small></p>' +
+        '</div>' +
+        '<div class="card-footer text-center">' +
+        '<button onclick="pedirViaje.aceptarViaje(' + "'" + uuid + "'" + ')" type="button" class="btn  btn-lg btn-block" style = "background-color: #5ccfb1; color : white">Aceptar</button>' +
+        '<button onclick="pedirViaje.eliminar(' + "'" + uuid + "'" + ')" type="button"  class="btn btn-danger btn-lg btn-block" >Rechazar</button>' +
+        '</div>' +
+        '</div>'
+        $("#listaDeOfertas").append(newOffer);
+    }
+    
+  }
 
   var connectAndSubscribe = function (channel) {
     console.info('Connecting to WS...');
@@ -45,7 +70,11 @@ pedirViaje = (function () {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
-      stompClient.subscribe('/topic/canales.'+channel, function (eventbody) {
+      stompClient.subscribe('/topic/canales.' + channel, function (eventbody) {
+        var json = JSON.parse(eventbody.body);
+        if (json.channelUno == false) {
+          showOffers(json);
+        }
         //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
       });
     });
@@ -67,7 +96,7 @@ pedirViaje = (function () {
     var geocoder = new google.maps.Geocoder();
     var infowindowContent = document.getElementById('infowindow-content');
     var infowindow = new google.maps.InfoWindow();
-    if(navigator.geolocation) {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         pos = {
           lat: position.coords.latitude,
@@ -83,7 +112,7 @@ pedirViaje = (function () {
                 map: map,
                 anchorPoint: new google.maps.Point(0, -29),
                 animation: google.maps.Animation.DROP
-    
+
               });
               var place2 = tmp;
               console.log(place2.geometry)
@@ -145,7 +174,7 @@ pedirViaje = (function () {
     directionsService.route({
       origin: document.getElementById('pac-input').value,
       destination: document.getElementById('pac-output').value,
-     
+
       waypoints: waypts,
       optimizeWaypoints: true,
       travelMode: 'DRIVING',
@@ -254,18 +283,28 @@ pedirViaje = (function () {
         zoom: 18
       });
       initMap();
-      
+
       var directionsService = new google.maps.DirectionsService;
       var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
       var btn = document.getElementById('pedir');
       btn.addEventListener('click', function () {
-        if($("#costo").val()>0){
+        if ($("#costo").val() > 0) {
           sendTopic();
           calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }   
+        }
       });
       connectAndSubscribe(1);
+    },
+
+    eliminar: function (uuid) {
+      $('#' + uuid).remove();
+    },
+
+    aceptarViaje: function (message) {
+      sendTopic(message);
+      location.href = 'subasta';
     }
+
   }
 })();
 
