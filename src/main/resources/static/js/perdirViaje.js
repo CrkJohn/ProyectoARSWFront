@@ -31,8 +31,9 @@ pedirViaje = (function () {
       topic  : newTopicID
     }
     console.log(viaje);
-    connectAndSubscribe(newTopicID);
     stompClient.send("/topic/canales.1", {}, JSON.stringify(viaje));
+    connectAndSubscribe(newTopicID);
+    
   };
 
   

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script src="js/conductorViajes.js"></script>
-     <script src="js/contraofertar.js"></script>
+
 
     <style>
         #map {
@@ -37,7 +37,7 @@
     </style>
 </head>
 
-<body onload='conductorViajes.init(); contraofertar.init() '>
+<body onload='conductorViajes.init(); '>
 
     <div th:replace="navbarConductor :: navbarConductorBody"></div>
 
@@ -52,36 +52,7 @@
         </p>
 
             <div class="card-deck" id ="listaDeViajes">
-                <div class="card text-center" id = 'prueba' >
-                    <div class="card-body">
-                        <h5 class="card-title">Viaje pedido por el usario : CrkJohn</h5>
-                        <p class="card-text" id = "Inicio">
-                            El usuario se debe recoger en : Escuela colombiana.
-                        </p>
-                        <p class="card-text" id = "fin">
-                            El usuario tiene como destino : Centro Mayor
-                        </p>
-                        <p>
-                            El usuario tiene una calificaion 3 estrellas.
-                        </p>
-                        <p class="card-text"><small class="text-muted"></small></p>
-                    </div>
-                    <div class="card-footer text-center">
-                            <button type="button" class="btn  btn-lg btn-block" style = "background-color: #5ccfb1; color : white">Ver ruta</button>
-                            <button type="button" class="btn btn-danger btn-lg btn-block">Eliminar</button>
-                            <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Subastar</button>
-                    </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                        <div class="opciones">
-                                            <button type="button" id="boton" class="btn btn-outline-primary" value=20000>20000</button>
-                                            <button type="button" id="boton" class="btn btn-outline-primary" value=25000>25000</button>
-                                            <button type="button" id="boton" class="btn btn-outline-primary" value=30000>30000</button>
-                                        </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
+                
             </div>
 
         </div>

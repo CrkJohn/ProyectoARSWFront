@@ -34,10 +34,11 @@ var conductorViajes =(function () {
   var sendOferta = function (uuid) {
     var oferta = {
       costo: $("#"+uuid).text(),
-      usr : JSON.parse( Cookies.get('conductor')).correo
+      usr : JSON.parse( Cookies.get('conductor')).correo ,
+      channelUno : false
     }
-    console.log(oferta);
-    stompClient.send("/topic/canales."+uuid, {}, JSON.stringify(oferta));
+    console.log(uuid.substring(6,uuid.length ));
+    stompClient.send("/topic/canales."+uuid.substring(6,uuid.length ), {}, JSON.stringify(oferta));
   };
 
 
@@ -88,11 +89,11 @@ var conductorViajes =(function () {
                                 '<div class="card card-body">'+
                                         '<div class="opciones">'+
                                             '<div class="btn-group">'+
-                                            '<button onclick="contraofertar.ofertar('+"'boton1"+uuid+"'"+')" type="button" id="boton1'+uuid+'" class="btn btn-outline-primary" >'+message.costo+'</button>'+
+                                            '<button onclick="conductorViajes.ofertar('+"'boton1"+uuid+"'"+')" type="button" id="boton1'+uuid+'" class="btn btn-outline-primary" >'+message.costo+'</button>'+
                                             '</div><div class="btn-group">'+
-                                            '<button onclick="contraofertar.ofertar('+"'boton2"+uuid+"'"+')" type="button" id="boton2'+uuid+'" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(5000))+'</button>'+
+                                            '<button onclick="conductorViajes.ofertar('+"'boton2"+uuid+"'"+')" type="button" id="boton2'+uuid+'" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(5000))+'</button>'+
                                             '</div><div class="btn-group">'+
-                                            '<button onclick="contraofertar.ofertar('+"'boton3"+uuid+"'"+')" type="button" id="boton3'+uuid+'" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(7000))+'</button>'+
+                                            '<button onclick="conductorViajes.ofertar('+"'boton3"+uuid+"'"+')" type="button" id="boton3'+uuid+'" class="btn btn-outline-primary" >'+(parseInt(message.costo)+parseInt(7000))+'</button>'+
                                         '</div></div>'+
                                 '</div>'+
                             '</div>'+
@@ -122,7 +123,6 @@ var conductorViajes =(function () {
 
         ofertar:function(uuid){
             sendOferta(uuid);
-        
         },
 
         verRuta : function(uuid){
