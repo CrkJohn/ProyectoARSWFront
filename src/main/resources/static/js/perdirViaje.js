@@ -44,7 +44,7 @@ pedirViaje = (function () {
     console.log(uuid);
     var thereIsAnOffer = document.getElementById(uuid);
     if (thereIsAnOffer) {
-        document.getElementById("costo"+uuid).textContent=message.costo;
+        document.getElementById("costo"+uuid).textContent='Precio ofrecido :' + message.costo;
     } else {
     
         var newOffer = '<div id="' + uuid + '" class="card text-center"  style = "max-width =50px" >' +

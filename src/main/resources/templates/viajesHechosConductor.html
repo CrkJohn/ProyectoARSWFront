@@ -15,12 +15,21 @@
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="css/cardStyle.css">
 	<link rel="stylesheet" href="css/notas.css">
+	<link rel= "stylesheet" href="css/noTieneViajes.css">
 	<link href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
 
 	<style>
-	a:focus{
-		color : white;
-	}
+		ul{
+			padding: 0em;
+		}
+		a:focus{
+			color : white;
+		}
+		.btn{
+			margin-left: auto;
+			margin-right: auto;
+			display: block;
+		}
 	</style>
 	
 	
@@ -36,8 +45,19 @@
 			<ul id="viaje">
 			
 			</ul>
+			<div id ="noHayViajes">
+					<div class  = "four_zero_four_bg">
+							<h1  style="text-align: center">¡No tienes viajes hechos!</h1>
+							<h2  style="text-align: center">Recoge un pasajero</h2>
+					</div>
+					<button id="viajesDisponibles" type="button" class="btn" style="color : white ; background-color:  #4267b2">¡Ahora!</button>
+			</div>
 		</div>
+		
 	</section>
+
+	
+
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
 	</script>
