@@ -11,7 +11,8 @@ var conductorViajes =(function () {
                 console.log('Hollaaaa');
                 var json = JSON.parse(viaje.body);
                 connectAndSubscribe(json.topic);
-                showRoute(json);
+                showRoute(json);                
+                $("#noHayViajes").css({'display': 'none'});
             });
         });
     }
@@ -149,6 +150,9 @@ var conductorViajes =(function () {
 
         eliminar : function(uuid){
             $('#'+uuid).remove();
+            if(document.getElementById('listaDeViajes').childElementCount==0){
+              $("#noHayViajes").css({'display': 'block'});
+            }
         }
     };
 

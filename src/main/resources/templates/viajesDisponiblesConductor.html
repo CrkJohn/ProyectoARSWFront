@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- main css -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href ="css/noTieneViajes.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script src="js/conductorViajes.js"></script>
 
@@ -34,6 +35,10 @@
             border-radius: 10px;
             border-bottom-color: brown;
         }
+
+        
+
+
     </style>
 </head>
 
@@ -54,9 +59,25 @@
             <div class="card-deck" id ="listaDeViajes">
                 
             </div>
+            <div id ="noHayViajes">
+                    <div class  = "four_zero_four_bg"  style="background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2087117/dog_dribbble.gif);
+                                                               height: 210px;">
+						<h1  style="text-align: center">¡No te estreses!</h1>
+						
+                    </div>
+                    <h2  style="text-align: center">Estamos buscando viajes disponibles...</h2>
+			</div>
+
 
         </div>
     </section>
+    <script>
+        $(document).on("change", ".listaDeViajes select", function () {
+            alert("acaaaa");    
+        });
+       
+            
+    </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
     </script>
