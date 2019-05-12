@@ -26,7 +26,14 @@ var conductorViajes =(function () {
     stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
       stompClient.subscribe('/topic/canales.'+channel, function (eventbody) {
-        //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
+        var message = JSON.parse(eventbody.body);
+        if(message.type =="acepto"){
+          if(message.conductor.localeCompare(JSON.parse( Cookies.get('conductor')).correo)){
+              location.href='subasta';
+            }else{
+
+            }
+        }       
       });
     });
   };
@@ -37,7 +44,8 @@ var conductorViajes =(function () {
       costo: $("#"+uuid).text(),
       usr : JSON.parse( Cookies.get('conductor')).correo ,
       uuid  :  uuid.substring(6,uuid.length ) ,
-      channelUno : false
+      channelUno : false,
+      type : "subasta"
     }
     //console.log(uuid.substring(6,uuid.length ));
     stompClient.send("/topic/canales."+uuid.substring(6,uuid.length ), {}, JSON.stringify(oferta));

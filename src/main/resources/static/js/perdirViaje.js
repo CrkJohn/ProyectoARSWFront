@@ -19,7 +19,20 @@ pedirViaje = (function () {
         .substring(1);
     }
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-  }
+  };
+
+  var aceptarViaje = function (message) {
+    var respuesta = {
+      pasajero : username = JSON.parse( Cookies.get('pasajero')).correo,
+      conductor : document.getElementById("usr"+message).textContent.split(":")[1],
+      type : "acepto"
+    }
+    console.log("Se envia la informacion del viaje aceptado");
+    console.log(message)
+    console.log(respuesta);
+    stompClient.send("/topic/canales."+message.substring(0,36), {}, JSON.stringify(respuesta));
+
+  };
 
   var sendTopic = function () {
     var newTopicID = guid();
@@ -40,8 +53,6 @@ pedirViaje = (function () {
    
     var message = message;
     var uuid = message.uuid + ':' + message.usr;
-    console.log(message.costo);
-    console.log(uuid);
     var thereIsAnOffer = document.getElementById(uuid);
     if (thereIsAnOffer) {
         document.getElementById("costo"+uuid).textContent='Precio ofrecido :' + message.costo;
@@ -301,8 +312,8 @@ pedirViaje = (function () {
     },
 
     aceptarViaje: function (message) {
-      sendTopic(message);
-      location.href = 'subasta';
+      aceptarViaje(message);
+      location.href = "subasta";
     }
 
   }
