@@ -87,6 +87,7 @@ pedirViaje = (function () {
         var json = JSON.parse(eventbody.body);
         if (json.channelUno == false) {
           showOffers(json);
+          $("#noHayOfertas").css({'display': 'none'});
         }
         //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
       });

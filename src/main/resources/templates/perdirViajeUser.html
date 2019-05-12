@@ -28,7 +28,8 @@
 	
 		</style>
 		<link rel="stylesheet" type="text/css" href="css/cardStyle.css">
-		<link rel="stylesheet" type="text/css" href="css/slider.css">
+    <link rel="stylesheet" type="text/css" href="css/slider.css">
+    <link rel="stylesheet" href ="css/noTieneViajes.css">
 
 </head>
 <body onload= 'pedirViaje.init();'>
@@ -44,6 +45,14 @@
       </div>
       <br>
       <div class="collapse" id="ofertas">
+        
+        <div id ="noHayOfertas">
+              <div class  = "four_zero_four_bg"  style="background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2087117/dog_dribbble.gif);
+                height: 210px;">
+						    <h1 style="text-align: center">¡No te estreses!</h1>
+              </div>
+              <h2  style="text-align: center">Aún no hay ofertas...</h2>
+        </div>
         <div class="slider" id ="listaDeOfertas"></div>
       </div>
     </div>
