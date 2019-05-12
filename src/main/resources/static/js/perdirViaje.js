@@ -58,7 +58,7 @@ pedirViaje = (function () {
         document.getElementById("costo"+uuid).textContent='Precio ofrecido :' + message.costo;
     } else {
     
-        var newOffer = '<div id="' + uuid + '" class="card text-center"  style = "max-width =50px" >' +
+        var newOffer = '<div id="' + uuid + '" class="slide">' +
         '<div class="card-body">' +
         '<h5 id="usr' + uuid + '" class="card-title">Usuario ofertante : ' + message.usr + '</h5>' +
         '<p id="costo' + uuid + '">Precio ofrecido : ' + message.costo + '</p>' +
@@ -69,7 +69,9 @@ pedirViaje = (function () {
         '<button onclick="pedirViaje.eliminar(' + "'" + uuid + "'" + ')" type="button"  class="btn btn-danger btn-lg btn-block" >Rechazar</button>' +
         '</div>' +
         '</div>'
+        
         $("#listaDeOfertas").append(newOffer);
+        document.dispatchEvent(event);
     }
     
   }
