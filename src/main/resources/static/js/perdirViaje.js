@@ -337,7 +337,11 @@ pedirViaje = (function () {
 
     aceptarViaje: function (message) {
       aceptarViaje(message);
-      location.href = "subasta";
+      if(Cookies.get('pasajero')){
+        location.href="subastaPasajero";
+    }else{
+        location.href="subasta";
+    }
     },
 	
 	cancelarViaje: function(){

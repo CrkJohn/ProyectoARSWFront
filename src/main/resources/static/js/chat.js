@@ -81,6 +81,13 @@ function onMessageReceived(payload) {
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
+    } else if (message.type === 'END'){
+        if(Cookies.get('pasajero')){
+            location.href="perdirViajeUser";
+        }else{
+            location.href="viajesDisponiblesConductor";
+        }
+    
     } else {
         messageElement.classList.add('chat-message');
 
@@ -119,13 +126,12 @@ function getAvatarColor(messageSender) {
 }
 
 var cancelarViaje = function(){ 
-    if(Cookies.get('pasajero')){
-        username = JSON.parse( Cookies.get('pasajero')).correo;
-        location.href="pedirViajeUser";
-    }else{
-        username = JSON.parse( Cookies.get('conductor')).correo;
-        location.href="viajesDisponiblesConductor";
-    }
+    var chatMessage = {
+        type: 'END'
+    };
+    stompClient.send("/topic/public", {}, JSON.stringify(chatMessage));
+    console.log("Hola");
+
   };
 
 return{
@@ -139,7 +145,7 @@ return{
     terminarViaje: function(){
         cancelarViaje();
         alert("Viaje terminado");
-        location.href="viajesDisponiblesConductor";
+      
     }
 }
 })();
