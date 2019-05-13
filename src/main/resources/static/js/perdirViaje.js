@@ -152,14 +152,49 @@ pedirViaje = (function () {
 
     }, function (response, status) {
       if (status === 'OK') {
-        directionsDisplay.setMap(map);
-        directionsDisplay.setDirections(response);
+        //directionsDisplay.setMap(map);
+        var  polycolour = "";
+        var Opacity = 0;
+        for (var i = 0, len = response.routes.length; i < len; i++) {
+          if (i == 0) {
+            polycolour = "Blue";
+            Opacity = 5;
+          }
+          else {
+            polycolour = "grey";
+            Opacity = 3;
+          }
+          new google.maps.DirectionsRenderer({
+              map: map,
+              directions: response,
+              routeIndex: i,
+              draggable : true,
+              suppressMarkers: true,
+              polylineOptions: {
+                strokeColor: polycolour,
+                strokeWeight: Opacity
+              }
+          });
+          if (i == 0){
+          var infowindow2 = new google.maps.InfoWindow();
+          //var step = 10;
+          //alert(angular.toJson(response.routes[0].legs[0].steps[i]));
+  
+          infowindow2.setContent(""+((response.routes[i].legs[0].distance.value)/1000)+" KM");
+          infowindow2.setPosition(response.routes[i].legs[0].steps[8].end_location);
+          infowindow2.open(map);
+          }
+        }
+        //directionsDisplay.setDirections(response);
         var route = response.routes[0];
         var leg = response.routes[0].legs[0];
         //mark = new google.maps.Marker({position:{lat:window.lat, lng:window.lng}, map:map,icon:icons.start.icon});
         //makeMarker({position:{lat:window.lat, lng:window.lng}},icons.start.icon,"init");
-        makeMarker(leg.start_location, icons.start.icon, 'start');
-        makeMarker(leg.end_location, icons.end.icon, 'end');
+        //makeMarker(leg.start_location, icons.start.icon, 'start');
+
+
+
+        //makeMarker(leg.end_location, icons.end.icon, 'end');
 
         routeConsole = route;
         console.log(route);
@@ -255,11 +290,11 @@ pedirViaje = (function () {
       initMap();
       
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+      var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true });
       var btn = document.getElementById('pedir');
       btn.addEventListener('click', function () {
         if($("#costo").val()>0){
-          sendTopic();
+          //sendTopic();
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         }   
       });
