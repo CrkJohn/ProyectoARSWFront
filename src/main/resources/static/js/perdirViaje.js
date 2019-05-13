@@ -11,6 +11,8 @@ pedirViaje = (function () {
   };
   var map = null;
   var stompClient = null;
+  var directionsRenderers = [];
+
 
   function guid() {
     function s4() {
@@ -183,6 +185,11 @@ pedirViaje = (function () {
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var waypts = [];
+    for (var i = 0; i < directionsRenderers.length; i++) {
+      directionsRenderers[i].setMap(null);
+    }
+    // clear out the directionsRenderers array
+    directionsRenderers = [];
 
     console.log($('#place-address').text());
     directionsService.route({
@@ -196,30 +203,64 @@ pedirViaje = (function () {
 
     }, function (response, status) {
       if (status === 'OK') {
-        directionsDisplay.setMap(map);
-        directionsDisplay.setDirections(response);
+        for (var i = 0; i < response.routes.length; i++) {
+          renderDirections(response, i);
+        }
         var route = response.routes[0];
         var leg = response.routes[0].legs[0];
-        //mark = new google.maps.Marker({position:{lat:window.lat, lng:window.lng}, map:map,icon:icons.start.icon});
-        //makeMarker({position:{lat:window.lat, lng:window.lng}},icons.start.icon,"init");
         makeMarker(leg.start_location, icons.start.icon, 'start');
         makeMarker(leg.end_location, icons.end.icon, 'end');
-
         routeConsole = route;
         console.log(route);
         var duration = route.legs[0].duration.text
         console.log()
         var distance = route.legs[0].distance.text;
         console.log(duration + " " + distance);
-        /*route.legs.forEach( function(leg){
-                duration += leg.duration.value;
-        });*/
-        //document.getElementById('duration').innerHTML = duration/60 + " minutos";              
+          
       } else {
         window.alert('Directions request failed due to ' + status);
       }
     });
   }
+
+  function renderDirections(result, routeToDisplay) {
+
+    if (routeToDisplay == 0) {
+        var _colour = '#00458E';
+        var _strokeWeight = 4;
+        var _strokeOpacity = 4;
+        var _suppressMarkers = false;
+    } else {
+        var _colour = '#877f7f';
+        var _strokeWeight = 4;
+        var _strokeOpacity = 0.7;
+        var _suppressMarkers = false;
+    }
+
+    // create new renderer object
+    var directionsRenderer = new google.maps.DirectionsRenderer({
+        draggable: false,
+        suppressMarkers: true,
+        polylineOptions: {
+            strokeColor: _colour,
+            strokeWeight: _strokeWeight,
+            strokeOpacity: _strokeOpacity
+        }
+    })
+    directionsRenderer.setMap(map);
+    directionsRenderer.setDirections(result);
+    directionsRenderer.setRouteIndex(routeToDisplay);
+
+    // push new renderer onto directionsRenderers array;
+    directionsRenderers.push(directionsRenderer);
+    if (routeToDisplay == 0){
+      var infowindow2 = new google.maps.InfoWindow();
+      infowindow2.setContent(""+((result.routes[routeToDisplay].legs[0].distance.value)/1000)+" KM");
+      infowindow2.setPosition(result.routes[routeToDisplay].legs[0].steps[8].end_location);
+      infowindow2.open(map);
+    }
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
 
   function makeMarker(position, icon, title) {
     var marker = new google.maps.Marker({
@@ -240,47 +281,7 @@ pedirViaje = (function () {
     }
   }
 
-  function infoWindowsF() {
-    var infowindowContent = document.getElementById('infowindow-content');
-    var infowindow = new google.maps.InfoWindow();
-    console.log(tmp);
-    infowindow.setContent(infowindowContent);
-    var marker = new google.maps.Marker({
-      map: map,
-      animation: google.maps.Animation.DROP,
-      anchorPoint: new google.maps.Point(0, -29)
-    });
-    marker.addListener('click', toggleBounce);
-
-    console.log('Hola mundo')
-    var place2 = tmp;
-    console.log(place2.geometry)
-    infowindow.setPosition(pos);
-    if (place2.geometry.viewport) {
-      map.fitBounds(place2.geometry.viewport);
-    } else {
-      map.setCenter(place2.geometry.location);
-      map.setZoom(17);  // Why 17? Because it looks good.
-    }
-    marker.setPosition(place2.geometry.location);
-    marker.setVisible(true);
-
-    var address = '';
-    if (place2.address_components) {
-      address = [
-        (place2.address_components[0] && place2.address_components[0].short_name || ''),
-        (place2.address_components[1] && place2.address_components[1].short_name || ''),
-        (place2.address_components[2] && place2.address_components[2].short_name || '')
-      ].join(' ');
-    }
-
-    infowindowContent.children['place-icon'].src = place2.icon;
-    infowindowContent.children['place-name'].textContent = place2.name;
-    infowindowContent.children['place-address'].textContent = address;
-    infowindow.open(map, marker);
-  }
-
-
+  
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
@@ -299,10 +300,11 @@ pedirViaje = (function () {
       initMap();
 
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+      var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true });
       var btn = document.getElementById('pedir');
       btn.addEventListener('click', function () {
-        if ($("#costo").val() > 0) {
+
+        if($("#costo").val()>0){
           sendTopic();
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         }
