@@ -6,7 +6,6 @@
 		<th:block th:replace="navbarConductor ::head"></th:block>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="css/mainSubasta.css" />
-		<link rel="stylesheet" href="css/styleChat.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/chat.css">  
@@ -33,25 +32,8 @@
 			<noscript>
 				<h2>Sorry! Your browser doesn't support Javascript</h2>
 			</noscript>
-			<div th:replace="navbarConductor :: navbarConductorBody"></div>
-		<!-- Header -->
-		<!--
-			<section id="header">
-				<header>
-					
-					<h3 id="logo"><a>Evern Viajes</a></h3>
-					<p>Encuentre el precio ideal para su viaje</p>
-				</header>
-				<nav id="nav">
-					<ul>
-						<li><a href="#one" class="active">Información del viaje</a></li>
-						<li><a href="#two">Chat de la subasta</a></li>
-						<li><a href="perfilConductor">Volver</a></li>				
-					</ul>
-				</nav>
-			</section>
-			-->
-		<!-- Wrapper -->
+        <!-- Wrapper -->
+            <div th:replace="navbarPasajero :: navbarPasajeroB"></div>
 			<div id="wrapper">
 				<!-- Main -->
 					<div id="main">
@@ -64,10 +46,8 @@
 							<!-- Two -->
 							<section id="two">
 								<div class="container">
-									<div id= botonTerminar>
-										<button id="terminarViaje" onclick="chat.terminarViaje()" class="btn btn-red" style="color : white ; text-align: center">TERMINAR VIAJE</button>
-									</div>
-									<div id="chat-page" class="card" style="height: 60vh; background-image: url('../img/chat.png'); width: 100%; ">
+									<h2>Comunícate con tu conductor</h2>
+									<div id="chat-page" class="card" style="height: 60vh;; background-image: url('../img/chat.png'); width: 100%; ">
 											<div class="chat-container">
 												<div class="chat-header">
 													<h2><i>EVERN</i></h2>

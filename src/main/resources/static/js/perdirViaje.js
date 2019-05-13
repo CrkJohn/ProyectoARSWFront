@@ -63,7 +63,7 @@ pedirViaje = (function () {
   function showOffers(message) {
    
     var message = message;
-    var uuid = message.uuid;
+    var uuid = message.uuid + message.usr;
     var thereIsAnOffer = document.getElementById(uuid);
     if (thereIsAnOffer) {
         document.getElementById("costo"+uuid).textContent='Precio ofrecido :' + message.costo;
@@ -100,7 +100,7 @@ pedirViaje = (function () {
           showOffers(json);
           $("#noHayOfertas").css({'display': 'none'});
         }
-        //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
+        alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
       });
     });
   };
@@ -329,7 +329,7 @@ pedirViaje = (function () {
     },
 
     eliminar: function (uuid) {
-      $('#' + uuid).remove();
+      document.getElementById(uuid).remove();
       if(document.getElementById('listaDeOfertas').childElementCount==0){
         $("#noHayOfertas").css({'display': 'block'});
       }

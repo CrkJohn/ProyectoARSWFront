@@ -118,6 +118,15 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+var cancelarViaje = function(){ 
+    if(Cookies.get('pasajero')){
+        username = JSON.parse( Cookies.get('pasajero')).correo;
+        location.href="pedirViajeUser";
+    }else{
+        username = JSON.parse( Cookies.get('conductor')).correo;
+        location.href="viajesDisponiblesConductor";
+    }
+  };
 
 return{
 
@@ -126,5 +135,11 @@ return{
        connect();
        messageForm.addEventListener('submit', sendMessage, true);
     },
+
+    terminarViaje: function(){
+        cancelarViaje();
+        alert("Viaje terminado");
+        location.href="viajesDisponiblesConductor";
+    }
 }
 })();

@@ -66,6 +66,7 @@ var conductorViajes =(function () {
     }
     //console.log(uuid.substring(6,uuid.length ));
     stompClient.send("/topic/canales."+uuid.substring(6,uuid.length ), {}, JSON.stringify(oferta));
+    alert("Su oferta ha sido enviada correctamente");
   };
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay,uuid) { 
@@ -97,7 +98,7 @@ var conductorViajes =(function () {
         var uuid = message.topic;
         var  newRoute = '<div id="'+uuid+'" class="card text-center">'+
                             '<div class="card-body">' +
-                                '<h5 id="usr'+uuid+'" class="card-title">Viaje pedido por el usario : '+ message.usr + '</h5>' +
+                                '<h5 id="usr'+uuid+'" class="card-title">'+ message.usr + ' ofrece:</h5>' +
                                     '<p class="card-text" id = "Inicio'+uuid+'"> El usuario se debe recoger en : '+ message.origin +'.</p>' +
                                     '<p class="card-text" id = "fin'+uuid+'"> El usuario tiene como destino :'+  message.destination +'</p>' +
                                         '<p>El usuario tiene una calificación 3 estrellas.</p>'+  

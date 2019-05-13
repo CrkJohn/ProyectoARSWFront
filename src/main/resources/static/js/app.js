@@ -73,6 +73,7 @@ app=(function(){
                 "clave": $('#claveLogin').val()
             }
             login = JSON.stringify(login);
+            console.log(login);
             return apiclient.loginConductor(login, onSuccessLoginConductor, onErrorLogin);
         },
 
