@@ -17,7 +17,6 @@ var conductorViajes =(function () {
         });
     }
 
-
   var connectAndSubscribe = function (channel) {
     console.info('Connecting to WS...');
     var url = 'stompendpoint';
@@ -33,11 +32,29 @@ var conductorViajes =(function () {
             }else{
 
             }
-        }       
+        }      
+      });
+      stompClient.subscribe('/topic/canales.199', function (eventbody) {
+        var message = JSON.parse(eventbody.body);
+        if(message.type == "cancelar"){
+          var viajes = document.querySelectorAll('.card.text-center');
+          console.log("estoy suscrito en cancelar");
+          console.log(message);
+          console.log("viajes"+viajes[0].textContent);
+          for (var i = viajes.length-1; i >=0; i--) {
+              var v=viajes[i].textContent;
+              if(message.pasajero.localeCompare(v.split(":")[1])){
+                alert("El usuario: "+message.pasajero+" ha cancelado su viaje");
+                viajes[i].remove();
+                if(document.getElementById('listaDeViajes').childElementCount==0){
+                  $("#noHayViajes").css({'display': 'block'});
+                }
+              }
+          }
+        }
       });
     });
   };
-
 
   var sendOferta = function (uuid) {
     var oferta = {
@@ -51,9 +68,7 @@ var conductorViajes =(function () {
     stompClient.send("/topic/canales."+uuid.substring(6,uuid.length ), {}, JSON.stringify(oferta));
   };
 
-
-
-    function calculateAndDisplayRoute(directionsService, directionsDisplay,uuid) { 
+  function calculateAndDisplayRoute(directionsService, directionsDisplay,uuid) { 
         directionsService.route({
           origin: $('#Inicio'+uuid).text().split(':')[1],
           destination: $('#fin'+uuid).text().split(':')[1],

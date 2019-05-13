@@ -35,6 +35,15 @@ pedirViaje = (function () {
     stompClient.send("/topic/canales."+message.substring(0,36), {}, JSON.stringify(respuesta));
 
   };
+  
+  var cancelarViaje = function(){
+    var cancelar = {
+      pasajero : username = JSON.parse( Cookies.get('pasajero')).correo,
+      type: "cancelar"
+    }
+    console.log("Se cancela viaje");
+    stompClient.send("/topic/canales.199", {}, JSON.stringify(cancelar));
+  };
 
   var sendTopic = function () {
     var newTopicID = guid();
@@ -183,13 +192,8 @@ pedirViaje = (function () {
     });
   }
 
-  function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+ function calculateAndDisplayRoute(directionsService, directionsDisplay,fn) {
     var waypts = [];
-    for (var i = 0; i < directionsRenderers.length; i++) {
-      directionsRenderers[i].setMap(null);
-    }
-    // clear out the directionsRenderers array
-    directionsRenderers = [];
 
     console.log($('#place-address').text());
     directionsService.route({
@@ -203,26 +207,32 @@ pedirViaje = (function () {
 
     }, function (response, status) {
       if (status === 'OK') {
-        for (var i = 0; i < response.routes.length; i++) {
-          renderDirections(response, i);
-        }
+        directionsDisplay.setMap(map);
+        directionsDisplay.setDirections(response);
         var route = response.routes[0];
         var leg = response.routes[0].legs[0];
+        //mark = new google.maps.Marker({position:{lat:window.lat, lng:window.lng}, map:map,icon:icons.start.icon});
+        //makeMarker({position:{lat:window.lat, lng:window.lng}},icons.start.icon,"init");
         makeMarker(leg.start_location, icons.start.icon, 'start');
         makeMarker(leg.end_location, icons.end.icon, 'end');
+
         routeConsole = route;
         console.log(route);
-        var duration = route.legs[0].duration.text
-        console.log()
-        var distance = route.legs[0].distance.text;
+        duration = route.legs[0].duration.text;
+        duracionViaje=duration;
+        distance = route.legs[0].distance.text;
+        recorridoViaje=distance;
         console.log(duration + " " + distance);
-          
+        fn(distance,duration);
+        /*route.legs.forEach( function(leg){
+                duration += leg.duration.value;
+        });*/
+        //document.getElementById('duration').innerHTML = duration/60 + " minutos";              
       } else {
         window.alert('Directions request failed due to ' + status);
       }
     });
   }
-
   function renderDirections(result, routeToDisplay) {
 
     if (routeToDisplay == 0) {
@@ -300,16 +310,21 @@ pedirViaje = (function () {
       initMap();
 
       var directionsService = new google.maps.DirectionsService;
-      var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true });
-      var btn = document.getElementById('pedir');
+      var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+      var btn = document.getElementById('botonPedir');
       btn.addEventListener('click', function () {
-
-        if($("#costo").val()>0){
+        if ($("#costo").val() > 0) {
           sendTopic();
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
+          calculateAndDisplayRoute(directionsService, directionsDisplay, function(dis,dur){
+            $("#pedirViaje").css({'display':'none'});
+            var infoViaje='<div><h2>Su viaje se demora aproximadamente: '+dur+'</h2><h3>Con '+dis+' de recorrido</h3></div>';
+            $("#infoViaje").append(infoViaje);
+          });
+          
         }
       });
       connectAndSubscribe(1);
+      
     },
 
     eliminar: function (uuid) {
@@ -319,6 +334,11 @@ pedirViaje = (function () {
     aceptarViaje: function (message) {
       aceptarViaje(message);
       location.href = "subasta";
+    },
+	
+	cancelarViaje: function(){
+      cancelarViaje();
+      location.href= "perdirViajeUser";
     }
 
   }

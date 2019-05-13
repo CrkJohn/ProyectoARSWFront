@@ -66,7 +66,7 @@
         </div>
         <br>
         <div id="collapseExample">
-
+          <div id="pedirViaje">
             <!--Body-->
             <div class="md-form">
               <input type="text" id="pac-input" class="form-control" placeholder="Ubicación">
@@ -79,9 +79,14 @@
             <div class="md-form">
               <input type="text" id="costo" class="form-control" style = "text-align: center" placeholder="Precio">
             </div>
-            <div class="text-center mt-4">
+            <div class="text-center mt-4" id="botonPedir">
               <button id="pedir" class="btn btn-light-blue" style="color : white ; text-align: center">Pedir</button>
             </div>
+          </div>
+          <div>
+            <div id="infoViaje"></div>
+            <div class="text-center md-4" id="botonCancelar"></div>
+          </div>
       </div>
     </div>
   </div>
@@ -107,6 +112,16 @@
         google.maps.event.trigger(map, 'resize');  
       }
     });
+
+    $("#botonPedir").click(function() {
+      //$("#botonPedir").css({'display': 'none'});
+      var cancelar= '<button id="rechazar" class="btn btn-red" onclick="pedirViaje.cancelarViaje()" style="color : white ; text-align: center">Cancelar</button>';
+      $("#botonCancelar").append(cancelar);
+      $("#pac-input").disable = true;
+      $("#pac-output").disable = true;
+      $("#precio").disable = true;
+    });
+    
 	var event= new Event('Event');
   event.initEvent('build',true,true);
   window.addEventListener('load', onWndLoad, false);
@@ -129,7 +144,7 @@
     var TRANS_DUR = 0.4;
   
      var images=document.querySelectorAll('img');
-  for(var i=0;i<images.length;i++)
+    for(var i=0;i<images.length;i++)
     {
       images[i].onmousemove=function(e){
         e.preventDefault()
