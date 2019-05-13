@@ -7,20 +7,25 @@ perfil  = (function(){
         $.get("https://backarsw.herokuapp.com/v1/conductores/" + correo, function(data) {
             console.log(data);
             var json = data;
-            var cache = $('#tel').children();
-            $("#tel").text(json.celular).append(cache);
+            var cache = $('#telefonoBtn').children();
+            $("#telefonoBtn").text(json.celular).append(cache);
             $("#nombre").text(json.nombres);
-
+            var cache = $('#fechaBtn').children();
+            $("#fechaBtn").text(json.fechaNacimiento).append(cache);           
             $("#tipoUsuario").text(json.tipoUsuario);
-            
-            var cache = $('#correo').children();
-            
-            $("#correo").text(json.correo).append(cache);
-            //$('.stars-inner').circleType({radius: 800});
+            var cache = $('#correoBtn').children();            
+            $("#correoBtn").text(json.correo).append(cache);
+            console.log(json.calificacion) 
 
             const ratings = {
-                hotel_a : 3.5
+                hotel_a : json.calificacion
               };
+              
+              var cache = $('#residenciaBtn').children();
+              $("#residenciaBtn").text(json.casa).append(cache);           
+              
+
+
 
             const starTotal = 5;
  
@@ -29,6 +34,16 @@ perfil  = (function(){
                 const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
                 document.querySelector('.stars-inner').style.width = starPercentageRounded; 
             }
+            
+            var input = document.getElementById('cambiarResidencia');
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 4.782715, lng: -74.042611 },
+                zoom: 18
+            });
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+            autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+            
         });
     };
 
@@ -36,29 +51,22 @@ perfil  = (function(){
     var updateDate = function(){
        
         var datos = {
-
+			"correo" : Cookies.get('pasajero') ?  JSON.parse(Cookies.get('pasajero')).correo :  JSON.parse( Cookies.get('conductor')).correo,
+			"clave" : Cookies.get('pasajero') ?  JSON.parse(Cookies.get('pasajero')).clave :  JSON.parse( Cookies.get('conductor')).clave,
+			"nuevaFechaNacimiento" :$("#cambiarFecha").val()
         }
+        var role =  Cookies.get('conductor') ? 'v1/conductores' : 'v1/pasajeros'
+        var JSON1 = JSON.stringify(datos);
+        console.log(JSON1);
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "https://backarsw.herokuapp.com/v1/conductores/login",
-            data: datos,
-            success: succ,
-            error: err
+            url: "https://backarsw.herokuapp.com/"+role+"/update/fechaNacimiento",
+            data: JSON1,       
         });
     };
 
-    var updateEmail = function(){
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "https://backarsw.herokuapp.com/v1/conductores/login",
-            data: datos,
-            success: succ,
-            error: err
-        });
-    };
-
+    
     var updateNumber = function(){
         var newNumber = $("#cambiarTelefono").val()
         if(isNaN(newNumber)){
@@ -72,41 +80,53 @@ perfil  = (function(){
               })
 
         }else{
+            var datos = {
+                "correo" : Cookies.get('pasajero') ?  JSON.parse(Cookies.get('pasajero')).correo :  JSON.parse( Cookies.get('conductor')).correo,
+                "clave" : Cookies.get('pasajero') ?  JSON.parse(Cookies.get('pasajero')).clave :  JSON.parse( Cookies.get('conductor')).clave,
+                "nuevoCelular" :$("#cambiarTelefono").val()
+            }
+            var role =  Cookies.get('conductor') ? 'v1/conductores' : 'v1/pasajeros'
+            var JSON1 = JSON.stringify(datos);
+            console.log(JSON1);
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
-                url: "https://backarsw.herokuapp.com/v1/conductores/login",
-                data: datos,
-                success: succ,
-                error: err
+                url: "https://backarsw.herokuapp.com/"+role+"/update/celular",
+                data: JSON1,
+              
             });
         }
     };
 
     var updateHome = function(){
+        var datos = {
+            "correo" : Cookies.get('pasajero') ?  JSON.parse(Cookies.get('pasajero')).correo :  JSON.parse( Cookies.get('conductor')).correo,
+            "clave" : Cookies.get('pasajero') ?  JSON.parse(Cookies.get('pasajero')).clave :  JSON.parse( Cookies.get('conductor')).clave,
+            "nuevaCasa" :$("#cambiarResidencia").val()
+        }
+        var JSON1 = JSON.stringify(datos);
+        console.log(JSON1);
+        var role =  Cookies.get('conductor') ? 'v1/conductores' : 'v1/pasajeros'
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "https://backarsw.herokuapp.com/v1/conductores/login",
-            data: datos,
-            success: succ,
-            error: err
+            url: "https://backarsw.herokuapp.com/"+role+"/update/casa",
+            data: JSON1,
+            
         });
     };
 
 
     return {
         init : function(){ 
-            //cargarInformacion();
+            cargarInformacion();
             $("#telefonoBtn").on('click',function(){
                 $("#telefono").modal('show');
             });
             $("#fechaBtn").on('click',function(){
                 $("#nacimiento").modal('show'); 
             });
-            $("#correoBtn").on('click',function(){
-                $("#correo").modal('show');
-            });
+           
             $("#residenciaBtn").on('click',function(){
                 $("#residencia").modal('show');
             });
@@ -114,8 +134,14 @@ perfil  = (function(){
             $("#telefonoGuardar").on('click',function(){
                 updateNumber();
             })
-			
+            
+            $("#residenciaGuardar").on('click',function(){
+                updateHome();
+            })
 
+           $("#nacimientoGuardar").on('click',function(){
+            updateDate();
+           })
 
 
         }

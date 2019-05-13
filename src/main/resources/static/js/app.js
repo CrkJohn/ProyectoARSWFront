@@ -2,7 +2,8 @@ app=(function(){
 
     var onSuccessLoginPasajero = function(data){
         var info = {
-            correo : $('#correoLogin').val()
+            correo : $('#correoLogin').val(),
+            clave : $('#claveLogin').val()
         }
         Cookies.set('pasajero' , JSON.stringify(info));
         location.href = "perdirViajeUser";
@@ -10,7 +11,8 @@ app=(function(){
     
     var onSuccessLoginConductor = function(data){
         var info = {
-            correo : $('#correoLogin').val()
+            correo : $('#correoLogin').val(),
+            clave : $('#claveLogin').val()
         }
         Cookies.set('conductor' , JSON.stringify(info));
     	location.href = "perfilConductor";

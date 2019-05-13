@@ -18,12 +18,35 @@
 	<link rel="stylesheet" href="css/cardStyle.css">
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="css/perfilConductor.css">
+	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+	<style>
+	.pac-container {
+    background-color: #FFF;
+    z-index: 20;
+    position: fixed;
+    display: inline-block;
+    float: left;
+	}	
+	.modal{
+   	 	z-index: 20;   
+	}
+	.datepicker{
+		z-index:1151;
+	}
+
+	/*.modal-backdrop
+	{
+		z-index: 10;        
+	}​*/	
+</style>
 </head>
 
 <body onload="perfil.init()">
 
 	<div th:replace="navbarConductor :: navbarConductorBody"></div>
 	</p>
+	
 
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
@@ -89,11 +112,14 @@
 				</div>
 				<div class="modal-body">
 					<form>
-						<label for="staticEmail">Nueva fecha</label>
-						<br>
-						<div class="col-sm-10">
-							<div class="md-form">
-								<input type="text" id="cambiarNumero" class="form-control">
+						<div class="form-group row" >
+
+							<label for="staticEmail"  class="col-sm-2 col-form-label">Nueva fecha</label>
+							<br>
+							<div class="col-sm-10">
+								<div class="md-form">
+									<input type="text" id="cambiarFecha" class="form-control">
+								</div>
 							</div>
 						</div>
 					</form>
@@ -137,34 +163,6 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="correo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #4267b2">
-					<h5 class="modal-title" style="color : white"><i class="fa fa-cogs"></i>
-						Cambia tu correo</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
-						style="color: white"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body">
-					<form>						
-						<label for="staticEmail">Escriba su nuevo correo</label>
-						<div class="md-form">
-								<input class="datepicker" data-date-format="mm/dd/yyyy">
-
-							<input type="text" id="cambiarCorreo" class="form-control">
-						</div>							
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal"
-						style="color:white">Cerrar</button>
-					<button id="correoGuardar" type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
-						cambios</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	<div class="modal fade" id="residencia" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -178,7 +176,8 @@
 				</div>
 				<div class="modal-body">
 					<form>
-						
+					
+							<div id='map'></div>
 							<label for="staticEmail" >Escriba el nuevo lugar de su
 								residencia</label>
 							
@@ -205,7 +204,15 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 	<script src="js/cargarPerfil.js"></script>
-	<script src="sweetalert2.all.min.js"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
+	</script>
+	<script>
+		$("#cambiarFecha").datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+	</script>
+
   
 </body>
 
