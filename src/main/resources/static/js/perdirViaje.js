@@ -63,7 +63,7 @@ pedirViaje = (function () {
   function showOffers(message) {
    
     var message = message;
-    var uuid = message.uuid + ':' + message.usr;
+    var uuid = message.uuid;
     var thereIsAnOffer = document.getElementById(uuid);
     if (thereIsAnOffer) {
         document.getElementById("costo"+uuid).textContent='Precio ofrecido :' + message.costo;
@@ -194,6 +194,11 @@ pedirViaje = (function () {
 
  function calculateAndDisplayRoute(directionsService, directionsDisplay,fn) {
     var waypts = [];
+    for (var i = 0; i < directionsRenderers.length; i++) {
+      directionsRenderers[i].setMap(null);
+    }
+     // clear out the directionsRenderers array
+     directionsRenderers = [];
 
     console.log($('#place-address').text());
     directionsService.route({
@@ -207,21 +212,18 @@ pedirViaje = (function () {
 
     }, function (response, status) {
       if (status === 'OK') {
-        directionsDisplay.setMap(map);
-        directionsDisplay.setDirections(response);
+        for (var i = 0; i < response.routes.length; i++) {
+          renderDirections(response, i);
+        }
+        //directionsDisplay.setMap(map);
+        //directionsDisplay.setDirections(response);
         var route = response.routes[0];
         var leg = response.routes[0].legs[0];
-        //mark = new google.maps.Marker({position:{lat:window.lat, lng:window.lng}, map:map,icon:icons.start.icon});
-        //makeMarker({position:{lat:window.lat, lng:window.lng}},icons.start.icon,"init");
         makeMarker(leg.start_location, icons.start.icon, 'start');
         makeMarker(leg.end_location, icons.end.icon, 'end');
-
         routeConsole = route;
-        console.log(route);
-        duration = route.legs[0].duration.text;
-        duracionViaje=duration;
-        distance = route.legs[0].distance.text;
-        recorridoViaje=distance;
+        var duration = route.legs[0].duration.text;
+        var distance = route.legs[0].distance.text;
         console.log(duration + " " + distance);
         fn(distance,duration);
         /*route.legs.forEach( function(leg){
@@ -269,8 +271,7 @@ pedirViaje = (function () {
       infowindow2.setPosition(result.routes[routeToDisplay].legs[0].steps[8].end_location);
       infowindow2.open(map);
     }
-  }                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
   function makeMarker(position, icon, title) {
     var marker = new google.maps.Marker({
@@ -329,6 +330,9 @@ pedirViaje = (function () {
 
     eliminar: function (uuid) {
       $('#' + uuid).remove();
+      if(document.getElementById('listaDeOfertas').childElementCount==0){
+        $("#noHayOfertas").css({'display': 'block'});
+      }
     },
 
     aceptarViaje: function (message) {
