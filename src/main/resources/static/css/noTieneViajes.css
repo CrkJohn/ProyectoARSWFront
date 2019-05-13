@@ -21,6 +21,17 @@
     margin-right: auto;
     display: block;
 }
+
+.soon{
+    height: 100px;
+    width:  80%;
+    left:10px;
+    background-position: center;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
  
  
  .four_zero_four_bg h1{
