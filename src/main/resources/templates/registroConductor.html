@@ -3,34 +3,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title> Registro del conductor </title>
-<!--===============================================================================================-->
 <!-- link rel="icon" type="image/png" href="images/icons/favicon.ico" /-->
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="conductor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="conductor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 <link rel="stylesheet" type="text/css" href="conductor/animate/animate.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="conductor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="conductor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="conductor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="conductor/animsition/css/animsition.min.css">
 <link rel="stylesheet" type="text/css" href="conductor/select2/select2.min.css">
-<!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="conductor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="conductor/daterangepicker/daterangepicker.css">
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="css/standar.css">
 
 <!-- LOS SCRIPTS DE APICLIENT Y APP -->
@@ -39,12 +22,10 @@
 <script src="js/app.js"></script>
 
 <style>
-	
 	/* Hide all steps by default: */
 	.tab {
 		display: none;
 	}
-	
 	/* Make circles that indicate the steps of the form: */
 	.step {
 		height: 15px;
@@ -56,11 +37,9 @@
 		display: inline-block;
 		opacity: 0.5;
 	}
-	
 	.step.active {
 		opacity: 1;
 	}
-	
 	/* Mark the steps that are finished and valid: */
 	.step.finish {
 		background-color: #ffffff;
@@ -236,8 +215,6 @@
 			// if you have reached the end of the form...
 			if (currentTab >= x.length) {
 				// ... the form gets submitted:
-				console.log("YA VA A MANDAR DATOS");
-				//location.href = "loginConductor";
 				app.registroConductor();
 				return false;
 			}
@@ -249,15 +226,10 @@
 			// This function deals with validation of the form fields
 			var x, y, i, valid = true;
 			x = document.getElementsByClassName("tab");
-			console.log("VALIDATE FORM x-> "+x);
 			y = x[currentTab].getElementsByTagName("input");
 			// A loop that checks every input field in the current tab:
-			console.log("VALIDATE FORM y-> y");
 			for (i = 0; i < y.length; i++) {
-				// If a field is empty...
 				if (y[i].value == "") {
-					// add an "invalid" class to the field:
-					//y[i].className += " invalid";
 					valid = false;
 					alert("Falta por completar " + y[i].placeholder);
 					y[i].focus()
@@ -265,24 +237,17 @@
 				}else if(y[i].name=="fechaNacimiento"){
 					var arr = y[i].value.split("/");
 					var formatoFecha = true;
-					//console.log(arr);
 					if(arr.length != 3){
 						formatoFecha=false;
-						//console.log("el tamaño del arreglo es diferente a 3");
 					}else if(!jQuery.isNumeric(arr[0]) ||
 						!jQuery.isNumeric(arr[1]) ||
 						!jQuery.isNumeric(arr[2])){
-
 						formatoFecha=false;
-						//console.log("no es numerico");
 					}else if(!(arr[0]>0 && arr[0]<=31)){
 						formatoFecha=false;
-					//	console.log("fallo el dia");
 					}else if(!(arr[1]>0 && arr[1]<=12)){
 						formatoFecha=false;
-					//	console.log("fallo el mes");
-					}else if(!(arr[2]>1920)){
-					//	console.log("fallo el año");
+					}else if(arr[2]<1920 || arr[2]>= 2010){
 						formatoFecha=false;
 					}
 					if(!formatoFecha){
@@ -295,7 +260,12 @@
 					if(y[i-1].value != y[i].value){
 						valid=false;
 						alert("Las contraseñas no coinciden");
-						y[i].focus();
+						y[i].focus(); break;
+					}
+				}else if(y[i].name=="telefono"){
+					if(!jQuery.isNumeric([i].value)){
+						alert("El numero de telefono debe ser numerico");
+						y[i].focus(); break;
 					}
 				}
 			}
@@ -317,22 +287,13 @@
 		}
 	</script>
 
-
-	<!--===============================================================================================-->
 	<script src="conductor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="conductor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="conductor/bootstrap/js/popper.js"></script>
 	<script src="conductor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="conductor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="conductor/daterangepicker/moment.min.js"></script>
 	<script src="conductor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
 	<script src="conductor/countdowntime/countdowntime.js"></script>
-
-
 </body>
 </html>

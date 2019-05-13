@@ -6,7 +6,6 @@ app=(function(){
         }
         Cookies.set('pasajero' , JSON.stringify(info));
         location.href = "perdirViajeUser";
-
     }
     
     var onSuccessLoginConductor = function(data){
@@ -57,16 +56,22 @@ app=(function(){
         
         loginPasajero:function(name){
         	if(!this.validateLogin()) return; //validateLogin fails
-            var correo = $('#correoLogin').val();
-            var clave = $('#claveLogin').val();
-            return apiclient.loginPasajero(correo, clave, onSuccessLoginPasajero, onErrorLogin);
+            var login = {
+                "correo": $('#correoLogin').val(),
+                "clave": $('#claveLogin').val()
+            }
+            login = JSON.stringify(login);
+            return apiclient.loginPasajero(login, onSuccessLoginPasajero, onErrorLogin);
         },
         
         loginConductor:function(name){
-        	if(!this.validateLogin()) return; //validateLogin fails
-            var correo = $('#correoLogin').val();
-            var clave = $('#claveLogin').val();
-              return apiclient.loginConductor(correo, clave, onSuccessLoginConductor, onErrorLogin);
+            if(!this.validateLogin()) return; //validateLogin fails
+            var login = {
+                "correo": $('#correoLogin').val(),
+                "clave": $('#claveLogin').val()
+            }
+            login = JSON.stringify(login);
+            return apiclient.loginConductor(login, onSuccessLoginConductor, onErrorLogin);
         },
 
         validateLogin:function(name){
@@ -93,7 +98,7 @@ app=(function(){
                 "clave": $('[name=clave]').val(),
                 "celular": $('[name=telefono]').val()					
             };
-            pasajero = JSON.stringify(pasajero);
+            pasajero = JSON.stringify(pasajero); //parsea a formato JSON
             console.log("APP REGISTRO PASAJERO -> "+pasajero);
             return apiclient.registroPasajero(pasajero, onSucessRegistroPasajero,
                 onErrorRegistroPasajero);
@@ -115,7 +120,7 @@ app=(function(){
             }
             conductor.automovil = automovil;
             console.log("APP REGISTRO AUTOMOVIL -> "+automovil);
-            conductor = JSON.stringify(conductor);
+            conductor = JSON.stringify(conductor); //parsea a formato JSON
             console.log("APP REGISTRO CONDUCTOR -> "+conductor);
             return apiclient.registroConductor(conductor, onSucessRegistroConductor,
                 onErrorRegistroConductor);

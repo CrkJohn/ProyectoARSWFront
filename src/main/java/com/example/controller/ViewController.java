@@ -7,97 +7,97 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 
 	@RequestMapping(value = { "/" , "index" })
-	String index() {
+	public String index() {
 	    return "index";
 	}
 	
 	@RequestMapping("/loginPasajero")
-	String loginPasajero(){
+	public String loginPasajero(){
 		return "loginPasajero";
 	}
 
 	@RequestMapping("/loginConductor")
-	String loginConductor(){
+	public String loginConductor(){
 		return "loginConductor";
 	}
 
 	@RequestMapping("/perdirViajeUser")
-	String perdirViajeUser() {
+	public String perdirViajeUser() {
 		return "perdirViajeUser";
 	}
 	
 	@RequestMapping("/configuracion")
-	String configuracion() {
+	public String configuracion() {
 		return "configuracion";
 	}
 
 	@RequestMapping("/maps")
-	String mapsp() {
+	public String mapsp() {
 		return "mapsP";
 	}
 
 	@RequestMapping("/pagos")
-	String pagos() {
+	public String pagos() {
 		return "pagos";
 	}
 
 	@RequestMapping("/viajesRealizados")
-	String viajesHechosConductor(){
+	public String viajesHechosConductor(){
 		return "viajesHechosConductor";
 	}
 	
 	@RequestMapping("/viajes")
-	String viajes() {
+	public String viajes() {
 		return "viajes";
 	}
 	
 	@RequestMapping("/cupones")
-	String cupones() {
+	public String cupones() {
 		return "cupones";
 	}
 	
 	@RequestMapping("/viajesDisponiblesConductor")
-	String viajesDisponiblesConductor() {
+	public String viajesDisponiblesConductor() {
 		return "viajesDisponiblesConductor";
 	}
 	
 	@RequestMapping("/navbarConductor")
-	String navbarConductor() {
+	public String navbarConductor() {
 		return "navbarConductor";
 	}
 	
 	@RequestMapping("/register")
-	String register() {
+	public String register() {
 		return "register";
 	}
 
 	@RequestMapping("/registroConductor")
-	String registroConductor(){
+	public String registroConductor(){
 		return "registroConductor";
 	}
 	
 	@RequestMapping("/registroPasajero")
-	String registroPasajero(){
+	public String registroPasajero(){
 		return "registroPasajero";
 	}
 
 	@RequestMapping("/perfilConductor")
-	String perfilConductor() {
+	public String perfilConductor() {
 		return "perfilConductor";
 	}
 
 	@RequestMapping("/conductorRegister")
-	String conductorRegister(){
+	public String conductorRegister(){
 		return "conductorRegister";
 	}
 
 	@RequestMapping("/subasta")
-	String  subasta(){
+	public String  subasta(){
 		return "subasta";
 	}
 	
 	@RequestMapping("/prueba")
-	String prueba() {
+	public String prueba() {
 		return "prueba";
 	}
 		
