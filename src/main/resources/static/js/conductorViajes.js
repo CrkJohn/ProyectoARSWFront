@@ -28,7 +28,16 @@ var conductorViajes =(function () {
         var message = JSON.parse(eventbody.body);
         if(message.type =="acepto"){
           if(message.conductor.localeCompare(JSON.parse( Cookies.get('conductor')).correo)){
-              location.href='subasta';
+              var uuid = message.uuid;
+              console.log(uuid);
+              Cookies.remove('subasta');
+              var info = {
+                  correo : $('#usr'+uuid).text().split(':')[1],
+                  origin : $('#Inicio'+uuid).text().split(':')[1],
+                  destination: $('#fin'+uuid).text().split(':')[1],
+                  costo : $('#costo'+uuid).text().split(':')[1],
+              }
+              Cookies.set('subasta' , JSON.stringify(info));
             }else{
 
             }

@@ -32,9 +32,92 @@ perfil  = (function(){
         });
     };
 
+
+    var updateDate = function(){
+       
+        var datos = {
+
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "https://backarsw.herokuapp.com/v1/conductores/login",
+            data: datos,
+            success: succ,
+            error: err
+        });
+    };
+
+    var updateEmail = function(){
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "https://backarsw.herokuapp.com/v1/conductores/login",
+            data: datos,
+            success: succ,
+            error: err
+        });
+    };
+
+    var updateNumber = function(){
+        var newNumber = $("#cambiarTelefono").val()
+        if(isNaN(newNumber)){
+            Swal.fire({
+                position: 'top-end',
+                type: 'error',
+                title: 'No es un número lo que acabo de digitar',
+                showConfirmButton: false,
+                width: 500, 
+                timer: 1000
+              })
+
+        }else{
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "https://backarsw.herokuapp.com/v1/conductores/login",
+                data: datos,
+                success: succ,
+                error: err
+            });
+        }
+    };
+
+    var updateHome = function(){
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "https://backarsw.herokuapp.com/v1/conductores/login",
+            data: datos,
+            success: succ,
+            error: err
+        });
+    };
+
+
     return {
         init : function(){ 
-            cargarInformacion();
+            //cargarInformacion();
+            $("#telefonoBtn").on('click',function(){
+                $("#telefono").modal('show');
+            });
+            $("#fechaBtn").on('click',function(){
+                $("#nacimiento").modal('show'); 
+            });
+            $("#correoBtn").on('click',function(){
+                $("#correo").modal('show');
+            });
+            $("#residenciaBtn").on('click',function(){
+                $("#residencia").modal('show');
+            });
+
+            $("#telefonoGuardar").on('click',function(){
+                updateNumber();
+            })
+			
+
+
+
         }
     }
 })();

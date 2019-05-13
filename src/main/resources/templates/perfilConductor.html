@@ -28,17 +28,12 @@
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
 		<div class="container box_1620">
-
 			<div class="banner_inner d-flex align-items-center">
 				<div class="banner_content">
 					<div id="configure" class="topright">
 						<a class="btn-floating accent-1" data-toggle="modal" data-target="#exampleModalCenter"
 							style="background-color: #4267b2"><i class="fa fa-cogs"></i></a>
 					</div>
-
-
-
-
 					<div class="media">
 						<div class="d-flex">
 							<img src="img/personal.jpg" alt="">
@@ -50,13 +45,14 @@
 								<h3 id="nombre">David Saavedra</h3>
 								<p> </p>
 								<ul class="list basic_info">
-									<li><a href="#" id="fecha"><i class="lnr lnr-calendar-full"></i> 31st December,
-											1992</a></li>
-									<li><a href="#" id="tel"><i class="lnr lnr-phone-handset"></i> 44 (012) 6954 783</a>
-									</li>
-									<li><a href="#" id="correo"><i class="lnr lnr-envelope"></i>
-											david.saavedra@donald</a></li>
-									<li><a href="#" id="lugar"><i class="lnr lnr-home"></i> Bogota Colombia</a></li>
+									<li><a class="select-bt-size" id="telefonoBtn"><i class="lnr lnr-phone-handset"></i>
+											44 (012) 6954 783 </a></li>
+									<li><a class="select-bt-size" id="fechaBtn"><i class="lnr lnr-calendar-full"></i>
+											31st December,1992</a></li>
+									<li><a class="select-bt-size" id="correoBtn"><i
+												class="lnr lnr-envelope"></i>david.saavedra@donald</a></li>
+									<li><a class="select-bt-size" id="residenciaBtn"><i class="lnr lnr-home"></i> Bogota
+											Colombia</a></li>
 									<li style="line-height: 26px;
 												font-size: 16px;
 												font-family: 'Roboto', sans-serif;
@@ -69,7 +65,6 @@
 										Su calificacion
 									</li>
 								</ul>
-
 								<ul class="list personal_social">
 									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -83,52 +78,22 @@
 		</div>
 	</section>
 
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+	<div class="modal fade" id="nacimiento" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #4267b2">
-					<h5 class="modal-title" id="exampleModalLongTitle" style="color : white"><i class="fa fa-cogs"></i>
-						Cambia tu informacion personal</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<h5 class="modal-title" style="color : white"><i class="fa fa-cogs"></i>
+						Cambia tu fecha de nacimiento</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						style="color: white"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<div class="modal-body">
-
 					<form>
-						<div class="form-group row">
-							<label for="staticEmail" class="col-sm-2 col-form-label">Nuevo número</label>
-								<div class="col-sm-10">
-									<div class="md-form">
-										<input type="text" id="cambiarNumero" class="form-control" >
-									</div>
-								</div>
-						</div>	
-
-						<div class="form-group row">
-							<label for="staticEmail" class="col-sm-2 col-form-label">Nuevo apellido</label>
-							<div class="col-sm-10">
-								<div class="md-form">
-									<input type="text" id="cambiarApellido" class="form-control" >
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="staticEmail" class="col-sm-2 col-form-label">Nuevo nombre</label>
-							<div class="col-sm-10">
-								<div class="md-form">
-									<input type="text" id="cambiarNombre" class="form-control" >
-								</div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="inputPassword" class="col-sm-2 col-form-label">Nueva clave</label>
-							<div class="col-sm-10">
-								<div class="md-form">
-									<input type="password" class="form-control" id="inputPassword">
-								</div>
+						<label for="staticEmail">Nueva fecha</label>
+						<br>
+						<div class="col-sm-10">
+							<div class="md-form">
+								<input type="text" id="cambiarNumero" class="form-control">
 							</div>
 						</div>
 					</form>
@@ -136,7 +101,65 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal"
 						style="color:white">Cerrar</button>
-					<button type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
+					<button id="nacimientoGuardar"type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
+						cambios</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="telefono" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #4267b2">
+					<h5 class="modal-title" style="color : white"><i class="fa fa-cogs"></i>
+						Cambia tu número telefónico</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						style="color: white"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<label for="staticEmail">Escribe tu nuevo telefono</label>
+						<div class="col-sm-10">
+							<div class="md-form">
+								<input type="text" id="cambiarTelefono" class="form-control">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"
+						style="color:white">Cerrar</button>
+					<button id="telefonoGuardar" type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
+						cambios</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="correo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #4267b2">
+					<h5 class="modal-title" style="color : white"><i class="fa fa-cogs"></i>
+						Cambia tu correo</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						style="color: white"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form>						
+						<label for="staticEmail">Escriba su nuevo correo</label>
+						<div class="md-form">
+								<input class="datepicker" data-date-format="mm/dd/yyyy">
+
+							<input type="text" id="cambiarCorreo" class="form-control">
+						</div>							
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"
+						style="color:white">Cerrar</button>
+					<button id="correoGuardar" type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
 						cambios</button>
 				</div>
 			</div>
@@ -144,11 +167,46 @@
 	</div>
 
 
+	<div class="modal fade" id="residencia" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #4267b2">
+					<h5 class="modal-title" style="color : white"><i class="fa fa-cogs"></i>
+						Cambia tu residencia</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						style="color: white"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						
+							<label for="staticEmail" >Escriba el nuevo lugar de su
+								residencia</label>
+							
+								<div class="md-form">
+									<input type="text" id="cambiarResidencia" class="form-control">
+								</div>
+							
+						
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"
+						style="color:white">Cerrar</button>
+					<button id = "residenciaGuardar" type="button" class="btn " style="color : white ; background-color: #4267b2 ">Guardar
+						cambios</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 	<script src="js/cargarPerfil.js"></script>
-
+	<script src="sweetalert2.all.min.js"></script>
+  
 </body>
 
 </html>
