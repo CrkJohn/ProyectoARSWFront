@@ -38,6 +38,7 @@ var conductorViajes =(function () {
                   costo : $('#costo'+uuid).text().split(':')[1],
               }
               Cookies.set('subasta' , JSON.stringify(info));
+              location.href='subasta';
             }else{
 
             }
