@@ -44,12 +44,16 @@
 	.step.finish {
 		background-color: #ffffff;
 	}
+
+	.wrap-login100 {
+		background: -webkit-linear-gradient(top, #C62418, #C62418)
+	}
+
 </style>
 <body>
 
-
 	<div class="limiter">
-		<div class="container-login100">
+		<div class="container-login100" style="background-image: url('img/bg-01.jpg');">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" id="reForm">
 
@@ -231,7 +235,8 @@
 						y[i].focus(); break;
 					}
 				}else if(y[i].name=="telefono"){
-					if(!jQuery.isNumeric([i].value)){
+					if(!jQuery.isNumeric(y[i].value)){
+						valid=false;
 						alert("El numero de telefono debe ser numerico");
 						y[i].focus(); break;
 					}

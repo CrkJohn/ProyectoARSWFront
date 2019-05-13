@@ -37,12 +37,14 @@ app=(function(){
 
     var onErrorRegistroPasajero = function(data){
         console.log(data);
-        alert("No se pudo realizar el registro del pasajero correctamente");
+        alert("No se pudo realizar el registro del pasajero correctamente, el correo o el celular ingresado ya existe en\
+            EVERN DRIVER");
         location.href = "registroPasajero";
     }
 
     var onErrorRegistroConductor = function(data){
-        alert("No se pudo realizar el registro del conductor correctamente");
+        alert("No se pudo realizar el registro del conductor correctamente, el correo o el celular ingresado ya existe en\
+            EVERN DRIVER");
         location.href = "registroConductor";
     }
 
