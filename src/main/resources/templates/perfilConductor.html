@@ -31,14 +31,14 @@
 	.modal{
    	 	z-index: 20;   
 	}
+	.modal-backdrop
+	{
+		z-index: 10;        
+	}​
 	.datepicker{
 		z-index:1151;
 	}
-
-	/*.modal-backdrop
-	{
-		z-index: 10;        
-	}​*/	
+	
 </style>
 </head>
 
@@ -201,7 +201,6 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 	<script src="js/cargarPerfil.js"></script>
 	<script async defer
@@ -212,8 +211,5 @@
             uiLibrary: 'bootstrap4'
         });
 	</script>
-
-  
 </body>
-
 </html>
