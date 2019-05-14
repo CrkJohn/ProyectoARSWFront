@@ -1,6 +1,7 @@
 pedirViaje = (function () {
   var tmp = null;
   var pos = null;
+  var viaje=null;
   var icons = {
     start: {
       icon: '../img/car.png',
@@ -33,6 +34,7 @@ pedirViaje = (function () {
     console.log("Se envia la informacion del viaje aceptado");
     console.log(message)
     console.log(respuesta);
+    console.log("info viaje"+viaje)
     stompClient.send("/topic/canales."+message.substring(0,36), {}, JSON.stringify(respuesta));
 
   };
@@ -48,7 +50,7 @@ pedirViaje = (function () {
 
   var sendTopic = function () {
     var newTopicID = guid();
-    var viaje = {
+    viaje = {
       origin: document.getElementById('pac-input').value,
       destination: document.getElementById('pac-output').value,
       costo: document.getElementById('costo').value,
@@ -56,6 +58,7 @@ pedirViaje = (function () {
       topic: newTopicID
     }
     console.log(viaje);
+    Cookies.set('subasta' , JSON.stringify(viaje));
     stompClient.send("/topic/canales.1", {}, JSON.stringify(viaje));
     connectAndSubscribe(newTopicID);
 
@@ -101,7 +104,7 @@ pedirViaje = (function () {
           showOffers(json);
           $("#noHayOfertas").css({'display': 'none'});
         }
-        alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
+        //alert("Se ha enviado su viaje correctamente, espera a que un conductor lo acepte");
       });
     });
   };

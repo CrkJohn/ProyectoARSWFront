@@ -1,5 +1,12 @@
 sb=(function(){
-    
+  var icons = {
+    start: {
+      icon: '../img/car.png',
+    },
+    end: {
+      icon: '../img/flag.png',
+    }
+  };
     var map;
     function autocompleteFunction(val){
         var input = document.getElementById(val);
@@ -20,10 +27,10 @@ sb=(function(){
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         var waypts = [];
-    
+        var viaje=JSON.parse(Cookies.get("subasta"));
         directionsService.route({
-          origin: document.getElementById('start').value,
-          destination: document.getElementById('end').value,
+          origin: viaje.origin,
+          destination: viaje.destination,
           waypoints: waypts,
           optimizeWaypoints: true,
           travelMode: 'DRIVING' ,
@@ -31,41 +38,50 @@ sb=(function(){
           
         }, function(response, status) {
           if (status === 'OK') {
+            directionsDisplay.setMap(map);
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
+            var leg = response.routes[0].legs[0];
+            makeMarker(leg.start_location, icons.start.icon, 'start');
+            makeMarker(leg.end_location, icons.end.icon, 'end');
             routeConsole = route;
-            console.log(route);
             var duration =  route.legs[0].duration.text
-            console.log()
             var distance = route.legs[0].distance.text;
-     
             console.log(duration +  " " + distance);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
       }
-    
       
-    
-    
-      function initMap(iniciarSBinit) {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 4.782715, lng: -74.042611},
-          zoom: 15
-        });
-        alert(Cookies.get('subasta'));
-        if(iniciarSBinit == "true"){
-          sbStomp.init();
-        }
+  function makeMarker(position, icon, title) {
+    var marker = new google.maps.Marker({
+      position: position,
+      map: map,
+      icon: icon,
+      title: title,
+      animation: google.maps.Animation.DROP
+    });  
+  }
+  
+  function initMap(iniciarSBinit) {
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 4.782715, lng: -74.042611},
+      zoom: 15
+    });
+    var infowindow = new google.maps.InfoWindow();
+    var infowindowContent = document.getElementById('infowindow-content');
+    infowindow.setContent(infowindowContent);
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+    //alert(Cookies.get('subasta'));
+    if(iniciarSBinit == "true"){
+      sbStomp.init();
+    }
     } 
 
-    
-
-
-	return{
-
-        
+	return{        
         init: function () {
            initMap();
         },
