@@ -23,8 +23,35 @@
             height: 100%;
             float: left;
             width: 100%;
-            height: 100%;
+            height: 100%; 
 
+        }
+        .row{
+        align-items: stretch;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        }
+        .card {
+        /*float: left;*/
+        max-width: 33.333%;
+        min-width: 70%;
+        padding: .75rem;
+        margin-bottom: 2rem;
+        border: 0;
+        flex-basis: 33.333%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        }
+
+        .card > img {
+        margin-bottom: .75rem;
+        }
+
+        .card-body{
+            background-color: whitesmoke;
         }
 
         .mapa.main {
@@ -34,9 +61,11 @@
             border-radius: 10px;
             border-bottom-color: brown;
         }
-
-        
-
+        @media  screen and (max-width: 500px){
+            .card {
+                min-width: 100%;
+            }
+        }
 
     </style>
 </head>
@@ -55,9 +84,11 @@
 
         </p>
 
-            <div class="card-deck" id ="listaDeViajes">
-                
+        <div class="container">
+            <div class="row" id = "listaDeViajes">
+          
             </div>
+        </div>
             <div id ="noHayViajes">
                     <div class  = "four_zero_four_bg"  style="background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2087117/dog_dribbble.gif);
                                                                height: 210px;">
@@ -73,9 +104,7 @@
     <script>
         $(document).on("change", ".listaDeViajes select", function () {
             alert("acaaaa");    
-        });
-       
-            
+        });     
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
