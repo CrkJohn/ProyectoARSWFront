@@ -26,9 +26,9 @@ public class ViewController {
 		return "perdirViajeUser";
 	}
 	
-	@RequestMapping("/configuracion")
-	public String configuracion() {
-		return "configuracion";
+	@RequestMapping("/perfilPasajero")
+	public String perfilPasajero() {
+		return "perfilPasajero";
 	}
 
 	@RequestMapping("/maps")

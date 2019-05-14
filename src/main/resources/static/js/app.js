@@ -67,6 +67,10 @@ app=(function(){
             login = JSON.stringify(login);
             return apiclient.loginPasajero(login, onSuccessLoginPasajero, onErrorLogin);
         },
+
+        logoutPasajero: function(name){
+            Cookies.remove('pasajero');
+        },
         
         loginConductor:function(name){
             if(!this.validateLogin()) return; //validateLogin fails
@@ -77,6 +81,10 @@ app=(function(){
             login = JSON.stringify(login);
             console.log(login);
             return apiclient.loginConductor(login, onSuccessLoginConductor, onErrorLogin);
+        },
+
+        logoutConductor:function(name){
+            Cookies.remove('conductor');
         },
 
         validateLogin:function(name){

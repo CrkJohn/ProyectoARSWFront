@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-	<th:block th:replace="navbarConductor ::head"></th:block>
+	<th:block th:replace="navbarPasajero::head"></th:block>
 
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Perfil conductor</title>
+	<title>Perfil pasajero</title>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="perfil/linericon/style.css">
@@ -22,11 +22,11 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 	<style>
 			.pac-container {
-				background-color: #FFF;
-				z-index: 20;
-				position: fixed;
-				display: inline-block;
-				float: left;
+			background-color: #FFF;
+			z-index: 20;
+			position: fixed;
+			display: inline-block;
+			float: left;
 			}	
 			.modal{
 				z-index: 20;   
@@ -43,7 +43,7 @@
 
 <body onload="perfil.init()">
 
-	<div th:replace="navbarConductor :: navbarConductorBody"></div>
+	<div th:replace="navbarPasajero :: navbarPasajeroB"></div>
 	</p>
 	
 
@@ -54,7 +54,7 @@
 				<div class="banner_content">
 					<div id="configure" class="topright">
 						<a class="btn-floating accent-1" data-toggle="modal" data-target="#exampleModalCenter"
-							style="background-color: #4267b2"><i class="fa fa-cogs"></i></a>
+							style="background-color: #C62418"><i class="fa fa-cogs"></i></a>
 					</div>
 					<div class="media">
 						<div class="d-flex">
