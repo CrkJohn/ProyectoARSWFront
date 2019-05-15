@@ -32,13 +32,11 @@ app=(function(){
     }
 
     var onSucessRegistroPasajero = function(data){
-        //console.log(data);
         alert("Ha sido registrado exitosamente como pasajero de Evern Driver");
         location.href = "loginPasajero";
     }
 
     var onErrorRegistroPasajero = function(data){
-        console.log(data);
         alert("No se pudo realizar el registro del pasajero correctamente, el correo o el celular ingresado ya existe en\
             EVERN DRIVER");
         location.href = "registroPasajero";
@@ -52,7 +50,6 @@ app=(function(){
 
     return{
         getUsuarioByCorreo:function(correo){
-            console.log("APP",correo);
             return apiclient.getUsuarioByCorreo(correo, function(usuario){
                 console.log(usuario);
             });
@@ -79,7 +76,6 @@ app=(function(){
                 "clave": $('#claveLogin').val()
             }
             login = JSON.stringify(login);
-            console.log(login);
             return apiclient.loginConductor(login, onSuccessLoginConductor, onErrorLogin);
         },
 
@@ -112,7 +108,6 @@ app=(function(){
                 "celular": $('[name=telefono]').val()					
             };
             pasajero = JSON.stringify(pasajero); //parsea a formato JSON
-            console.log("APP REGISTRO PASAJERO -> "+pasajero);
             return apiclient.registroPasajero(pasajero, onSucessRegistroPasajero,
                 onErrorRegistroPasajero);
         },
@@ -132,9 +127,7 @@ app=(function(){
                 "tipo": $('[name=tipoAutomovil]').val()
             }
             conductor.automovil = automovil;
-            console.log("APP REGISTRO AUTOMOVIL -> "+automovil);
             conductor = JSON.stringify(conductor); //parsea a formato JSON
-            console.log("APP REGISTRO CONDUCTOR -> "+conductor);
             return apiclient.registroConductor(conductor, onSucessRegistroConductor,
                 onErrorRegistroConductor);
         }

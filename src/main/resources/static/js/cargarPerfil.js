@@ -2,6 +2,26 @@ perfil  = (function(){
 
     var tipoUsuario;
 
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+          if ((new Date().getTime() - start) > milliseconds){
+            break;
+          }
+        }
+      }
+    
+    var showSuccess = function(callback){
+        Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        callback(2000);
+    }
+
     var onSuccessUpdate = function(data){
         if(tipoUsuario=="conductor"){
             window.location.href = "perfilConductor";
@@ -14,17 +34,27 @@ perfil  = (function(){
         Swal.fire({
             position: 'top-end',
             type: 'error',
-            title: 'Su informacion no fue actualizada, intentelo de nuevo',
+            title: 'Oops...',
+            text: 'Su información no fue actualizada, inténtelo más tarde',
             showConfirmButton: false,
             width: 500, 
             timer: 2000
         })
     }
 
+    var onErrorCampoVacio=function(data){
+        Swal.fire({
+            position: 'top-end',
+            type: 'error',
+            title: 'Oops...',
+            text: 'El campo no puede estar vacío!!',
+            showConfirmButton: false,
+            width: 500, 
+            timer: 1000
+        })
+    }
+
     var cargarInformacion = function(){
-
-        console.log("ACTUALIZANDO")
-
         var usuario;
         var URL;
         if(Cookies.get("conductor")){
@@ -36,10 +66,10 @@ perfil  = (function(){
             tipoUsuario = "pasajero";
             URL = "https://backarsw.herokuapp.com/v1/pasajeros/";
         }
-        console.log("EL TIPO DE USUARIO -> "+tipoUsuario);
         var correo = usuario.correo;
         $.get(URL+ correo, function(data) {
             var json = data;
+            console.log(json);
             var cache = $('#telefonoBtn').children();
             $("#telefonoBtn").text(json.celular).append(cache);
             $("#nombre").text(json.nombres);
@@ -48,6 +78,13 @@ perfil  = (function(){
             $("#tipoUsuario").text(json.tipoUsuario);
             var cache = $('#correoBtn').children();            
             $("#correoBtn").text(json.correo).append(cache);
+            
+            if(tipoUsuario=="conductor"){
+                $("#cambiarPlacaAuto").val(json.automovil.placa);
+                $("#cambiarColorAuto").val(json.automovil.color);
+                $("#cambiarTipoAuto").val(json.automovil.tipo);
+                $("#cambiarModeloAuto").val(json.automovil.modelo);
+            }
 
             const ratings = {
                 hotel_a : json.calificacion
@@ -183,17 +220,34 @@ perfil  = (function(){
                 $("#residencia").modal('show');
             });
 
+            $("#automovilBtn").on('click',function(){
+                $("#automovil").modal('show');
+            });
+
             $("#telefonoGuardar").on('click',function(){
-                updateNumber();
+                if($("#cambiarTelefono").val()==""){
+                    onErrorCampoVacio();
+                }else{
+                    updateNumber();
+                }
             })
             
             $("#residenciaGuardar").on('click',function(){
-                updateHome();
+                if($("cambiarResidencia").val()==""){
+                    onErrorCampoVacio();
+                }else{
+                    updateHome();
+                }
             })
 
            $("#nacimientoGuardar").on('click',function(){
-            updateDate();
+                if($("cambiarFecha").val()==""){
+                    onErrorCampoVacio();
+                }else{
+                    updateDate();
+                }
            })
+            
         }
     }
 })();
