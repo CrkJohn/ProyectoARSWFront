@@ -71,12 +71,14 @@ perfil  = (function(){
             var json = data;
             console.log(json);
             var cache = $('#telefonoBtn').children();
+            console.log("aca");
             $("#telefonoBtn").text(json.celular).append(cache);
             $("#nombre").text(json.nombres);
             var cache = $('#fechaBtn').children();
             $("#fechaBtn").text(json.fechaNacimiento).append(cache);           
             $("#tipoUsuario").text(json.tipoUsuario);
-            var cache = $('#correoBtn').children();            
+            var cache = $('#correoBtn').children();     
+            
             $("#correoBtn").text(json.correo).append(cache);
             
             if(tipoUsuario=="conductor"){
@@ -88,11 +90,11 @@ perfil  = (function(){
 
             const ratings = {
                 hotel_a : json.calificacion
-              };
-              
-              var cache = $('#residenciaBtn').children();
-              $("#residenciaBtn").text(json.casa).append(cache);           
-              
+            };  
+            var cache = $('#residenciaBtn').children();
+            var vive = json.casa.replace(", Bogota, Colombia" , ".").replace(", Bogotá, Cundinamarca, Colombia","");
+                   
+            $("#residenciaBtn").text(vive).append(cache);           
             const starTotal = 5;
  
             for(const rating in ratings) {  
