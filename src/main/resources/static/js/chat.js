@@ -9,7 +9,7 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
-
+var topic  = null;
 var stompClient = null;
 var username = null;
 var colors = [
@@ -36,10 +36,11 @@ function connect(event) {
 
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    console.log(Cookies.get('subasta'));
+    topic = JSON.parse(Cookies.get('subasta')).topic; 
+    stompClient.subscribe('/topic/public.'+topic, onMessageReceived);
     // Tell your username to the server
-    stompClient.send("/app/chat.addUser",
-        {},
+    stompClient.send("/app/chat.addUser."+topic,{},
         JSON.stringify({sender: username, type: 'JOIN'})
     )
 
@@ -62,8 +63,7 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-
-        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        stompClient.send("/topic/public."+topic, {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -90,7 +90,6 @@ function onMessageReceived(payload) {
     
     } else {
         messageElement.classList.add('chat-message');
-
         var avatarElement = document.createElement('i');
         var avatarText = document.createTextNode(message.sender[0]);
         avatarElement.appendChild(avatarText);
@@ -129,9 +128,7 @@ var cancelarViaje = function(){
     var chatMessage = {
         type: 'END'
     };
-    stompClient.send("/topic/public", {}, JSON.stringify(chatMessage));
-    console.log("Hola");
-
+    stompClient.send("/topic/public."+topic, {}, JSON.stringify(chatMessage));
   };
 
 return{

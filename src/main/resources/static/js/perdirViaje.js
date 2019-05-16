@@ -26,8 +26,8 @@ pedirViaje = (function () {
 
   var aceptarViaje = function (message) {
     var respuesta = {
-      pasajero : username = JSON.parse( Cookies.get('pasajero')).correo,
-      conductor : document.getElementById("usr"+message).textContent.split(":")[1],
+      pasajero : JSON.parse(Cookies.get('pasajero')).correo,
+      conductor : document.getElementById("usr"+message).textContent.split(":")[1].replace(" ",""),
       uuid  : message.substring(0,36),
       type : "acepto"
     }

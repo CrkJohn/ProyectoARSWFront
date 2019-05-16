@@ -126,10 +126,21 @@ app=(function(){
                 "color": $('[name=colorAutomovil]').val(),
                 "tipo": $('[name=tipoAutomovil]').val()
             }
-            conductor.automovil = automovil;
-            conductor = JSON.stringify(conductor); //parsea a formato JSON
-            return apiclient.registroConductor(conductor, onSucessRegistroConductor,
-                onErrorRegistroConductor);
+            var carDisponibles =  ['chevrolet', 'mazda' , 'mercedez', 'audi'];
+            var isApto  = false;
+            for(var i  = 0 ; i < 4 ; i++){
+                if($('[name=modeloAutomovil]').val().toLowerCase() == carDisponibles[i]){
+                    isApto = true;
+                }
+            }
+            if(!isApto){
+                alert("El modelo del carro no es permitido");
+            }else{
+                conductor.automovil = automovil;
+                conductor = JSON.stringify(conductor); //parsea a formato JSON
+                return apiclient.registroConductor(conductor, onSucessRegistroConductor,
+                    onErrorRegistroConductor);
+            }
         }
     }
 })();

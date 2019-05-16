@@ -36,4 +36,11 @@ public class ChatMessage {
     public void setSender(String sender) {
         this.sender = sender;
     }
+
+    @Override
+    public String toString(){
+        return String.format("Content {} sender {} ",this.content, this.sender);
+    }
+
+
 }
