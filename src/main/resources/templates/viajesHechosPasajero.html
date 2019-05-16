@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<th:block th:replace="navbarPasajero ::head"></th:block>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Viajes hechos</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="perfil/linericon/style.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- main css -->
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="css/cardStyle.css">
+	<link rel="stylesheet" href="css/notas2.css">
+	<link rel= "stylesheet" href="css/noTieneViajes.css">
+	<link href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
+	
+
+</head>
+
+<body onload ="viajesHechosP.init()">
+	<div th:replace="navbarPasajero :: navbarPasajeroB"></div>
+	</p>
+	<!--================Home Banner Area =================-->
+	<section class="home_banner_area">
+		<div  class="container box_1620" style = "overflow-y: scroll; height: 500px;">
+			<ul id="viaje">
+			
+			</ul>
+			<div id ="noHayViajes">
+					<div class  = "four_zero_four_bg">
+							<h1  style="text-align: center">¡No tienes ningún viajes!</h1>
+							<p  style="text-align: center"> Pide tu primer viaje ahora!! </p>
+					</div>
+					<button id="viajesDisponibles" type="button" class="btn" style="color : white ; background-color:  #4267b2">¡Ahora!</button>
+			</div>
+		</div>
+		
+	</section>
+
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjCqh3UjH1tQ3V04-J_F0GJJe3sBc5M9U&libraries=places">
+	</script>
+	<script src = "js/viajesHechosP.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+</body>
+</html>

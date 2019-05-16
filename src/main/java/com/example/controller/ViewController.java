@@ -46,9 +46,9 @@ public class ViewController {
 		return "viajesHechosConductor";
 	}
 	
-	@RequestMapping("/viajes")
-	public String viajes() {
-		return "viajes";
+	@RequestMapping("/misViajes")
+	public String viajesHechosPasajero() {
+		return "viajesHechosPasajero";
 	}
 	
 	@RequestMapping("/cupones")
