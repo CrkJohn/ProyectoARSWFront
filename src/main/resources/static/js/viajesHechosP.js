@@ -54,7 +54,7 @@ viajesHechosP = (function(){
     return {
         init : function (){
             $("#viajesDisponibles").click (function() {
-                location.href = "pedirViajeUser";
+                location.href = "perdirViajeUser";
              })
             loadViajes();
             
