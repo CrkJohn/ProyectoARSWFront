@@ -13,8 +13,9 @@
  
     background-image: url(https://cdn.dribbble.com/users/760333/screenshots/4255615/mr_t2.gif);
     height: 500px;
-    width:  453px;
+    width:  95%;
     left:10px;
+    max-width: 453px;
     background-position: center;
     background-size: cover;
     margin-left: auto;
