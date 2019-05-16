@@ -109,8 +109,6 @@ pedirViaje = (function () {
     });
   };
 
-
-
   function initMap() {
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
