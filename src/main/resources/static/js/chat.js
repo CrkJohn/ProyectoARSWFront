@@ -84,8 +84,10 @@ function onMessageReceived(payload) {
     } else if (message.type === 'END'){
         if(Cookies.get('pasajero')){
             location.href="perdirViajeUser";
+            Cookies.remove('subasta');
         }else{
             location.href="viajesDisponiblesConductor";
+            Cookies.remove('subasta');
         }
     
     } else {
@@ -140,8 +142,7 @@ return{
     },
 
     terminarViaje: function(){
-        cancelarViaje();
-        alert("Viaje terminado");
+        cancelarViaje();        
       
     }
 }

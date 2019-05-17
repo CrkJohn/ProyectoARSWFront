@@ -64,7 +64,7 @@ sb=(function(){
     });  
   }
   
-  function initMap(iniciarSBinit) {
+  function initMap(){
       map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 4.782715, lng: -74.042611},
       zoom: 15
@@ -75,11 +75,7 @@ sb=(function(){
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
     calculateAndDisplayRoute(directionsService, directionsDisplay);
-    //alert(Cookies.get('subasta'));
-    if(iniciarSBinit == "true"){
-      sbStomp.init();
-    }
-    } 
+  } 
 
 	return{        
         init: function () {
