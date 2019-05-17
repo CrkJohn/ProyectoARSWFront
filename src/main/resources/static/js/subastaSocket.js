@@ -178,7 +178,7 @@ var stomp = (function () {
                         $.ajax({
                             type: "POST",
                             contentType: "application/json",
-                            url: "http://localhost:8080/v1/viajes/save",
+                            url: "https://backarsw.herokuapp.com/v1/viajes/save",
                             data: gson,  
                             success: onSucessRegistroViaje,
 			                error: onErrorRegistroViaje                    
