@@ -5,11 +5,11 @@ var stomp = (function () {
     var uuid = null;
 
     var onSucessRegistroViaje = function(data){
-        alert("Se pudo registrar satisfactoriamente el viaje");
+        console.log("Se pudo registrar satisfactoriamente el viaje");
     }
 
     var onErrorRegistroViaje = function(data){
-        alert("Oops!!, no se pudo registrar el viaje");
+        console.log("Oops!!, no se pudo registrar el viaje");
     }
 
     var sendTopic = function (value) {
