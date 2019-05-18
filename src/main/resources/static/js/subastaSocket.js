@@ -4,17 +4,6 @@ var stomp = (function () {
     var stompClient = null;
     var uuid = null;
 
-    var onSucessRegistroPasajero = function(data){
-        alert("Ha sido registrado exitosamente como pasajero de Evern Driver");
-        
-    }
-
-    var onErrorRegistroPasajero = function(data){
-        alert("No se pudo realizar el registro del pasajero correctamente, el correo o el celular ingresado ya existe en\
-            EVERN DRIVER");
-       
-    }
-
     var onSucessRegistroViaje = function(data){
         alert("Se pudo registrar satisfactoriamente el viaje");
     }
@@ -183,8 +172,8 @@ var stomp = (function () {
                             success: onSucessRegistroViaje,
 			                error: onErrorRegistroViaje                    
                         });
-                        //Cookies.remove('subasta');
-                        //chat.terminarViaje();
+                        Cookies.remove('subasta');
+                        chat.terminarViaje();
 
                             
                         

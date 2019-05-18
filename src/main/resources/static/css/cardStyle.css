@@ -99,10 +99,6 @@ button, input, optgroup, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
-*, ::after, ::before {
-    box-sizing: border-box;
-}
-user agent stylesheet
 input {
     padding: 1px 0px;
 }

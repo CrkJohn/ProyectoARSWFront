@@ -2783,7 +2783,7 @@ input, select, textarea {
 
 	#wrapper {
 		background: #fff;
-		padding-right: 0px;
+	
 	}
 
 /* Main */
@@ -2858,11 +2858,6 @@ input, select, textarea {
 					padding: 1.5em;
 				}
 
-		/* Wrapper */
-
-			#wrapper {
-				padding-right: 0px;
-			}
 
 		/* Main */
 
@@ -2889,10 +2884,6 @@ input, select, textarea {
 			}
 
 		/* Wrapper */
-
-			#wrapper {
-				padding-right: 20em;
-			}
 
 	}
 
@@ -2973,7 +2964,7 @@ input, select, textarea {
 				-webkit-transition: -webkit-transform 0.5s ease;
 				-ms-transition: -ms-transform 0.5s ease;
 				transition: transform 0.5s ease;
-				padding: 44px 0 1px 0;
+				
 			}
 
 		/* Header Panel */
