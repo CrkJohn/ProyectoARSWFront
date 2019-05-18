@@ -36,7 +36,7 @@ public class SessionController{
             if(response==200){
                 session.setAttribute("correo", correo);
                 session.setAttribute("rol", "pasajero");
-                System.out.println("OBTUVO LA SESION DEL PASAJERO CORRECTAMENTE");
+                //System.out.println("OBTUVO LA SESION DEL PASAJERO CORRECTAMENTE");
                 return new ResponseEntity<>("OK",  org.springframework.http.HttpStatus.OK); 
             }
 	        return new ResponseEntity<>("CREDENCIALES ERRONAS",  org.springframework.http.HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ public class SessionController{
             if(response==200){
                 session.setAttribute("correo", correo);
                 session.setAttribute("rol", "conductor");
-                System.out.println("OBTUVO LA SESION DEL CONDUCTOR CORRECTAMENTE");
+                //System.out.println("OBTUVO LA SESION DEL CONDUCTOR CORRECTAMENTE");
                 return new ResponseEntity<>("OK",  org.springframework.http.HttpStatus.OK); 
             }
 	        return new ResponseEntity<>("CREDENCIALES ERRONAS",  org.springframework.http.HttpStatus.NOT_FOUND);
@@ -65,7 +65,7 @@ public class SessionController{
     @GetMapping(value = "/logout")
     public ResponseEntity<?> postlogout(HttpServletRequest request){
 		try {
-            System.out.println("SALIENDO SESION");
+            //System.out.println("SALIENDO SESION");
             request.getSession().removeAttribute("correo");
             request.getSession().removeAttribute("rol");
             request.getSession().invalidate();
@@ -89,7 +89,7 @@ public class SessionController{
         jsonObject.put("clave", clave);
         //String strJson = "'"+jsonObject.toString()+"'";
         final String POST_PARAMS = jsonObject.toString();
-        System.out.println(POST_PARAMS);
+        //System.out.println(POST_PARAMS);
 
         URL obj = new URL("https://backarsw.herokuapp.com/v1/"+extension+"/login");
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
@@ -103,8 +103,8 @@ public class SessionController{
         os.write(POST_PARAMS.getBytes());
         os.flush(); os.close(); 
         int responseCode = postConnection.getResponseCode();
-        System.out.println("POST Response Code : " + responseCode);
-        System.out.println("POST Response Message : " + postConnection.getResponseMessage());
+        //System.out.println("POST Response Code : " + responseCode);
+        //System.out.println("POST Response Message : " + postConnection.getResponseMessage());
 
         if (responseCode == HttpURLConnection.HTTP_OK) { //success
             BufferedReader in = new BufferedReader(new InputStreamReader( postConnection.getInputStream()));
@@ -114,9 +114,9 @@ public class SessionController{
                 response.append(inputLine);
             }
             in .close(); // print result
-            System.out.println(response.toString());
+            //System.out.println(response.toString());
         } else {
-            System.out.println("POST NOT WORKED");
+            //System.out.println("POST NOT WORKED");
         }
         return responseCode;
     }

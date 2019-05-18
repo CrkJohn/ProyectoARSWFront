@@ -54,7 +54,10 @@ var conductorViajes = (function () {
           var viajes = document.querySelectorAll('.card.text-center');
           for (var i = viajes.length - 1; i >= 0; i--) {
             var v = viajes[i].textContent;
-            if (message.pasajero.localeCompare(v.split(":")[1]) == 0) {
+            console.log(message.pasajero);
+            console.log(v.split(":")[1]);
+            if (message.pasajero.localeCompare(v.split(" ")[0]) == 0) {
+              
               alert("El usuario: " + message.pasajero + " ha cancelado su viaje");
               viajes[i].remove();
               if (document.getElementById('listaDeViajes').childElementCount == 0) {
