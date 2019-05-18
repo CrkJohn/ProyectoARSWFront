@@ -172,7 +172,7 @@ var stomp = (function () {
                             success: onSucessRegistroViaje,
 			                error: onErrorRegistroViaje                    
                         });
-                        Cookies.remove('subasta');
+                        //Cookies.remove('subasta');
                         chat.terminarViaje();
 
                             
