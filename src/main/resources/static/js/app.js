@@ -117,11 +117,6 @@ app=(function(){
         		correo.focus();
         		return false;
             }
-            if(!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(correo))){
-                errorMSG("Tiene que ingresar un correo!! por ejemplo: driver@evern.com");
-                correo.focus();
-                return false;
-            }
 
         	var clave=$('#claveLogin');
         	if(clave.val()==""){
