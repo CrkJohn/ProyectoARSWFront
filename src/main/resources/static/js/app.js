@@ -1,8 +1,15 @@
 app=(function(){
 
     var errorMSG = function(msg){
-        alert(msg);
-        
+        Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Oops...',
+            text: msg,
+            showConfirmButton: false,
+            width: 500, 
+            timer: 1700
+        });
     }
 
     var successMSG = function (msg){
@@ -106,13 +113,19 @@ app=(function(){
         validateLogin:function(name){
         	var correo=$('#correoLogin');
         	if(correo.val()==""){
-        		window.alert("Por favor ingrese su correo");
+        		errorMSG("Por favor ingrese su correo");
         		correo.focus();
         		return false;
-        	}
+            }
+            if(!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(correo))){
+                errorMSG("Tiene que ingresar un correo!! por ejemplo: driver@evern.com");
+                correo.focus();
+                return false;
+            }
+
         	var clave=$('#claveLogin');
         	if(clave.val()==""){
-        		window.alert("Por favor ingrese su contraseña");
+        		errorMSG("Por favor ingrese su contraseña");
         		clave.focus();
         		return false;
         	}
