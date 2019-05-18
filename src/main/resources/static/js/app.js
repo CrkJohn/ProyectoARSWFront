@@ -1,5 +1,13 @@
 app=(function(){
 
+    var errorMSG = function(msg){
+        alert(msg);
+    }
+
+    var successMSG = function (msg){
+        alert(msg);
+    }
+    // PROMESAS DE LOGIN
     var onSuccessLoginPasajero = function(data){
         var info = {
             correo : $('#correoLogin').val(),
@@ -19,33 +27,38 @@ app=(function(){
     }
     
     var onErrorLogin = function(data){
-        alert("El correo o la contraseña no son correctas.");
+        errorMSG("El correo o la contraseña no son correctas.");
     }
-
-    var onErrorConductorRegister = function(data){
-        alert("El automóvil ya está asociado a otra cuenta");
-    }
-
-    var onSucessRegistroConductor = function (data){
-        alert("Ha sido registrado exitosamente como conductor de Evern Driver");
-        location.href = "loginConductor";
-    }
+    
+    // PROMESAS DEL REGISTRO
 
     var onSucessRegistroPasajero = function(data){
         alert("Ha sido registrado exitosamente como pasajero de Evern Driver");
         location.href = "loginPasajero";
     }
+    var onSucessRegistroConductor = function (data){
+        alert("Ha sido registrado exitosamente como conductor de Evern Driver");
+        location.href = "loginConductor";
+    }    
 
     var onErrorRegistroPasajero = function(data){
-        alert("No se pudo realizar el registro del pasajero correctamente, el correo o el celular ingresado ya existe en\
+        errorMSG("No se pudo realizar el registro del pasajero correctamente, el correo o el celular ingresado ya existe en\
             EVERN DRIVER");
         location.href = "registroPasajero";
     }
 
     var onErrorRegistroConductor = function(data){
-        alert("No se pudo realizar el registro del conductor correctamente, el correo o el celular ingresado ya existe en\
+        errorMSG("No se pudo realizar el registro del conductor correctamente, el correo o el celular ingresado ya existe en\
             EVERN DRIVER");
         location.href = "registroConductor";
+    }
+
+    var onSuccessLogout = function (data){
+        location.href = "index";
+    }
+
+    var onErrorLogout = function (data){
+        errorMSG("No se pudo cerrar sesión correctamente, intente de nuevo");
     }
 
     return{
@@ -55,6 +68,9 @@ app=(function(){
             });
         },
         
+        /*
+            FUNCIONES DE LOGIN - LOGOUT
+        */
         loginPasajero:function(name){
         	if(!this.validateLogin()) return; //validateLogin fails
             var login = {
@@ -62,11 +78,12 @@ app=(function(){
                 "clave": $('#claveLogin').val()
             }
             login = JSON.stringify(login);
-            return apiclient.loginPasajero(login, onSuccessLoginPasajero, onErrorLogin);
+            return apiclient.loginPasajero(onSuccessLoginPasajero, onErrorLogin);
         },
 
         logoutPasajero: function(name){
             Cookies.remove('pasajero');
+            return apiclient.logout(onSuccessLogout, onErrorLogout);
         },
         
         loginConductor:function(name){
@@ -76,11 +93,13 @@ app=(function(){
                 "clave": $('#claveLogin').val()
             }
             login = JSON.stringify(login);
-            return apiclient.loginConductor(login, onSuccessLoginConductor, onErrorLogin);
+            return apiclient.loginConductor(onSuccessLoginConductor, onErrorLogin);
         },
 
         logoutConductor:function(name){
+            console.log("VA A CERRAR LA SESION EL CONDUCTOR");
             Cookies.remove('conductor');
+            return apiclient.logout(onSuccessLogout, onErrorLogout);
         },
 
         validateLogin:function(name){
@@ -99,6 +118,10 @@ app=(function(){
         	return true;
         },
 
+
+        /*
+            FUNCIONES DE REGISTRO
+        */
         registroPasajero:function(name){
             var pasajero = {
                 "nombres": $('[name=nombres]').val(),

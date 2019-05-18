@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class ChatController {
 
     @MessageMapping("/chat.sendMessage.{numdibujo}}")
     public void sendMessage(@Payload ChatMessage chatMessage, @DestinationVariable String numdibujo) {
-        System.out.println("Aqui karen " +   chatMessage.toString());
+        //System.out.println("Aqui karen " +   chatMessage.toString());
         msgt.convertAndSend("/topic/public."+numdibujo,chatMessage);
     }
 

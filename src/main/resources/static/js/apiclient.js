@@ -7,32 +7,43 @@ apiclient=(function(){
 			});
 		},
 
-		loginPasajero:function(datos, succ, err){
-			console.log(datos);
+		/*
+			FUNCIONES DE LOGIN - LOGOUT
+		*/
+		loginPasajero:function(succ, err){
 			$.ajax({
-				type: "POST",
-				contentType: "application/json",
-				url: "https://backarsw.herokuapp.com/v1/pasajeros/login",
-				data: datos,
-			    success: succ,
-			    error: err
+				url : "/pasajero/login",
+				type : "POST",
+				data : $("#FormLoginPasajero").serialize(),
+				success: succ,
+				error : err
 			});
 		},
 		
-		loginConductor:function(datos, succ, err){
+		loginConductor:function(succ, err){
 			$.ajax({
-				type: "POST",
-				contentType: "application/json",
-				url: "https://backarsw.herokuapp.com/v1/conductores/login",
-				data: datos,
-			    success: succ,
-			    error: err
+				url : "/conductor/login",
+				type : "POST",
+				data : $("#FormLoginConductor").serialize(),
+				success: succ,
+				error : err
+			});
+		},
+		
+		logout:function(succ, err){
+			$.ajax({
+				url: "/logout",
+				type: "GET",
+				success: succ,
+				error: err
 			});
 		},
 
+
+		/*
+			FUNCIONES DE REGISTRO
+		*/
 		registroPasajero:function(datos, succ, err){
-			console.log("DATA PASAJERO -> ");
-			console.log(datos);
 			$.ajax({
 				method: "POST",
 				contentType: "application/json",
@@ -41,12 +52,10 @@ apiclient=(function(){
 				//dataType : 'json',
 				success: succ,
 				error: err
-			})
+			});
 		},
 
 		registroConductor:function(datos, succ, err){
-			console.log("DATA CONDUCTOR -> ");
-			console.log(datos);
 			$.ajax({
 				method: "POST",
 				contentType: "application/json",
@@ -54,7 +63,7 @@ apiclient=(function(){
 				data: datos,
 				success: succ,
 				error: err
-			})
+			});
 		}
 	}
 })();
