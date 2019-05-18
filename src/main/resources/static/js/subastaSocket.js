@@ -3,13 +3,34 @@ var stomp = (function () {
 
     var stompClient = null;
     var uuid = null;
+    var errorMsg= function(msg){
+        Swal.fire({
+            position: 'top-end',
+            type: 'error',
+            title: msg,
+            showConfirmButton: false,
+            timer: 1000
+        })
 
+    }
+    var successMsg= function(msg){
+        Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: msg,
+            showConfirmButton: false,
+            timer: 1000
+        })
+
+    }
     var onSucessRegistroViaje = function(data){
-        console.log("Se pudo registrar satisfactoriamente el viaje");
+        successMsg("viaje finalizado");
+        chat.terminarViaje();
     }
 
     var onErrorRegistroViaje = function(data){
-        console.log("Oops!!, no se pudo registrar el viaje");
+        errorMsg("Oops!!, no se pudo registrar el viaje");
+        chat.terminarViaje();
     }
 
     var sendTopic = function (value) {
@@ -164,18 +185,20 @@ var stomp = (function () {
                         console.log(gson);
                         gson = JSON.stringify(gson);
                         console.log(gson);
+                        
                         $.ajax({
                             type: "POST",
                             contentType: "application/json",
                             url: "https://backarsw.herokuapp.com/v1/viajes/save",
                             data: gson,  
                             success: onSucessRegistroViaje,
-			                error: onErrorRegistroViaje                    
+                            error: onErrorRegistroViaje                    
                         });
-                        //Cookies.remove('subasta');
-                        chat.terminarViaje();
+                    
+                        //Cookies.remove('subasta')
+                        
 
-                            
+                 
                         
                         
                     }
