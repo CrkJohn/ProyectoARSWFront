@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="conductor/animsition/css/animsition.min.css">
 <link rel="stylesheet" type="text/css" href="conductor/select2/select2.min.css">
 <link rel="stylesheet" type="text/css" href="conductor/daterangepicker/daterangepicker.css">
-<link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/standar.css">
 
@@ -151,8 +150,31 @@
 		var currentTab = 0; // Current tab is set to be the first tab (0)
 		showTab(currentTab); // Display the current tab
 
+		function alertaError(msg){
+			Swal.fire({
+				position: 'center',
+				type: 'error',
+				title: 'Oops...',
+				text: msg,
+				showConfirmButton: false,
+				width: 500, 
+				timer: 1700
+			});
+		}
+
+		function alertaInformacionEnviada(){
+			Swal.fire({
+				position: 'center',
+				title: 'Evern Driver',
+				text: "Estamos procesando tu información",
+				showConfirmButton: false,
+				width: 500, 
+				timer: 1000
+			});
+		}
+
 		function showTab(n) {
-			console.log("SHOW TAB n-> "+ n);
+			//console.log("SHOW TAB n-> "+ n);
 			// This function will display the specified tab of the form...
 			var x = document.getElementsByClassName("tab");
 			x[n].style.display = "block";
@@ -161,7 +183,7 @@
 				return node.textContent || node.innerText || "";
 			}).join("");
 
-			console.log("SHOW TAB x-> "+x.toString());
+			//console.log("SHOW TAB x-> "+x.toString());
 			//... and fix the Previous/Next buttons:
 			if (n == 0) {
 				document.getElementById("prevBtn").style.display = "none";
@@ -190,6 +212,7 @@
 			// if you have reached the end of the form...
 			if (currentTab >= x.length) {
 				// ... the form gets submitted:
+				alertaInformacionEnviada();
 				app.registroPasajero();
 				return false;
 			}
@@ -204,7 +227,7 @@
 			for (i = 0; i < y.length; i++) {
 				if (y[i].value == "") {
 					valid = false;
-					alert("Falta por completar " + y[i].placeholder);
+					alertaError("Falta por completar " + y[i].placeholder);
 					y[i].focus()
 					break;
 				}else if(y[i].name=="fechaNacimiento"){
@@ -225,19 +248,25 @@
 					}
 					if(!formatoFecha){
 						valid=false;
-						alert("La fecha es invalida");
+						alertaError("La fecha es inválida");
 						y[i].focus(); break;
 					}
 				}else if(y[i].name=="reclave"){ //validacion de confirmar la contraseña
 					if(y[i-1].value != y[i].value){
 						valid=false;
-						alert("Las contraseñas no coinciden");
+						alertaError("Las contraseñas no coinciden");
 						y[i].focus(); break;
 					}
 				}else if(y[i].name=="telefono"){
 					if(!jQuery.isNumeric(y[i].value)){
 						valid=false;
-						alert("El numero de telefono debe ser numerico");
+						alertaError("El numero de telefono debe tener solo digítos");
+						y[i].focus(); break;
+					}
+				}else if(y[i].name == "correo"){
+					if(!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(y[i].value))){
+						alertaError("El correo ingresado no es correcto!");
+						valid=false;
 						y[i].focus(); break;
 					}
 				}
@@ -269,5 +298,8 @@
 	<script src="conductor/daterangepicker/daterangepicker.js"></script>
  	<script src="conductor/countdowntime/countdowntime.js"></script>
 
+
+	 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </body>
 </html>

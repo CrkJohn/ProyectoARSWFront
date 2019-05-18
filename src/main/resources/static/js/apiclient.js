@@ -21,6 +21,7 @@ apiclient=(function(){
 		},
 		
 		loginConductor:function(succ, err){
+			console.log($("#claveLogin").val());
 			$.ajax({
 				url : "/conductor/login",
 				type : "POST",

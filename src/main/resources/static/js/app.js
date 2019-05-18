@@ -2,6 +2,7 @@ app=(function(){
 
     var errorMSG = function(msg){
         alert(msg);
+        
     }
 
     var successMSG = function (msg){
@@ -64,7 +65,7 @@ app=(function(){
     return{
         getUsuarioByCorreo:function(correo){
             return apiclient.getUsuarioByCorreo(correo, function(usuario){
-                console.log(usuario);
+                //console.log(usuario);
             });
         },
         
@@ -97,7 +98,7 @@ app=(function(){
         },
 
         logoutConductor:function(name){
-            console.log("VA A CERRAR LA SESION EL CONDUCTOR");
+            //console.log("VA A CERRAR LA SESION EL CONDUCTOR");
             Cookies.remove('conductor');
             return apiclient.logout(onSuccessLogout, onErrorLogout);
         },
@@ -149,21 +150,12 @@ app=(function(){
                 "color": $('[name=colorAutomovil]').val(),
                 "tipo": $('[name=tipoAutomovil]').val()
             }
-            var carDisponibles =  ['chevrolet', 'mazda' , 'mercedez', 'audi'];
-            var isApto  = false;
-            for(var i  = 0 ; i < 4 ; i++){
-                if($('[name=modeloAutomovil]').val().toLowerCase() == carDisponibles[i]){
-                    isApto = true;
-                }
-            }
-            if(!isApto){
-                alert("El modelo del carro no es permitido");
-            }else{
-                conductor.automovil = automovil;
-                conductor = JSON.stringify(conductor); //parsea a formato JSON
-                return apiclient.registroConductor(conductor, onSucessRegistroConductor,
-                    onErrorRegistroConductor);
-            }
+            
+            conductor.automovil = automovil;
+            conductor = JSON.stringify(conductor); //parsea a formato JSON
+            return apiclient.registroConductor(conductor, onSucessRegistroConductor,
+                onErrorRegistroConductor);
+            
         }
     }
 })();
