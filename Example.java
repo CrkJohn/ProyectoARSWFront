@@ -1,10 +1,15 @@
-private boolean anyFunction(){
-	// más código
-	// verifica el si el archivo pertenece a red de pago
-	if ((fileName != null) && fileName.matches(abstractEmailConfiguration.getPattern()) 
-			      && (Part.ATTACHMENT.equalsIgnoreCase(attachment.getDisposition()) ||  
-				StringUtils.isNotBlank(attachment.getFileName()))){
-	 // descarga
+/**
+ * @author <a href="mailto:ggsosa@transportsystems.co">Gerson Sosa</a>
+ * @since 4.9.25
+ */
+@Configuration
+public class SpaceRegistrationConfiguration {
+
+	/**
+	 * @author <a href="mailto:ggsosa@transportsystems.co">Gerson Sosa</a>
+	 * @since 4.9.25
+	 */
+	static class WorkflowLeaseListener implements LeaseListener {
 
 	}
 }
