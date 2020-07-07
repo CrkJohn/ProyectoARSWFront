@@ -5,7 +5,6 @@
 @Configuration
 public class SpaceRegistrationConfiguration {
 
-	
 	static class WorkflowLeaseListener implements LeaseListener {
 
 	}
