@@ -1,14 +1,10 @@
 private boolean anyFunction(){
 	// más código
-	if (isAttachment(attachment)) {
-	//descarga el archivo
-	}
-}
+	// verifica el si el archivo pertenece a red de pago
+	if ((fileName != null) && fileName.matches(abstractEmailConfiguration.getPattern()) 
+			      && (Part.ATTACHMENT.equalsIgnoreCase(attachment.getDisposition()) ||  
+				StringUtils.isNotBlank(attachment.getFileName()))){
+	 // descarga
 
-private boolean isAttachment(MimeBodyPart attachment){
-	String fileName = attachment.getFileName();
-	boolean hasAttachment = (fileName != null) && fileName.matches(abstractEmailConfiguration.getPattern());
-	hasAttachment &= (Part.ATTACHMENT.equalsIgnoreCase(attachment.getDisposition()) ||
-						StringUtils.isNotBlank(attachment.getFileName()));
-	return hasAttachment;
+	}
 }
