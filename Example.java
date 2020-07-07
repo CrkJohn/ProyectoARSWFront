@@ -1,8 +1,8 @@
-try{
-  String propertiesPath = propertiesLocation + "/" + PROPERTIES_FILE
-  FileInputStream propertiesStream = new FileInputStream(propertiesPath)
-  // más codigo
-}catch(IOException e){
-  // Si no hay archivos de propiedades significan que cargan las predeterminadas 
-  
+for(Node node : Graph[u]){
+  bfs(node)
+}
+
+AdjacentList adjList =  Graph[u];
+for(Node node : adjLsit){
+  bfs(node)
 }
